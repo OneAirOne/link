@@ -136,35 +136,10 @@
 							break;
 					}
 				}
-
-				// keyup: function(e)
-				// {
-				// 	switch (e.keyCode) {
-				//
-				// 		case 38:
-				// 			press = false;
-				// 			break;
-				//
-				// 		case 40:
-				// 		press = false;
-				// 			break;
-				//
-				// 		case 37:
-				// 			press = false;
-				// 			break;
-				//
-				// 		case 39:
-				// 			press = false;
-				// 			break;
-				// 	}
-				//
-				// }
 			});
 		});
 
 
 	}
 	resizeCanvas();
-
-
 })();
