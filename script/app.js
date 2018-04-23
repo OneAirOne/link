@@ -1,145 +1,235 @@
-(function() {
-	var canvas = document.getElementById('canvas'),
-	ctx = canvas.getContext('2d');
 
-	// resize the canvas to fill browser window dynamically
-	window.addEventListener('resize', resizeCanvas, false);
 
-	var img = {
-		'up1'    : 'img/haut1.png',
-		'up2'    : 'img/haut2.png',
-		'down1'  :'img/bas1.png',
-		'down2'  : 'img/bas2.png',
-		'right1' : 'img/droite1.png',
-		'right2' : 'img/droite2.png',
-		'left1'  : 'img/gauche1.png',
-		'left2'  : 'img/gauche2.png'
+(function () {
+
+	var link;
+	var linkImage;
+	var canvas;
+	var notPress = true;
+	var move = false;
+
+	function move_link() {
+		move = true;
+		if (notPress) {
+			move = false;
+			linkImage.src = "img/link_statique.png";
+			gameLoop();
+			return;
+		}
+		window.requestAnimationFrame(move_link);
+
+	  link.update();
+	  link.render();
+
 	}
 
-	var sprite = img['down2'];
+	function gameLoop () {
+		if (move == true) {
+			return;
+		}
+		console.log("statique");
+	  window.requestAnimationFrame(gameLoop);
 
-	function resizeCanvas() {
-		canvas.width = window.innerWidth;
-		canvas.height = window.innerHeight;
-		var x = canvas.width / 2;
-		var y = canvas.height /2;
+	  link.update();
+	  link.statique_render();
+	}
 
-		function move(direction)
-		{
-			var speed = 10;
+	function sprite (options) {
 
-			switch (direction) {
+		var that = {};
+		var	frameIndex = 0;
+		var tickCount = 0;
+		var ticksPerFrame = options.ticksPerFrame || 0;
+		var numberOfFrames = options.numberOfFrames || 1;
 
-				case "UP":
-					y = y - 20;
-					ctx.clearRect(0,0, canvas.width, canvas.height);
-					ctx.drawImage(link, x, y);
-					break;
 
-				case "DOWN":
-					y = y + 20;
-					ctx.clearRect(0,0, canvas.width, canvas.height);
 
-					ctx.drawImage(link, x, y);
-					break;
+		that.context = options.context;
+		that.width = options.width;
+		that.height = options.height;
+		that.image = options.image;
+		that.posX = options.posX;
+		that.posY = options.posY;
+		that.direction = options.direction;
 
-				case "RIGHT":
-					x = x + 20;
-					ctx.clearRect(0,0, canvas.width, canvas.height);
-					// link.src = sprite;
-					// console.log(srite);
-					ctx.drawImage(link, x, y);
-					break;
+		that.update = function () {
 
-				case "LEFT":
-					x = x - 20;
-					ctx.clearRect(0,0, canvas.width, canvas.height);
-					// link.src = sprite;
 
-					ctx.drawImage(link, x, y);
-					break;
+            tickCount += 1;
+
+
+            if (tickCount > ticksPerFrame) {
+
+							tickCount = 0;
+
+                // If the current frame index is in range
+                if (frameIndex < numberOfFrames - 1) {
+                    // Go to the next frame
+                    frameIndex += 1;
+                } else {
+                    frameIndex = 0;
+                }
+            }
+        };
+
+		that.render = function () {
+			console.log(that.direction )
+			if (that.direction == "right" ) {
+				that.posX = that.posX + 2
+			} else if (that.direction == "left") {
+				console.log("toto")
+				that.posX = that.posX - 2;
 			}
-		}
-
-		link = new Image();
-		link.src = sprite;
-		link.onload = function(){
-			ctx.drawImage(link, x, y);
-		}
-
-		var press;
-
-		$(document).ready(function()
-		{
-			var up = [img['up1'], img['up2']];
-			var down = [img['down1'], img['down2']];
-			var right = [img['right1'], img['right2']];
-			var left = [img['left1'], img['left2']];
-			var index = 0;
-
-			$(this).on({
-
-				keydown: function(e)
-				{
-					switch (e.keyCode) {
-
-						case 38:
-							console.log("-> UP");
-								sprite = up[index];
-								link.src = sprite;
-								move("UP");
-								if (index == 0) {
-									index++;
-								} else {
-									index--;
-								}
-							break;
-
-						case 40:
-							console.log("-> DOWN");
-							sprite = down[index];
-							link.src = sprite;
-							move("DOWN");
-							if (index == 0) {
-								index++;
-							} else {
-								index--;
-							}
-							break;
-
-						case 37:
-							console.log("-> LEFT");
-							sprite = left[index];
-							link.src = sprite;
-							move("LEFT");
-							if (index == 0) {
-								index++;
-							} else {
-								index--;
-							}
-							break;
-
-						case 39:
-							console.log("-> RIGHT");
-							sprite = right[index];
-							link.src = sprite;
-							move("RIGHT");
-							if (index == 0) {
-								index++;
-							} else {
-								index--;
-							}
-							break;
-
-						case 76:
-							console.log("L");
-							break;
-					}
-				}
-			});
-		});
 
 
+		  // Clear the canvas
+		  that.context.clearRect(0, 0, canvas.width , canvas.height);
+
+		  // Draw the animation
+		  that.context.drawImage(
+		    that.image,
+		    frameIndex * that.width / numberOfFrames, // x position on the sprite sheet
+		    0,
+		    that.width / numberOfFrames, // x size of the frame
+		    that.height,
+		    that.posX,
+		    that.posY,
+		    (that.width / numberOfFrames) * 1.5,
+		    (that.height)* 1.5);
+		};
+
+		that.statique_render = function () {
+
+		  // Clear the canvas
+		  that.context.clearRect(0, 0, canvas.width , canvas.height);
+		  // Draw the animation
+		  that.context.drawImage(
+		    that.image,
+		    frameIndex * that.width / numberOfFrames, // x position on the sprite sheet
+		    0,
+		    that.width / numberOfFrames, // x size of the frame
+		    that.height,
+		    that.posX,
+		    that.posY,
+		    (that.width / numberOfFrames) * 1.5,
+		    (that.height)* 1.5);
+		};
+
+		return that;
 	}
-	resizeCanvas();
-})();
+	// ---------------------------------------------------------------------------
+	// Get canvas
+	canvas = document.getElementById("link");
+	canvas.width = window.innerWidth;
+	canvas.height = window.innerHeight;
+
+
+	// Create sprite sheet
+	linkImage = new Image();
+
+
+	// Create sprite
+	link = sprite({
+		context: canvas.getContext("2d"),
+		width: 240,
+		height: 24,
+		image: linkImage,
+		numberOfFrames: 10,
+		ticksPerFrame: 3,
+		posX: canvas.width / 2,
+		posY: canvas.height / 2,
+		direction: ""
+	});
+
+	// init
+	linkImage.src = "img/link_statique.png";
+	move_link();
+
+	$(document).ready(function()
+	{
+		$(this).on({
+			keydown: function(e)
+			{
+				switch (e.keyCode) {
+
+					case 38:
+						console.log("-> UP");
+						break;
+
+					case 40:
+						console.log("-> DOWN");
+						break;
+
+					case 37:
+						console.log("-> LEFT");
+						notPress = false;
+						link.direction = "left";
+						if (move == false) {
+							linkImage.src = "img/link_gauche.png";
+							move_link();
+
+						}
+						// link.posX = link.posX - 10;
+						break;
+
+					case 39:
+						console.log("-> RIGHT");
+						notPress = false;
+						link.direction = "right"
+						// link.posX = link.posX + 10;
+						if (move == false) {
+							linkImage.src = "img/link_droite.png";
+							move_link();
+						}
+
+						break;
+				}
+			},
+
+			keyup: function(e)
+			{
+				switch (e.keyCode) {
+
+					case 38:
+						console.log("-> UP");
+						notPress = true;
+						move = false;
+						// linkImage.src = "img/link_statique.png";
+						link.direction = ""
+						break;
+
+					case 40:
+						console.log("-> DOWN");
+						notPress = true;
+						move = false;
+						// linkImage.src = "img/link_statique.png";
+						link.direction = ""
+						break;
+
+					case 37:
+						console.log("-> LEFT");
+						notPress = true;
+						move = false;
+						// linkImage.src = "img/link_statique.png";
+						link.direction = ""
+						break;
+
+					case 39:
+						console.log("-> RIGHT");
+						notPress = true;
+						move = false;
+
+						// linkImage.src = "img/link_statique.png";
+						link.direction = ""
+						break;
+
+					case 76:
+						console.log("L");
+						break;
+				}
+			}
+
+		});
+	});
+
+} ());
