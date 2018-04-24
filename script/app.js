@@ -48,14 +48,13 @@
 	 */
 	function AnimateSprite (options) {
 
-		// var that = {};
 		var	frameIndex = 0;
 		var tickCount = 0;
 		var ticksPerFrame = options.ticksPerFrame || 0;
-		var numberOfFrames = options.numberOfFrames || 1;
 		var img = new Image();
-		this.image = options.image;
 
+		this.image = options.image;
+		this.numberOfFrames = options.numberOfFrames || 1;
 		this.width = options.width;
 		this.height = options.height;
 		this.posX = options.posX;
@@ -72,7 +71,7 @@
 					tickCount = 0;
 
 						// If the current frame index is in range
-						if (frameIndex < numberOfFrames - 1) {
+						if (frameIndex < this.numberOfFrames - 1) {
 								// Go to the next frame
 								frameIndex += 1;
 						} else {
@@ -84,14 +83,32 @@
 		// draw the position of sprite updated
 		this.render = function () {
 
+			this.speed = 3;
+
 			if (this.direction == "right" ) {
-				this.posX = this.posX + 3
+
+				if (collisionDetection(this, sanctuary, "right") == false) {
+					this.posX = this.posX + this.speed
+				}
+
 			} else if (this.direction == "left") {
-				this.posX = this.posX - 3;
+
+				if (collisionDetection(this, sanctuary, "left") == false) {
+					this.posX = this.posX - this.speed;
+				}
+
 			} else if (this.direction == "up") {
-				this.posY = this.posY - 3;
+
+				if (collisionDetection(this, sanctuary, "up") == false) {
+					this.posY = this.posY - this.speed;
+				}
+
 			} else if (this.direction == "down") {
-					this.posY = this.posY + 3;
+
+				if (collisionDetection(this, sanctuary, "down") == false) {
+					this.posY = this.posY + this.speed;
+				}
+
 			}
 			// update the image source
 			img.src = this.image;
@@ -102,16 +119,75 @@
 			// Draw the animation
 			ctx.drawImage(
 				img,
-				frameIndex * this.width / numberOfFrames, // x position on the sprite sheet
+				frameIndex * this.width / this.numberOfFrames, // x position on the sprite sheet
 				0,
-				this.width / numberOfFrames, // x size of the frame
+				this.width / this.numberOfFrames, // x size of the frame
 				this.height,
 				this.posX,
 				this.posY,
-				(this.width / numberOfFrames) * 1.5,
+				(this.width / this.numberOfFrames) * 1.5,
 				(this.height)* 1.5);
 		};
 	}
+
+	function collisionDetection (personnage, object, direction) {
+		var xMin = object.posX;
+		var xMax = object.posX + object.width;
+		var yMin = object.posY;
+		var yMax = object.posY + object.height;
+		var x = personnage.posX ;
+		var y = personnage.posY ;
+		var speed = personnage.speed;
+		var spriteSize = personnage.width / personnage.numberOfFrames;
+
+		if (direction == "up") {
+			if (x >= xMin && x <= xMax ) {
+				if (y - speed  <= yMax && y - speed >= yMin) {
+					return true;
+				} else {
+					return false;
+				}
+			} else {
+				return false;
+			}
+
+		} else if (direction == "right") {
+			if (y >= yMin && y <= yMax) {
+				if (x + 24 + speed >= xMin && x + spriteSize + speed<= xMax) {
+					return true;
+				} else {
+					return false;
+				}
+			} else {
+				return false;
+			}
+
+		} else if (direction == "left") {
+			if ( y >= yMin && y <= yMax) {
+				if (x - speed >= xMin && x - speed <= xMax) {
+					return true;
+				} else {
+					return false;
+				}
+			} else {
+				return false;
+			}
+
+		} else if (direction == "down") {
+			if (x >= xMin && x <= xMax) {
+				if (y + spriteSize + speed >= yMin && y + spriteSize + speed <= yMax) {
+					return true;
+				} else {
+					return false;
+				}
+			} else {
+				return false;
+			}
+		}
+
+
+	}
+
 
 
 	/* OBJECTS CREATON */
@@ -121,7 +197,7 @@
 		height: 66,
 		image: "img/sanctuaire.png",
 		posX: canvas.width / 2 - (80 / 2),
-		posY: 10
+		posY: 30
 	});
 
 	var link = new AnimateSprite ({
@@ -136,21 +212,30 @@
 	});
 
 
+
 	/*      INIT       */
 	// --------------- //
 	function init () {
 		sanctuary.initDraw();
-		console.log(sanctuary);
+
 	}
 
 
 	/*    GAME LOOP    */
 	// --------------- //
 	function gameLoop () {
+		// console.log("---------------------------")
+		// console.log("link.posX: " + link.posX)
+		// console.log("link.posY: " + link.posY)
+		// console.log("sanctuary.posX: " + sanctuary.posX)
+		// console.log("sanctuary.posY: " + sanctuary.posY)
+		// if (collisionDetection(link, sanctuary)) {
+		//
+		// 	link.direction = "";
+		// 	link.image = "img/link_statique.png";
+		// }
 		link.update();
 		link.render();
-		console.log("link.posX: " + link.posX)
-		console.log("link.posY: " + link.posY)
 		sanctuary.update();
 		window.requestAnimationFrame(gameLoop);
 	}
