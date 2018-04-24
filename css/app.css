@@ -11,7 +11,7 @@ body {
 }
 
 #link {
-	border: 1px red solid;
+	/* border: 1px red solid; */
 	position: absolute;
 	width: 100%;
 	height: 100%;

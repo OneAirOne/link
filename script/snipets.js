@@ -120,7 +120,7 @@
 		width: 80,
 		height: 66,
 		image: "img/sanctuaire.png",
-		posX: canvas.width / 2 - (80 / 2),
+		posX: 10,
 		posY: 10
 	});
 
@@ -130,7 +130,7 @@
 		image: "img/link_statique.png",
 		numberOfFrames: 10,
 		ticksPerFrame: 4,
-		posX: canvas.width / 2 - ((24 * 1.5) / 2),
+		posX: canvas.width / 2,
 		posY: canvas.height / 2,
 		direction: ""
 	});
@@ -149,8 +149,6 @@
 	function gameLoop () {
 		link.update();
 		link.render();
-		console.log("link.posX: " + link.posX)
-		console.log("link.posY: " + link.posY)
 		sanctuary.update();
 		window.requestAnimationFrame(gameLoop);
 	}
