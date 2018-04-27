@@ -2,12 +2,15 @@
 body {
 	margin: 0;
 	padding: 0;
+	background:white;
 }
-#container {
+#container{
 	/* border: 1px blue solid; */
 	position: relative;
+	margin-top: 5px;
 	width: 100%;
 	height: 100%;
+  text-align:center;
 }
 
 #link {
@@ -22,4 +25,9 @@ body {
 	position: absolute;
 	width: 100%;
 	height: 100%;
+}
+
+#map {
+	display: inline;
+	border: 1px solid black;
 }

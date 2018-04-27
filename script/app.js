@@ -1,8 +1,10 @@
 (function() {
 
 	var canvas = document.getElementById("map");
-	canvas.width = window.innerWidth;
-	canvas.height = window.innerHeight;
+	// canvas.width = window.innerWidth;
+	// canvas.height = window.innerHeight;
+	canvas.width = "800";
+	canvas.height = "600";
 	var ctx = canvas.getContext("2d");
 
 
@@ -15,6 +17,9 @@
 	 */
 	function FixedSprite (options) {
 
+		var	frameIndex = 0;
+		var tickCount = 0;
+		var ticksPerFrame = options.ticksPerFrame || 0;
 		var img = new Image();
 		this.image = options.image;
 		img.src = this.image;
@@ -23,12 +28,12 @@
 		this.width = options.width;
 		this.height = options.height;
 
-		this.update = function() {
-			this.draw();
-		};
+
 
 		this.draw = function() {
 			ctx.drawImage(img, this.posX, this.posY);
+			// ctx.globalCompositeOperation='luminosity';
+			ctx.globalCompositeOperation='hard-light';
 		};
 
 		this.initDraw = function() {
@@ -87,25 +92,25 @@
 
 			if (this.direction == "right" ) {
 
-				if (collisionDetection(this, sanctuary, "right") == false) {
+				if (collisionDetection(this, linkedin, "right") == false) {
 					this.posX = this.posX + this.speed
 				}
 
 			} else if (this.direction == "left") {
 
-				if (collisionDetection(this, sanctuary, "left") == false) {
+				if (collisionDetection(this, linkedin, "left") == false) {
 					this.posX = this.posX - this.speed;
 				}
 
 			} else if (this.direction == "up") {
 
-				if (collisionDetection(this, sanctuary, "up") == false) {
+				if (collisionDetection(this, linkedin, "up") == false) {
 					this.posY = this.posY - this.speed;
 				}
 
 			} else if (this.direction == "down") {
 
-				if (collisionDetection(this, sanctuary, "down") == false) {
+				if (collisionDetection(this, linkedin, "down") == false) {
 					this.posY = this.posY + this.speed;
 				}
 
@@ -125,8 +130,8 @@
 				this.height,
 				this.posX,
 				this.posY,
-				(this.width / this.numberOfFrames) * 1.5,
-				(this.height)* 1.5);
+				(this.width / this.numberOfFrames)*1.2,
+				(this.height)*1.2);
 		};
 	}
 
@@ -153,7 +158,7 @@
 
 		} else if (direction == "right") {
 			if (y >= yMin && y <= yMax) {
-				if (x + 24 + speed >= xMin && x + spriteSize + speed<= xMax) {
+				if (x + spriteSize + speed >= xMin && x + spriteSize + speed<= xMax) {
 					return true;
 				} else {
 					return false;
@@ -184,30 +189,88 @@
 				return false;
 			}
 		}
+	}
 
 
+	var zoneDetection = (object1, object2) => {
+		if (object1.posX >= object2.posX
+    		&& object1.posX < object2.posX + object2.width
+    		&& object1.posY >= object2.posY
+    		&& object1.posY < object2.posY + object2.height) {
+					console.log("colision");
+
+					return true;
+		} else {
+			return false;
+		}
+	}
+
+	var activateRedirect = (name) => {
+		document.body.addEventListener("keydown", function (event) {
+			if (event.keyCode === 65) {
+				window.location.replace("http://www.linkedin.com");
+			}
+		});
 	}
 
 
 
+	var frame = () => {
+		ctx.globalCompositeOperation='destination-over';
+		ctx.beginPath();
+		var offsetX = 30;
+		var offsetY = 80;
+		var width = canvas.width - offsetX;
+		var height = canvas.height - offsetY;
+
+		ctx.moveTo(offsetX, offsetY);
+		ctx.lineTo(width, offsetY);
+		ctx.lineTo(width, height);
+		ctx.lineTo(offsetX, height);
+		ctx.lineTo(offsetX, offsetY);
+		ctx.stroke();
+
+		ctx.strokeStyle = '#000001';
+		ctx.lineWidth = 1;
+
+	}
+
+// press arrow keys to move
+
 	/* OBJECTS CREATON */
 	// --------------- //
-	var sanctuary = new FixedSprite({
-		width: 80,
-		height: 66,
-		image: "img/sanctuaire.png",
-		posX: canvas.width / 2 - (80 / 2),
-		posY: 30
+	var linkedin = new FixedSprite({
+		width		: 142, 
+		height	: 165,
+		image		: "img/linkedin.png",
+		posX		: 400 - (142 / 2),
+		posY		: 0
 	});
 
+	var linkedinBubble = new FixedSprite({
+		width		: 150, 
+		height	: 36,
+		image		: "img/bulle_linkedin.png",
+		posX		: 10,
+		posY		: 10,
+		name		: "linkedin"
+	});
+
+	var linkedinZoneBubble = {
+		posX 		: linkedin.posX,
+		posY 		: linkedin.height,
+		height 	: 30,
+		width 	: linkedin.width
+	}
+
 	var link = new AnimateSprite ({
-		width: 240,
-		height: 24,
-		image: "img/link_statique.png",
-		numberOfFrames: 10,
-		ticksPerFrame: 4,
-		posX: canvas.width / 2 - ((24 * 1.5) / 2),
-		posY: canvas.height / 2,
+		width						: 240,
+		height					: 24,
+		image						: "img/link_statique.png",
+		numberOfFrames	: 10,
+		ticksPerFrame		: 4,
+		posX						: canvas.width / 2 - ((24 * 1.2) / 2),
+		posY						: canvas.height / 2,
 		direction: ""
 	});
 
@@ -216,8 +279,7 @@
 	/*      INIT       */
 	// --------------- //
 	function init () {
-		sanctuary.initDraw();
-
+		linkedin.initDraw();
 	}
 
 
@@ -227,16 +289,21 @@
 		// console.log("---------------------------")
 		// console.log("link.posX: " + link.posX)
 		// console.log("link.posY: " + link.posY)
-		// console.log("sanctuary.posX: " + sanctuary.posX)
-		// console.log("sanctuary.posY: " + sanctuary.posY)
-		// if (collisionDetection(link, sanctuary)) {
-		//
-		// 	link.direction = "";
-		// 	link.image = "img/link_statique.png";
-		// }
+		// console.log("linkedin.posX: " + linkedin.posX)
+		// console.log("linkedin.posY: " + linkedin.posY)
+		// console.log(linkedinZoneBubble.posX);
+
 		link.update();
 		link.render();
-		sanctuary.update();
+		linkedin.draw();
+		if (zoneDetection(link, linkedinZoneBubble)) {
+			linkedinBubble.posX = link.posX - 90;
+			linkedinBubble.posY = link.posY - 60;
+			linkedinBubble.draw();
+			activateRedirect(linkedinBubble.name)
+		}
+
+		frame();
 		window.requestAnimationFrame(gameLoop);
 	}
 
