@@ -27,6 +27,7 @@
 		this.posY = options.posY;
 		this.width = options.width;
 		this.height = options.height;
+		this.url = options.url || '';
 
 
 
@@ -205,15 +206,13 @@
 		}
 	}
 
-	var activateRedirect = (name) => {
+	var activateRedirect = (url) => {
 		document.body.addEventListener("keydown", function (event) {
 			if (event.keyCode === 65) {
-				window.location.replace("http://www.linkedin.com");
+				window.location.replace(url);
 			}
 		});
 	}
-
-
 
 	var frame = () => {
 		ctx.globalCompositeOperation='destination-over';
@@ -253,7 +252,7 @@
 		image		: "img/bulle_linkedin.png",
 		posX		: 10,
 		posY		: 10,
-		name		: "linkedin"
+		url			: "https://fr.linkedin.com/in/erwan-gilbert-b184241b"
 	});
 
 	var linkedinZoneBubble = {
@@ -300,7 +299,8 @@
 			linkedinBubble.posX = link.posX - 90;
 			linkedinBubble.posY = link.posY - 60;
 			linkedinBubble.draw();
-			activateRedirect(linkedinBubble.name)
+			console.log(linkedinBubble.url);
+			activateRedirect(linkedinBubble.url)
 		}
 
 		frame();
