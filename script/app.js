@@ -1,13 +1,9 @@
 (function() {
 
 	var canvas = document.getElementById("map");
-	// canvas.width = window.innerWidth;
-	// canvas.height = window.innerHeight;
 	canvas.width = "800";
 	canvas.height = "600";
 	var ctx = canvas.getContext("2d");
-
-
 
 	/**
 	 * Class of fixed sprites
@@ -29,15 +25,13 @@
 		this.height = options.height;
 		this.url = options.url || '';
 
-
-
-		this.draw = function() {
+		this.draw = () => {
 			ctx.drawImage(img, this.posX, this.posY);
 			// ctx.globalCompositeOperation='luminosity';
 			ctx.globalCompositeOperation='hard-light';
 		};
 
-		this.initDraw = function() {
+		this.initDraw = () => {
 			img.addEventListener('load', function() {
 				ctx.drawImage(img, this.posX, this.posY);
 			})
@@ -68,7 +62,7 @@
 		this.direction = options.direction;
 
 		// update position of sprite
-		this.update = function () {
+		this.update = () => {
 
 				tickCount += 1;
 
@@ -87,7 +81,7 @@
 		};
 
 		// draw the position of sprite updated
-		this.render = function () {
+		this.render =  () => {
 
 			this.speed = 3;
 
@@ -136,6 +130,14 @@
 		};
 	}
 
+	/**
+	 * Detect colition between a personnage and an object
+	 *
+	 * @param  {object} personnage link
+	 * @param  {object} object     an object on the map
+	 * @param  {string} direction  the direction to move
+	 * @return {booleen}
+	 */
 	function collisionDetection (personnage, object, direction) {
 		var xMin = object.posX;
 		var xMax = object.posX + object.width;
@@ -192,7 +194,13 @@
 		}
 	}
 
-
+	/**
+	 * Detect if object1 is in zone of object2
+	 *
+	 * @param  {object} object1 one object
+	 * @param  {object} object2 another object
+	 * @return {booleen}
+	 */
 	var zoneDetection = (object1, object2) => {
 		if (object1.posX >= object2.posX
     		&& object1.posX < object2.posX + object2.width
@@ -206,14 +214,25 @@
 		}
 	}
 
+	/**
+	 * Redirect on key press
+	 *
+	 * @param  {string} url [description]
+	 * @return {void}
+	 */
 	var activateRedirect = (url) => {
 		document.body.addEventListener("keydown", function (event) {
 			if (event.keyCode === 65) {
-				window.location.replace(url);
+				document.location = url;
 			}
 		});
 	}
 
+	/**
+	 * Draw a rectangle, limit of the game
+	 * @return {[type]} [descrLiption]
+	 * @return {void}
+	 */
 	var frame = () => {
 		ctx.globalCompositeOperation='destination-over';
 		ctx.beginPath();
@@ -234,7 +253,6 @@
 
 	}
 
-// press arrow keys to move
 
 	/* OBJECTS CREATON */
 	// --------------- //
@@ -265,7 +283,7 @@
 	var link = new AnimateSprite ({
 		width						: 240,
 		height					: 24,
-		image						: "img/link_statique.png",
+		image						: "img/link_static.png",
 		numberOfFrames	: 10,
 		ticksPerFrame		: 4,
 		posX						: canvas.width / 2 - ((24 * 1.2) / 2),
@@ -277,6 +295,10 @@
 
 	/*      INIT       */
 	// --------------- //
+	/**
+	 * init the game
+	 * @return {void} [
+	 */
 	function init () {
 		linkedin.initDraw();
 	}
@@ -284,17 +306,15 @@
 
 	/*    GAME LOOP    */
 	// --------------- //
+	/**
+	 * infinite game loop
+	 * @return {void}
+	 */
 	function gameLoop () {
-		// console.log("---------------------------")
-		// console.log("link.posX: " + link.posX)
-		// console.log("link.posY: " + link.posY)
-		// console.log("linkedin.posX: " + linkedin.posX)
-		// console.log("linkedin.posY: " + linkedin.posY)
-		// console.log(linkedinZoneBubble.posX);
-
 		link.update();
 		link.render();
 		linkedin.draw();
+		// check if the personnage is in bubble zone
 		if (zoneDetection(link, linkedinZoneBubble)) {
 			linkedinBubble.posX = link.posX - 90;
 			linkedinBubble.posY = link.posY - 60;
@@ -302,7 +322,7 @@
 			console.log(linkedinBubble.url);
 			activateRedirect(linkedinBubble.url)
 		}
-
+		// draw the frame
 		frame();
 		window.requestAnimationFrame(gameLoop);
 	}
@@ -325,25 +345,25 @@
 					case 38:
 						console.log("-> UP");
 						link.direction = "up";
-						link.image = "img/link_haut.png";
+						link.image = "img/link_up.png";
 						break;
 
 					case 40:
 						console.log("-> DOWN");
 						link.direction = "down";
-						link.image = "img/link_bas.png";
+						link.image = "img/link_down.png";
 						break;
 
 					case 37:
 						console.log("-> LEFT");
 						link.direction = "left";
-						link.image = "img/link_gauche.png";
+						link.image = "img/link_left.png";
 						break;
 
 					case 39:
 						console.log("-> RIGHT");
 						link.direction = "right";
-						link.image = "img/link_droite.png";
+						link.image = "img/link_right.png";
 						break;
 				}
 			},
@@ -355,25 +375,25 @@
 					case 38:
 						console.log("-> UP");
 						link.direction = "";
-						link.image = "img/link_statique.png";
+						link.image = "img/link_static.png";
 						break;
 
 					case 40:
 						console.log("-> DOWN");
 						link.direction = "";
-						link.image = "img/link_statique.png";
+						link.image = "img/link_static.png";
 						break;
 
 					case 37:
 						console.log("-> LEFT");
 						link.direction = "";
-						link.image = "img/link_statique.png";
+						link.image = "img/link_static.png";
 						break;
 
 					case 39:
 						console.log("-> RIGHT");
 						link.direction = "";
-						link.image = "img/link_statique.png";
+						link.image = "img/link_static.png";
 						break;
 				}
 			}
