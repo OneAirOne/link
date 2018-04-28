@@ -1,8 +1,10 @@
 (function() {
 
 	var canvas = document.getElementById("map");
-	canvas.width = "800";
-	canvas.height = "600";
+	// canvas.width = "800";
+	canvas.width = window.innerWidth;
+	// canvas.height = "600";
+	canvas.height = window.innerHeight;
 	var ctx = canvas.getContext("2d");
 
 	/**
@@ -27,8 +29,8 @@
 
 		this.draw = () => {
 			ctx.drawImage(img, this.posX, this.posY);
-			// ctx.globalCompositeOperation='luminosity';
-			ctx.globalCompositeOperation='hard-light';
+			ctx.globalCompositeOperation='luminosity';
+			// ctx.globalCompositeOperation='hard-light';
 		};
 
 		this.initDraw = () => {
@@ -85,29 +87,80 @@
 
 			this.speed = 3;
 
+
+			var max = boxes.length
+
 			if (this.direction == "right" ) {
 
-				if (collisionDetection(this, linkedin, "right") == false) {
-					this.posX = this.posX + this.speed
+				for (i = 0 ; i < 3; i++) {
+					if (collisionDetection(this, boxes[i], "right") == true) {
+						return;
+					} else {
+						if (i == max - 1) {
+							this.posX = this.posX + this.speed
+						}
+					}
 				}
+
+				// if (collisionDetection(this, linkedin, "right") == false
+				// && collisionDetection(this, truck, "right") == false
+				// && collisionDetection(this, house, "right") == false) {
+				// 	this.posX = this.posX + this.speed
+				// }
 
 			} else if (this.direction == "left") {
 
-				if (collisionDetection(this, linkedin, "left") == false) {
-					this.posX = this.posX - this.speed;
+				for (i = 0 ; i < 3; i++) {
+					if (collisionDetection(this, boxes[i], "left") == true) {
+						return;
+					} else {
+						if (i == max - 1) {
+							this.posX = this.posX - this.speed;
+						}
+					}
 				}
+
+				// if (collisionDetection(this, linkedin, "left") == false
+				// && collisionDetection(this, truck, "left") == false
+				// && collisionDetection(this, house, "left") == false) {
+				// 	this.posX = this.posX - this.speed;
+				// }
 
 			} else if (this.direction == "up") {
 
-				if (collisionDetection(this, linkedin, "up") == false) {
-					this.posY = this.posY - this.speed;
+				for (i = 0 ; i < 3; i++) {
+					if (collisionDetection(this, boxes[i], "up") == true) {
+						return;
+					} else {
+						if (i == max - 1) {
+							this.posY = this.posY - this.speed;
+						}
+					}
 				}
+
+				// if (collisionDetection(this, linkedin, "up") == false
+				// && collisionDetection(this, truck, "up") == false
+				// && collisionDetection(this, house, "up") == false) {
+				// 	this.posY = this.posY - this.speed;
+				// }
 
 			} else if (this.direction == "down") {
 
-				if (collisionDetection(this, linkedin, "down") == false) {
-					this.posY = this.posY + this.speed;
+				for (i = 0 ; i < 3; i++) {
+					if (collisionDetection(this, boxes[i], "down") == true) {
+						return;
+					} else {
+						if (i == max - 1) {
+							this.posY = this.posY + this.speed;
+						}
+					}
 				}
+
+				// if (collisionDetection(this, linkedin, "down") == false
+				// && collisionDetection(this, truck, "down") == false
+				// && collisionDetection(this, house, "down") == false) {
+				// 	this.posY = this.posY + this.speed;
+				// }
 
 			}
 			// update the image source
@@ -234,7 +287,7 @@
 	 * @return {void}
 	 */
 	var frame = () => {
-		ctx.globalCompositeOperation='destination-over';
+		// ctx.globalCompositeOperation='destination-over';
 		ctx.beginPath();
 		var offsetX = 30;
 		var offsetY = 80;
@@ -256,12 +309,40 @@
 
 	/* OBJECTS CREATON */
 	// --------------- //
+
+	var link = new AnimateSprite ({
+		width						: 240,
+		height					: 24,
+		image						: "img/link_static.png",
+		numberOfFrames	: 10,
+		ticksPerFrame		: 4,
+		posX						: canvas.width / 2 - ((24 * 1.2) / 2),
+		posY						: canvas.height / 2,
+		direction: ""
+	});
+
 	var linkedin = new FixedSprite({
-		width		: 142, 
-		height	: 165,
+		width		: 124, 
+		height	: 131,
 		image		: "img/linkedin.png",
-		posX		: 400 - (142 / 2),
+		posX		: canvas.width / 1.8,
 		posY		: 0
+	});
+
+	var truck = new FixedSprite({
+		width		: 48, 
+		height	: 40,
+		image		: "img/truck.png",
+		posX		: canvas.width / 1.3,
+		posY		: 150
+	});
+
+	var house = new FixedSprite({
+		width		: 80, 
+		height	: 70,
+		image		: "img/house.png",
+		posX		: canvas.width / 1.2,
+		posY		: 258
 	});
 
 	var linkedinBubble = new FixedSprite({
@@ -274,22 +355,32 @@
 	});
 
 	var linkedinZoneBubble = {
-		posX 		: linkedin.posX,
-		posY 		: linkedin.height,
-		height 	: 30,
-		width 	: linkedin.width
+		posX 		: linkedin.posX - (0.5 * linkedin.width),
+		posY 		: linkedin.posY - (0.7 * linkedin.height),
+		height 	: linkedin.height * 2,
+		width 	: linkedin.width * 2
 	}
 
-	var link = new AnimateSprite ({
-		width						: 240,
-		height					: 24,
-		image						: "img/link_static.png",
-		numberOfFrames	: 10,
-		ticksPerFrame		: 4,
-		posX						: canvas.width / 2 - ((24 * 1.2) / 2),
-		posY						: canvas.height / 2,
-		direction: ""
+	var houseBubble = new FixedSprite({
+		width		: 150, 
+		height	: 36,
+		image		: "img/bulle_linkedin.png",
+		posX		: 10,
+		posY		: 10,
+		url			: "https://fr.linkedin.com/in/erwan-gilbert-b184241b"
 	});
+
+	var houseZoneBubble = {
+		posX 		: house.posX - (1.2 * house.width),
+		posY 		: house.posY - (0.7 * house.height),
+		height 	: house.height * 2,
+		width 	: house.width * 2
+	}
+
+
+
+
+	var boxes = [linkedin,truck, house]
 
 
 
@@ -314,6 +405,16 @@
 		link.update();
 		link.render();
 		linkedin.draw();
+		truck.draw();
+		house.draw();
+		// check if the personnage is in bubble zone
+		if (zoneDetection(link, houseZoneBubble)) {
+			houseBubble.posX = link.posX - 90;
+			houseBubble.posY = link.posY - 60;
+			houseBubble.draw();
+			console.log(houseBubble.url);
+			activateRedirect(houseBubble.url)
+		}
 		// check if the personnage is in bubble zone
 		if (zoneDetection(link, linkedinZoneBubble)) {
 			linkedinBubble.posX = link.posX - 90;
@@ -322,8 +423,9 @@
 			console.log(linkedinBubble.url);
 			activateRedirect(linkedinBubble.url)
 		}
+
 		// draw the frame
-		frame();
+		// frame();
 		window.requestAnimationFrame(gameLoop);
 	}
 
