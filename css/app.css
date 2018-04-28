@@ -28,6 +28,11 @@ body {
 }
 
 #map {
+	margin: 0;
 	display: inline;
-	border: 1px solid black;
+	/* border: 1px solid black; */
+}
+
+#return {
+	/* border: 1px solid black; */
 }

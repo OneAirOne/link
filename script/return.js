@@ -1,10 +1,10 @@
 (function() {
 
-	var canvas = document.getElementById("map");
-	// canvas.width = "800";
-	canvas.width = window.innerWidth;
-	// canvas.height = "600";
-	canvas.height = window.innerHeight;
+	var canvas = document.getElementById("return");
+	canvas.width = "400";
+	// canvas.height = "200";
+	canvas.width = window.innerWidth
+
 	var ctx = canvas.getContext("2d");
 
 	/**
@@ -29,8 +29,6 @@
 
 		this.draw = () => {
 			ctx.drawImage(img, this.posX, this.posY);
-			// ctx.globalCompositeOperation='luminosity';
-			// ctx.globalCompositeOperation='hard-light';
 		};
 
 		this.initDraw = () => {
@@ -87,6 +85,7 @@
 
 			this.speed = 3;
 
+
 			var max = boxes.length
 
 			if (this.direction == "right" ) {
@@ -115,9 +114,7 @@
 			} else if (this.direction == "up") {
 
 				for (i = 0 ; i < max; i++) {
-					console.log(i)
 					if (collisionDetection(this, boxes[i], "up") == true) {
-						console.log("PROUT")
 						return;
 					} else {
 						if (i == max - 1) {
@@ -136,6 +133,7 @@
 						}
 					}
 				}
+
 			}
 			// update the image source
 			img.src = this.image;
@@ -255,222 +253,48 @@
 		});
 	}
 
-	/**
-	 * Draw a rectangle, limit of the game
-	 * @return {[type]} [descrLiption]
-	 * @return {void}
-	 */
-	var frame = () => {
-		// ctx.globalCompositeOperation='destination-over';
-		ctx.beginPath();
-		var offsetX = 30;
-		var offsetY = 80;
-		var width = canvas.width - offsetX;
-		var height = canvas.height - offsetY;
 
-		ctx.moveTo(offsetX, offsetY);
-		ctx.lineTo(width, offsetY);
-		ctx.lineTo(width, height);
-		ctx.lineTo(offsetX, height);
-		ctx.lineTo(offsetX, offsetY);
-		ctx.stroke();
-
-		ctx.strokeStyle = '#000001';
-		ctx.lineWidth = 1;
-
-	}
 
 
 	/* OBJECTS CREATON */
 	// --------------- //
-
+	//
 	var link = new AnimateSprite ({
 		width						: 240,
 		height					: 24,
 		image						: "img/link_static.png",
 		numberOfFrames	: 10,
 		ticksPerFrame		: 4,
-		posX						: canvas.width / 2 - ((24 * 1.2) / 2),
-		posY						: canvas.height / 2,
+		posX						: 50,
+		posY						: 65,
 		direction: ""
 	});
 
-	var linkedin = new FixedSprite({
-		width		: 124, 
-		height	: 131,
-		image		: "img/linkedin_color.png",
-		posX		: canvas.width / 1.2,
-		posY		: 0
+	var back = new FixedSprite({
+		width		: 36, 
+		height	: 49,
+		image		: "img/return.png",
+		posX		: 0,
+		posY		: 60
 	});
 
-	var truck = new FixedSprite({
-		width		: 48, 
-		height	: 40,
-		image		: "img/truck.png",
-		posX		: canvas.width / 1.1,
-		posY		: canvas.height / 1.6,
-	});
-
-	var house = new FixedSprite({
-		width		: 80, 
-		height	: 70,
-		image		: "img/house_color.png",
-		posX		: canvas.width / 1.8,
-		posY		: canvas.height / 11
-	});
-
-	var garden = new FixedSprite({
-		width		: 60, 
-		height	: 70,
-		image		: "img/garden_color.png",
-		posX		: house.posX - 70,
-		posY		: house.posY + 25
-	});
-
-	var city = new FixedSprite({
-		width		: 1500, 
-		height	: 200,
-		image		: "img/city_color.png",
-		posX		: canvas.width / 100,
-		posY		: canvas.height - 170
-	});
-
-	var swimmingPool = new FixedSprite({
-		width		: 240, 
-		height	: 120,
-		image		: "img/swimmingPool_color.png",
-		posX		: canvas.width / 17,
-		posY		: canvas.height / 2.2
-	});
-
-	var chillout = new FixedSprite({
-		width		: 160, 
-		height	: 80,
-		image		: "img/chillout_color.png",
-		posX		: swimmingPool.posX + (swimmingPool.height / 1.09),
-		posY		: swimmingPool.posY + swimmingPool.height
-	});
-
-	var factoryGit = new FixedSprite({
-		width		: 240, 
-		height	: 108,
-		image		: "img/factory_git_color.png",
-		posX		: canvas.width / 1.4,
-		posY		: canvas.height / 2.8
-	});
-
-
-	var mosaicGit = new FixedSprite({
-		width		: 88, 
-		height	: 31,
-		image		: "img/mosaic_git.png",
-		posX		: factoryGit.posX + 39 ,
-		posY		: factoryGit.posY + factoryGit.height
-	});
-
-	var linkedinBubble = new FixedSprite({
+	var backBubble = new FixedSprite({
 		width		: 150, 
 		height	: 36,
 		image		: "img/bubble_linkedin.png",
-		posX		: 10,
-		posY		: 10,
-		url			: "https://fr.linkedin.com/in/erwan-gilbert-b184241b"
+		posX		: 0,
+		posY		: 0,
+		url			: "index.html"
 	});
 
-	var linkedinZoneBubble = {
-		posX 		: linkedin.posX - (0.5 * linkedin.width),
-		posY 		: linkedin.posY - (0.5 * linkedin.height),
-		height 	: linkedin.height * 2,
-		width 	: linkedin.width * 2
+	var backZoneBubble = {
+		posX 		: back.posX - (0.7 * back.width),
+		posY 		: back.posY - (0.7 * back.height),
+		height 	: back.height * 4,
+		width 	: back.width * 4
 	}
 
-	var factoryBubble = new FixedSprite({
-		width		: 244, 
-		height	: 50,
-		image		: "img/bubble_git.png",
-		posX		: 10,
-		posY		: 10,
-		url			: "https://github.com/OneAirOne"
-	});
-
-	var factoryZoneBubble = {
-		posX 		: factoryGit.posX - (0.3 * factoryGit.width),
-		posY 		: factoryGit.posY - (0.3 * factoryGit.height),
-		height 	: factoryGit.height * 2,
-		width 	: factoryGit.width * 1.5
-	}
-
-	var houseBubble = new FixedSprite({
-		width		: 203, 
-		height	: 50,
-		image		: "img/bubble_cv.png",
-		posX		: 10,
-		posY		: 10,
-		url			: "cv.html"
-	});
-
-	var houseZoneBubble = {
-		posX 		: house.posX - (1.2 * house.width),
-		posY 		: house.posY - (0.7 * house.height),
-		height 	: house.height * 2,
-		width 	: house.width * 2
-	}
-
-	var swimmingPoolBubble = new FixedSprite({
-		width		: 226, 
-		height	: 50,
-		image		: "img/bubble_game.png",
-		posX		: 10,
-		posY		: 10,
-		url			: "game.html"
-	});
-
-	var swimmingPoolZoneBubble = {
-		posX 		: swimmingPool.posX - (1.8 * swimmingPool.width),
-		posY 		: swimmingPool.posY - (0.7 * swimmingPool.height),
-		height 	: swimmingPool.height * 2,
-		width 	: swimmingPool.width * 3
-	}
-
-	var cityBubble = new FixedSprite({
-		width		: 197, 
-		height	: 50,
-		image		: "img/bubble_nothing.png",
-		posX		: 10,
-		posY		: 10,
-		url			: "game.html"
-	});
-
-	var cityZoneBubble = {
-		posX 		: city.posX - 15,
-		posY 		: city.posY - 30,
-		height 	: city.height ,
-		width 	: city.width
-	}
-
-	var startBubble = new FixedSprite({
-		width		: 300, 
-		height	: 50,
-		image		: "img/bubble_start.png",
-		posX		: link.posX  - (300 / 2),
-		posY		: link.posY - 80,
-		url			: "game.html"
-	});
-
-	var welcomeBubble = new FixedSprite({
-		width		: 300, 
-		height	: 50,
-		image		: "img/bubble_welcome.png",
-		posX		: 10,
-		posY		: 20,
-		url			: "game.html"
-	});
-
-
-
-	var boxes = [linkedin,truck, house, garden, factoryGit, mosaicGit, city, swimmingPool]
-	var welcome = false;
-
+	var boxes = [back];
 
 	/*      INIT       */
 	// --------------- //
@@ -479,7 +303,6 @@
 	 * @return {void} [
 	 */
 	function init () {
-
 	}
 
 
@@ -493,71 +316,17 @@
 
 		link.update();
 		link.render();
-		linkedin.draw();
-		truck.draw();
-		house.draw();
-		garden.draw();
-		factoryGit.draw();
-		mosaicGit.draw();
-		swimmingPool.draw();
-		chillout.draw();
-		city.draw();
-		welcomeBubble.draw();
-
-		//
-		if (link.image == "img/link_static.png" && welcome == false) {
-			startBubble.draw();
-		}
-
+		back.draw();
 
 		// check if the personnage is in bubble zone
-		if (zoneDetection(link, houseZoneBubble)) {
-			houseBubble.posX = link.posX - 45;
-			houseBubble.posY = link.posY - 60;
-			houseBubble.draw();
-			console.log(houseBubble.url);
-			activateRedirect(houseBubble.url)
+		if (zoneDetection(link, backZoneBubble)) {
+			backBubble.posX = link.posX - 50;
+			backBubble.posY = link.posY - 60;
+			backBubble.draw();
+			console.log(backBubble.url);
+			activateRedirect(backBubble.url)
 		}
 
-		// check if the personnage is in bubble zone
-		if (zoneDetection(link, linkedinZoneBubble)) {
-			linkedinBubble.posX = link.posX - 90;
-			linkedinBubble.posY = link.posY - 60;
-			linkedinBubble.draw();
-			console.log(linkedinBubble.url);
-			activateRedirect(linkedinBubble.url)
-		}
-
-		// check if the personnage is in bubble zone
-		if (zoneDetection(link, factoryZoneBubble)) {
-			factoryBubble.posX = link.posX - 50;
-			factoryBubble.posY = link.posY - 60;
-			factoryBubble.draw();
-			console.log(factoryBubble.url);
-			activateRedirect(factoryBubble.url)
-		}
-
-		// check if the personnage is in bubble zone
-		if (zoneDetection(link, swimmingPoolZoneBubble)) {
-			swimmingPoolBubble.posX = link.posX - 150;
-			swimmingPoolBubble.posY = link.posY - 60;
-			swimmingPoolBubble.draw();
-			console.log(swimmingPoolBubble.url);
-			activateRedirect(swimmingPoolBubble.url)
-		}
-
-		// check if the personnage is in bubble zone
-		if (zoneDetection(link, cityZoneBubble)) {
-			cityBubble.posX = link.posX - 40;
-			cityBubble.posY = link.posY - 60;
-			cityBubble.draw();
-			console.log(cityBubble.url);
-			activateRedirect(cityBubble.url)
-		}
-
-
-		// draw the frame
-		// frame();
 		window.requestAnimationFrame(gameLoop);
 	}
 
@@ -580,28 +349,24 @@
 						console.log("-> UP");
 						link.direction = "up";
 						link.image = "img/link_up.png";
-						welcome = true;
 						break;
 
 					case 40:
 						console.log("-> DOWN");
 						link.direction = "down";
 						link.image = "img/link_down.png";
-						welcome = true;
 						break;
 
 					case 37:
 						console.log("-> LEFT");
 						link.direction = "left";
 						link.image = "img/link_left.png";
-						welcome = true;
 						break;
 
 					case 39:
 						console.log("-> RIGHT");
 						link.direction = "right";
 						link.image = "img/link_right.png";
-						welcome = true;
 						break;
 				}
 			},
