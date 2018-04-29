@@ -1,9 +1,10 @@
 (function() {
 
 	var canvas = document.getElementById("return");
-	canvas.width = "400";
+	// canvas.width = "400";
 	// canvas.height = "200";
 	canvas.width = window.innerWidth
+	canvas.height = window.innerHeight
 
 	var ctx = canvas.getContext("2d");
 
@@ -260,8 +261,8 @@
 	// --------------- //
 	//
 	var link = new AnimateSprite ({
-		width						: 240,
-		height					: 24,
+		width						: 380,
+		height					: 38,
 		image						: "img/link_static.png",
 		numberOfFrames	: 10,
 		ticksPerFrame		: 4,
@@ -294,6 +295,14 @@
 		width 	: back.width * 4
 	}
 
+	var cv = new FixedSprite({
+		width		: 1000, 
+		height	: 01439,
+		image		: "img/cv.png",
+		posX		: 0,
+		posY		: 150
+	});
+
 	var boxes = [back];
 
 	/*      INIT       */
@@ -317,6 +326,7 @@
 		link.update();
 		link.render();
 		back.draw();
+		cv.draw();
 
 		// check if the personnage is in bubble zone
 		if (zoneDetection(link, backZoneBubble)) {
@@ -348,25 +358,25 @@
 					case 38:
 						console.log("-> UP");
 						link.direction = "up";
-						link.image = "img/link_up.png";
+						link.image = "img/up.png";
 						break;
 
 					case 40:
 						console.log("-> DOWN");
 						link.direction = "down";
-						link.image = "img/link_down.png";
+						link.image = "img/down.png";
 						break;
 
 					case 37:
 						console.log("-> LEFT");
 						link.direction = "left";
-						link.image = "img/link_left.png";
+						link.image = "img/left.png";
 						break;
 
 					case 39:
 						console.log("-> RIGHT");
 						link.direction = "right";
-						link.image = "img/link_right.png";
+						link.image = "img/right.png";
 						break;
 				}
 			},

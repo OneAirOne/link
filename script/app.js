@@ -2,7 +2,7 @@
 
 	var canvas = document.getElementById("map");
 	// canvas.width = "800";
-	canvas.width = window.innerWidth;
+	canvas.width = window.innerWidth - 30;
 	// canvas.height = "600";
 	canvas.height = window.innerHeight;
 	var ctx = canvas.getContext("2d");
@@ -141,7 +141,11 @@
 
 			// Clear the canvas
 			ctx.clearRect(0, 0, canvas.width , canvas.height);
+
+			// draw elements under link
 			swimmingPool.draw();
+			mosaicGit.draw();
+			// triforce.draw();
 			// Draw the animation
 			ctx.drawImage(
 				img,
@@ -284,8 +288,8 @@
 	// --------------- //
 
 	var link = new AnimateSprite ({
-		width						: 240,
-		height					: 24,
+		width						: 380,
+		height					: 38,
 		image						: "img/link_static.png",
 		numberOfFrames	: 10,
 		ticksPerFrame		: 4,
@@ -293,6 +297,8 @@
 		posY						: canvas.height / 2,
 		direction: ""
 	});
+
+
 
 	var linkedin = new FixedSprite({
 		width		: 124, 
@@ -310,12 +316,28 @@
 		posY		: canvas.height / 1.6,
 	});
 
+	var swimmingPool = new FixedSprite({
+		width		: 240, 
+		height	: 120,
+		image		: "img/swimmingPool_color.png",
+		posX		: canvas.width / 17,
+		posY		: canvas.height / 1.9
+	});
+
 	var house = new FixedSprite({
 		width		: 80, 
 		height	: 70,
 		image		: "img/house_color.png",
-		posX		: canvas.width / 1.8,
-		posY		: canvas.height / 11
+		posX		: canvas.width / 2,
+		posY		: 120
+	});
+
+	var bubbleRoom = new FixedSprite({
+		width		: 147, 
+		height	: 103,
+		image		: "img/bubble_room.png",
+		posX		: house.posX + 15,
+		posY		: house.posY - 65
 	});
 
 	var garden = new FixedSprite({
@@ -330,25 +352,19 @@
 		width		: 1500, 
 		height	: 200,
 		image		: "img/city_color.png",
-		posX		: canvas.width / 100,
+		posX		: canvas.width / 2 - ((1070 * 1.2) / 2),
 		posY		: canvas.height - 170
 	});
 
-	var swimmingPool = new FixedSprite({
-		width		: 240, 
-		height	: 120,
-		image		: "img/swimmingPool_color.png",
-		posX		: canvas.width / 17,
-		posY		: canvas.height / 2.2
-	});
+
 
 	var chillout = new FixedSprite({
 		width		: 160, 
 		height	: 80,
 		image		: "img/chillout_color.png",
-		posX		: swimmingPool.posX + (swimmingPool.height / 1.09),
-		posY		: swimmingPool.posY + swimmingPool.height
-	});
+		posX		: swimmingPool.posX + (swimmingPool.height / 1.35),
+		posY		: swimmingPool.posY + swimmingPool.height - 20
+ 	});
 
 	var factoryGit = new FixedSprite({
 		width		: 240, 
@@ -366,6 +382,14 @@
 		posX		: factoryGit.posX + 39 ,
 		posY		: factoryGit.posY + factoryGit.height
 	});
+
+	// var triforce = new FixedSprite({
+	// 	width		: 80, 
+	// 	height	: 84,
+	// 	image		: "img/triforce.png",
+	// 	posX		: link.posX - 25,
+	// 	posY		: link.posY -24
+	// });
 
 	var linkedinBubble = new FixedSprite({
 		width		: 150, 
@@ -410,7 +434,7 @@
 
 	var houseZoneBubble = {
 		posX 		: house.posX - (1.2 * house.width),
-		posY 		: house.posY - (0.7 * house.height),
+		posY 		: house.posY - (0.2 * house.height),
 		height 	: house.height * 2,
 		width 	: house.width * 3
 	}
@@ -441,8 +465,8 @@
 	});
 
 	var cityZoneBubble = {
-		posX 		: city.posX - 15,
-		posY 		: city.posY - 30,
+		posX 		: city.posX - 50,
+		posY 		: city.posY - 50,
 		height 	: city.height ,
 		width 	: city.width
 	}
@@ -467,7 +491,7 @@
 
 
 
-	var boxes = [linkedin,truck, house, garden, factoryGit, mosaicGit, city, chillout]
+	var boxes = [linkedin,truck, house, garden, factoryGit, city, chillout]
 	var welcome = false;
 
 
@@ -488,24 +512,40 @@
 	 * infinite game loop
 	 * @return {void}
 	 */
+	var nbLoop = true;
+	var equip = false;
+	var timeCount = 0;
 	function gameLoop () {
-
 		link.update();
 		link.render();
 		linkedin.draw();
+
 		truck.draw();
 		house.draw();
-		garden.draw();
+		// garden.draw();
 		factoryGit.draw();
-		mosaicGit.draw();
+		// mosaicGit.draw();
 		// swimmingPool.draw();
 		chillout.draw();
 		city.draw();
 		welcomeBubble.draw();
+		bubbleRoom.draw();
 
-		//
+		timeCount ++;
 		if (link.image == "img/link_static.png" && welcome == false) {
+			console.log(nbLoop);
 			startBubble.draw();
+			if (timeCount > 45) {
+				if (nbLoop == true) {
+					startBubble.posY = startBubble.posY + 7;
+					nbLoop = false;
+				} else {
+					startBubble.posY = startBubble.posY - 7;
+					nbLoop = true;
+
+				}
+				timeCount = 0;
+			}
 		}
 
 
@@ -550,7 +590,7 @@
 			cityBubble.posX = link.posX - 40;
 			cityBubble.posY = link.posY - 60;
 			cityBubble.draw();
-			console.log(cityBubble.url);
+			console.log("TTTTTTT");
 			activateRedirect(cityBubble.url)
 		}
 
@@ -578,30 +618,116 @@
 					case 38:
 						console.log("-> UP");
 						link.direction = "up";
-						link.image = "img/link_up.png";
+						if (zoneDetection(link, swimmingPool)) {
+							link.image = "img/up_swim.png";
+						} else {
+							
+							if (equip == true) {
+								link.image = "img/up_shield.png";
+							} else {
+								link.image = "img/up.png";
+							}
+						}
+
 						welcome = true;
 						break;
 
 					case 40:
 						console.log("-> DOWN");
 						link.direction = "down";
-						link.image = "img/link_down.png";
+						if (zoneDetection(link, swimmingPool)) {
+							link.image = "img/down_swim.png";
+						} else {
+							if (equip == true) {
+								link.image = "img/down_shield.png";
+							} else {
+								link.image = "img/down.png";
+							}
+						}
 						welcome = true;
 						break;
 
 					case 37:
 						console.log("-> LEFT");
 						link.direction = "left";
-						link.image = "img/link_left.png";
+						if (zoneDetection(link, swimmingPool)) {
+							link.image = "img/left_swim.png";
+						} else {
+							if (equip == true) {
+								link.image = "img/left_shield.png";
+							} else {
+								link.image = "img/left.png";
+							}
+						}
 						welcome = true;
 						break;
 
 					case 39:
 						console.log("-> RIGHT");
 						link.direction = "right";
-						link.image = "img/link_right.png";
+						if (zoneDetection(link, swimmingPool)) {
+							link.image = "img/right_swim.png";
+						} else {
+							if (equip == true) {
+								link.image = "img/right_shield.png";
+							} else {
+								link.image = "img/right.png";
+							}
+						}
+
 						welcome = true;
 						break;
+
+						case 69:
+							console.log("->E");
+
+							if (zoneDetection(link, swimmingPool)) {
+								// link.image = "img/right_swim.png";
+							} else {
+								link.numberOfFrames = 7;
+								link.width = 270;
+								link.image = "img/right_sword.png";
+							}
+
+							welcome = true;
+							break;
+
+							case 87:
+								console.log("->W");
+
+								if (zoneDetection(link, swimmingPool)) {
+									// link.image = "img/right_swim.png";
+								} else {
+									link.numberOfFrames = 7;
+									link.width = 270;
+									link.image = "img/left_sword.png";
+								}
+
+								welcome = true;
+								break;
+
+								case 78:
+									console.log("->N");
+
+									if (zoneDetection(link, swimmingPool)) {
+										// link.image = "img/right_swim.png";
+									} else {
+										link.image = "img/link_static_shield.png";
+										equip = true;
+									}
+									welcome = true;
+									break;
+									case 82:
+										console.log("->R");
+
+										if (zoneDetection(link, swimmingPool)) {
+											// link.image = "img/right_swim.png";
+										} else {
+											link.image = "img/link_static.png";
+											equip = false;
+										}
+										welcome = true;
+										break;
 				}
 			},
 
@@ -612,26 +738,94 @@
 					case 38:
 						console.log("-> UP");
 						link.direction = "";
-						link.image = "img/link_static.png";
+						if (zoneDetection(link, swimmingPool)) {
+							link.image = "img/down_swim.png";
+						} else {
+							if (equip == true) {
+								link.image = "img/link_static_shield.png";
+							} else {
+								link.image = "img/link_static.png";
+							}
+						}
 						break;
 
 					case 40:
 						console.log("-> DOWN");
 						link.direction = "";
-						link.image = "img/link_static.png";
+						if (zoneDetection(link, swimmingPool)) {
+							link.image = "img/down_swim.png";
+						} else {
+							if (equip == true) {
+								link.image = "img/link_static_shield.png";
+							} else {
+								link.image = "img/link_static.png";
+							}
+						}
 						break;
 
 					case 37:
 						console.log("-> LEFT");
 						link.direction = "";
-						link.image = "img/link_static.png";
+						if (zoneDetection(link, swimmingPool)) {
+							link.image = "img/down_swim.png";
+						} else {
+							if (equip == true) {
+								link.image = "img/link_static_shield.png";
+							} else {
+								link.image = "img/link_static.png";
+							}
+						}
 						break;
 
 					case 39:
 						console.log("-> RIGHT");
 						link.direction = "";
-						link.image = "img/link_static.png";
+						if (zoneDetection(link, swimmingPool)) {
+							link.image = "img/down_swim.png";
+						} else {
+							if (equip == true) {
+								link.image = "img/link_static_shield.png";
+							} else {
+								link.image = "img/link_static.png";
+							}
+						}
 						break;
+
+						case 69:
+							console.log("-> E up");
+							link.direction = "";
+							if (zoneDetection(link, swimmingPool)) {
+								link.numberOfFrames = 10;
+								link.width = 380;
+								link.image = "img/down_swim.png";
+							} else {
+								link.numberOfFrames = 10;
+								link.width = 380;
+								if (equip == true) {
+									link.image = "img/link_static_shield.png";
+								} else {
+									link.image = "img/link_static.png";
+								}
+							}
+							break;
+
+						case 87:
+							console.log("-> W up");
+							link.direction = "";
+							if (zoneDetection(link, swimmingPool)) {
+								link.numberOfFrames = 10;
+								link.width = 380;
+								link.image = "img/down_swim.png";
+							} else {
+								link.numberOfFrames = 10;
+								link.width = 380;
+								if (equip == true) {
+									link.image = "img/link_static_shield.png";
+								} else {
+									link.image = "img/link_static.png";
+								}
+							}
+							break;
 				}
 			}
 		});
