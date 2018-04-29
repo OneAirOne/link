@@ -117,7 +117,6 @@
 				for (i = 0 ; i < max; i++) {
 					console.log(i)
 					if (collisionDetection(this, boxes[i], "up") == true) {
-						console.log("PROUT")
 						return;
 					} else {
 						if (i == max - 1) {
@@ -142,7 +141,7 @@
 
 			// Clear the canvas
 			ctx.clearRect(0, 0, canvas.width , canvas.height);
-
+			swimmingPool.draw();
 			// Draw the animation
 			ctx.drawImage(
 				img,
@@ -413,7 +412,7 @@
 		posX 		: house.posX - (1.2 * house.width),
 		posY 		: house.posY - (0.7 * house.height),
 		height 	: house.height * 2,
-		width 	: house.width * 2
+		width 	: house.width * 3
 	}
 
 	var swimmingPoolBubble = new FixedSprite({
@@ -468,7 +467,7 @@
 
 
 
-	var boxes = [linkedin,truck, house, garden, factoryGit, mosaicGit, city, swimmingPool]
+	var boxes = [linkedin,truck, house, garden, factoryGit, mosaicGit, city, chillout]
 	var welcome = false;
 
 
@@ -479,7 +478,7 @@
 	 * @return {void} [
 	 */
 	function init () {
-
+		swimmingPool.draw();
 	}
 
 
@@ -499,7 +498,7 @@
 		garden.draw();
 		factoryGit.draw();
 		mosaicGit.draw();
-		swimmingPool.draw();
+		// swimmingPool.draw();
 		chillout.draw();
 		city.draw();
 		welcomeBubble.draw();

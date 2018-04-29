@@ -281,7 +281,7 @@
 	var backBubble = new FixedSprite({
 		width		: 150, 
 		height	: 36,
-		image		: "img/bubble_linkedin.png",
+		image		: "img/bubble_back.png",
 		posX		: 0,
 		posY		: 0,
 		url			: "index.html"
@@ -320,8 +320,8 @@
 
 		// check if the personnage is in bubble zone
 		if (zoneDetection(link, backZoneBubble)) {
-			backBubble.posX = link.posX - 50;
-			backBubble.posY = link.posY - 60;
+			backBubble.posX = link.posX - 30;
+			backBubble.posY = link.posY - 55;
 			backBubble.draw();
 			console.log(backBubble.url);
 			activateRedirect(backBubble.url)
