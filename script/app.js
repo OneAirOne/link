@@ -491,7 +491,7 @@
 
 
 
-	var boxes = [linkedin,truck, house, garden, factoryGit, city, chillout]
+	var boxes = [linkedin,truck, house, factoryGit, city, chillout]
 	var welcome = false;
 
 
@@ -621,7 +621,7 @@
 						if (zoneDetection(link, swimmingPool)) {
 							link.image = "img/up_swim.png";
 						} else {
-							
+
 							if (equip == true) {
 								link.image = "img/up_shield.png";
 							} else {

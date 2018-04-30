@@ -2,9 +2,9 @@
 
 	var canvas = document.getElementById("return");
 	// canvas.width = "400";
-	// canvas.height = "200";
+	canvas.height = "1600";
 	canvas.width = window.innerWidth
-	canvas.height = window.innerHeight
+	// canvas.height = window.innerHeight
 
 	var ctx = canvas.getContext("2d");
 
@@ -297,7 +297,7 @@
 
 	var cv = new FixedSprite({
 		width		: 1000, 
-		height	: 01439,
+		height	: 1439,
 		image		: "img/cv.png",
 		posX		: 0,
 		posY		: 150
