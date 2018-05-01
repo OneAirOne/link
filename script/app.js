@@ -629,6 +629,10 @@
 	var equip = false;
 	var timeCount = 0;
 	var timeStartCount = 0;
+	var right = false;
+	var left = false;
+	var up = false;
+	var down = false;
 
 	function gameLoop () {
 		link.update();
@@ -718,22 +722,23 @@
 	// --------------- //
 	$(document).ready(function()
 	{
-
 			// MULTIPLE KEY LISTENER
 			var tickPerFrameIncrease = 6;
 			var speedIncrease = 6;
 
-			var map = {37: false, 38: false, 39: false, 40: false, 83: false, 69: false};
+			var map = {37: false, 38: false, 39: false, 40: false, 83: false, 69: false, 88: false, 72: false};
 			$(document).keydown(function(e) {
 				if (e.keyCode in map) {
 					map[e.keyCode] = true;
 
-					// RUN -------------------------------------
-
+					// MOVE -------------------------------------
 					// left
-					if (map[37] && map[83]) {
-						link.speed = speedIncrease;
-						link.ticksPerFrame = tickPerFrameIncrease;
+					if (map[37]) {
+						left = true;
+						if (map[37] && map[83]) {
+							link.speed = speedIncrease;
+							link.ticksPerFrame = tickPerFrameIncrease;
+						}
 						link.direction = "left";
 						if (zoneDetection(link, swimmingPool)) {
 								link.image = "img/left_swim.png";
@@ -744,11 +749,17 @@
 								link.image = "img/left.png";
 							}
 						}
+						right = false;
+						up = false;
+						down = false;
 					}
 					// right
-					if (map[39] && map[83]) {
-						link.speed = speedIncrease;
-						link.ticksPerFrame = tickPerFrameIncrease;
+					if (map[39]) {
+						right = true;
+						if (map[39] && map[83]) {
+							link.speed = speedIncrease;
+							link.ticksPerFrame = tickPerFrameIncrease;
+						}
 						link.direction = "right";
 						if (zoneDetection(link, swimmingPool)) {
 								link.image = "img/right_swim.png";
@@ -759,12 +770,18 @@
 								link.image = "img/right.png";
 							}
 						}
+						left = false;
+						up = false;
+						down = false;
 					}
 
 					// up
-					if (map[38] && map[83]) {
-						link.speed = speedIncrease;
-						link.ticksPerFrame = tickPerFrameIncrease;
+					if (map[38]) {
+						up = true;
+						if (map[38] && map[83]) {
+							link.speed = speedIncrease;
+							link.ticksPerFrame = tickPerFrameIncrease;
+						}
 						link.direction = "up";
 						if (zoneDetection(link, swimmingPool)) {
 								link.image = "img/up_swim.png";
@@ -775,12 +792,18 @@
 								link.image = "img/up.png";
 							}
 						}
+						right = false;
+						left = false;
+						down = false;
 					}
 
 					// down
-					if (map[40] && map[83]) {
-						link.speed = speedIncrease;
-						link.ticksPerFrame = tickPerFrameIncrease;
+					if (map[40]) {
+						down = true;
+						if (map[40] && map[83]) {
+							link.speed = speedIncrease;
+							link.ticksPerFrame = tickPerFrameIncrease;
+						}
 						link.direction = "down";
 						if (zoneDetection(link, swimmingPool)) {
 								link.image = "img/down_swim.png";
@@ -791,7 +814,11 @@
 								link.image = "img/down.png";
 							}
 						}
+						right = false;
+						up = false;
+						left = false;
 					}
+
 
 					// SWORD --------------------------------
 					if (map[39] && map[69] || map[69]) {
@@ -812,121 +839,30 @@
 							link.image = "img/left_sword.png";
 						}
 					}
-
-				}
-			}).keyup(function(e) {
-				if (e.keyCode in map) {
-					link.speed = speedInit;
-					link.ticksPerFrame = 4;
-					map[e.keyCode] = false;
-				}
-			});
-
-			// SINGLE KEY LISTENER
-			$(this).on({
-				keydown: function(e)
-				{
-					switch (e.keyCode) {
-
-						case 38:
-						console.log("-> UP");
-						link.direction = "up";
+					if (map[38] && map[69] ) {
 						if (zoneDetection(link, swimmingPool)) {
-							link.image = "img/up_swim.png";
-						} else {
-
-							if (equip == true) {
-								link.image = "img/up_shield.png";
-							} else {
-								link.image = "img/up.png";
-							}
-						}
-
-						welcome = true;
-						break;
-
-						case 40:
-						console.log("-> DOWN");
-						link.direction = "down";
-						if (zoneDetection(link, swimmingPool)) {
-							link.image = "img/down_swim.png";
-						} else {
-							if (equip == true) {
-								link.image = "img/down_shield.png";
-							} else {
-								link.image = "img/down.png";
-							}
-						}
-						welcome = true;
-						break;
-
-						case 37:
-							console.log("-> LEFT");
-							link.direction = "left";
-							if (zoneDetection(link, swimmingPool)) {
 								link.image = "img/left_swim.png";
-							} else {
-								if (e.keyCode == 8) {
-									console.log("AJFSFWEKFSEKFS")
-									link.speed = 6;
-								}
-								if (equip == true) {
-									link.image = "img/left_shield.png";
-								} else {
-									link.image = "img/left.png";
-								}
-							}
-							welcome = true;
-							break;
-
-						case 39:
-						console.log("-> RIGHT");
-						link.direction = "right";
-						if (zoneDetection(link, swimmingPool)) {
-							link.image = "img/right_swim.png";
-						} else {
-							if (equip == true) {
-								link.image = "img/right_shield.png";
-							} else {
-								link.image = "img/right.png";
-							}
-						}
-
-						welcome = true;
-						break;
-
-						// case 69:
-						// console.log("->E");
-						//
-						// if (zoneDetection(link, swimmingPool)) {
-						// 	// link.image = "img/right_swim.png";
-						// } else {
-						// 	link.numberOfFrames = 7;
-						// 	link.width = 270;
-						// 	link.image = "img/right_sword.png";
-						// }
-						//
-						// welcome = true;
-						// break;
-
-						case 87:
-						console.log("->W");
-
-						if (zoneDetection(link, swimmingPool)) {
-							// link.image = "img/right_swim.png";
 						} else {
 							link.numberOfFrames = 7;
 							link.width = 270;
-							link.image = "img/left_sword.png";
+							link.image = "img/up_sword.png";
 						}
-
-						welcome = true;
-						break;
-
-						case 88:
-						console.log("->X");
+					}
+					if (map[40] && map[69]  ) {
 						if (zoneDetection(link, swimmingPool)) {
-							// link.image = "img/right_swim.png";
+								link.image = "img/left_swim.png";
+						} else {
+							link.numberOfFrames = 7;
+							link.width = 270;
+							link.image = "img/down_sword.png";
+						}
+					}
+
+
+					// ACTION ------------------------------
+					if (map[88] ) {
+						if (zoneDetection(link, swimmingPool)) {
+							link.image = "img/right_swim.png";
 						} else {
 							if (equip == false) {
 								link.image = "img/link_static_shield.png";
@@ -936,124 +872,54 @@
 								equip = false;
 							}
 						}
-						welcome = true;
-						break;
+					}
 
-						case 82:
-						console.log("->R");
-
-						welcome = true;
-						break;
-
-						case 72:
-						console.log("->H");
+					if (map[72] ) {
 						if (help == false) {
 							help = true;
 						} else {
 							help = false;
 						}
-						break;
-
 					}
-				},
-
-				keyup: function(e)
-				{
-					switch (e.keyCode) {
-
-						case 38:
-						console.log("-> UP");
-						link.direction = "";
-						if (zoneDetection(link, swimmingPool)) {
-							link.image = "img/down_swim.png";
-						} else {
-							if (equip == true) {
-								link.image = "img/link_static_shield.png";
-							} else {
-								link.image = "img/link_static.png";
-							}
-						}
-						break;
-
-						case 40:
-						console.log("-> DOWN");
-						link.direction = "";
-						if (zoneDetection(link, swimmingPool)) {
-							link.image = "img/down_swim.png";
-						} else {
-							if (equip == true) {
-								link.image = "img/link_static_shield.png";
-							} else {
-								link.image = "img/link_static.png";
-							}
-						}
-						break;
-
-						case 37:
-						console.log("-> LEFT");
-						link.direction = "";
-						if (zoneDetection(link, swimmingPool)) {
-							link.image = "img/down_swim.png";
-						} else {
-							if (equip == true) {
-								link.image = "img/link_static_shield.png";
-							} else {
-								link.image = "img/link_static.png";
-							}
-						}
-						break;
-
-						case 39:
-						console.log("-> RIGHT");
-						link.direction = "";
-						if (zoneDetection(link, swimmingPool)) {
-							link.image = "img/down_swim.png";
-						} else {
-							if (equip == true) {
-								link.image = "img/link_static_shield.png";
-							} else {
-								link.image = "img/link_static.png";
-							}
-						}
-						break;
-
-						case 69:
-						console.log("-> E up");
-						link.direction = "";
-						if (zoneDetection(link, swimmingPool)) {
-							link.numberOfFrames = 10;
-							link.width = 380;
-							link.image = "img/down_swim.png";
-						} else {
-							link.numberOfFrames = 10;
-							link.width = 380;
-							if (equip == true) {
-								link.image = "img/link_static_shield.png";
-							} else {
-								link.image = "img/link_static.png";
-							}
-						}
-						break;
-
-						case 87:
-						console.log("-> W up");
-						link.direction = "";
-						if (zoneDetection(link, swimmingPool)) {
-							link.numberOfFrames = 10;
-							link.width = 380;
-							link.image = "img/down_swim.png";
-						} else {
-							link.numberOfFrames = 10;
-							link.width = 380;
-							if (equip == true) {
-								link.image = "img/link_static_shield.png";
-							} else {
-								link.image = "img/link_static.png";
-							}
-						}
-						break;
 				}
-			}
-		});
+			}).keyup(function(e) {
+				welcome = true;
+				link.direction = "";
+				if (e.keyCode in map) {
+					link.speed = speedInit;
+					link.ticksPerFrame = 4;
+					map[e.keyCode] = false;
+				}
+				if (zoneDetection(link, swimmingPool)) {
+					link.numberOfFrames = 10;
+					link.width = 380;
+					link.image = "img/down_swim.png";
+				} else {
+					link.numberOfFrames = 10;
+					link.width = 380;
+					if (equip == true) {
+						if (right == true) {
+							link.image = "img/link_static_shield.png";
+						} else if (left == true) {
+							link.image = "img/link_static_shield.png";
+						} else if (up == true) {
+							link.image = "img/link_static_shield.png";
+						} else {
+							link.image = "img/link_static_shield.png";
+						}
+
+					} else {
+						if (right == true) {
+							link.image = "img/static_right.png";
+						} else if (left == true) {
+							link.image = "img/static_left.png";
+						} else if (up == true) {
+							link.image = "img/static_up.png";
+						} else {
+							link.image = "img/link_static.png";
+						}
+					}
+				}
+			});
 	});
 })();
