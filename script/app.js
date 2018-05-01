@@ -1,9 +1,7 @@
 (function() {
 
 	var canvas = document.getElementById("map");
-	// canvas.width = "800";
 	canvas.width = window.innerWidth - 30;
-	// canvas.height = "600";
 	canvas.height = window.innerHeight;
 	var ctx = canvas.getContext("2d");
 
@@ -30,7 +28,6 @@
 
 		this.draw = () => {
 			ctx.drawImage(img, this.posX, this.posY);
-			// ctx.globalCompositeOperation='luminosity';
 			// ctx.globalCompositeOperation='hard-light';
 		};
 
@@ -88,8 +85,6 @@
 		// draw the position of sprite updated
 		this.render =  () => {
 
-
-
 			var max = boxes.length
 
 			if (this.direction == "right" ) {
@@ -118,7 +113,6 @@
 			} else if (this.direction == "up") {
 
 				for (i = 0 ; i < max; i++) {
-					console.log(i)
 					if (collisionDetection(this, boxes[i], "up") == true) {
 						return;
 					} else {
@@ -151,7 +145,6 @@
 			startMosaic.draw();
 			background.draw();
 
-			// triforce.draw();
 			// Draw the animation
 			ctx.drawImage(
 				img,
@@ -165,6 +158,8 @@
 				(this.height)*1.2);
 		};
 	}
+
+
 
 	/**
 	 * Detect colition between a personnage and an object
@@ -230,6 +225,8 @@
 		}
 	}
 
+
+
 	/**
 	 * Detect if object1 is in zone of object2
 	 *
@@ -255,6 +252,7 @@
 	}
 
 
+
 	/**
 	 * Redirect on key press
 	 *
@@ -269,31 +267,15 @@
 		});
 	}
 
+
+
 	/**
-	 * Draw a rectangle, limit of the game
-	 * @return {[type]} [descrLiption]
+	 * Animate start message
+	 * @param  {FixedSprite} object object to animate
+	 * @param  {int} delay  delay
+	 * @param  {int} speed  speed of animation
 	 * @return {void}
 	 */
-	var frame = () => {
-		// ctx.globalCompositeOperation='destination-over';
-		ctx.beginPath();
-		var offsetX = 30;
-		var offsetY = 80;
-		var width = canvas.width - offsetX;
-		var height = canvas.height - offsetY;
-
-		ctx.moveTo(offsetX, offsetY);
-		ctx.lineTo(width, offsetY);
-		ctx.lineTo(width, height);
-		ctx.lineTo(offsetX, height);
-		ctx.lineTo(offsetX, offsetY);
-		ctx.stroke();
-
-		ctx.strokeStyle = '#000001';
-		ctx.lineWidth = 1;
-
-	}
-
 	function animateStart (object, delay, speed) {
 		if (link.image == "img/link_static.png" && welcome == false) {
 			object.draw();
@@ -310,6 +292,15 @@
 		}
 	}
 
+
+
+	/**
+	 * Animate clouds
+	 * @param  {array} object array containing clouds to animates
+	 * @param  {int} delay  delay
+	 * @param  {int} speed  speed of animation
+	 * @return {void}
+	 */
 	function animateCloud (object, delay, speed) {
 		for (var i = 0 ; i < object.length; i++) {
 			object[i].draw();
@@ -386,14 +377,6 @@
 		posY		: house.posY - 85
 	});
 
-	var garden = new FixedSprite({
-		width		: 60, 
-		height	: 70,
-		image		: "img/garden_color.png",
-		posX		: house.posX - 70,
-		posY		: house.posY + 25
-	});
-
 	var city = new FixedSprite({
 		width		: 1500, 
 		height	: 200,
@@ -401,8 +384,6 @@
 		posX		: canvas.width / 2 - ((1070 * 1.2) / 2),
 		posY		: canvas.height - 170
 	});
-
-
 
 	var chillout = new FixedSprite({
 		width		:223, 
@@ -420,21 +401,12 @@
 		posY		: canvas.height / 2.8
 	});
 
-
 	var mosaicGit = new FixedSprite({
 		width		: 88, 
 		height	: 31,
 		image		: "img/mosaic_git.png",
 		posX		: factoryGit.posX + 39 ,
 		posY		: factoryGit.posY + factoryGit.height
-	});
-
-	var triforce = new FixedSprite({
-		width		: 80, 
-		height	: 84,
-		image		: "img/triforce.png",
-		posX		: link.posX - 25,
-		posY		: link.posY -24
 	});
 
 	var linkedinBubble = new FixedSprite({
@@ -523,7 +495,6 @@
 		image		: "img/bubble_start.png",
 		posX		: (canvas.width / 2) - (390 / 2),
 		posY		: link.posY - 80
-
 	});
 
 	var welcomeBubble = new FixedSprite({
@@ -532,7 +503,6 @@
 		image		: "img/bubble_welcome.png",
 		posX		: 10,
 		posY		: 20
-
 	});
 
 	var helpBubble = new FixedSprite({
@@ -607,6 +577,14 @@
 	var welcome = false;
 	var help = false;
 	var clouds = [cloud1, cloud2, cloud3, cloud4]
+	var nbLoop = true;
+	var equip = false;
+	var timeCount = 0;
+	var timeStartCount = 0;
+	var right = false;
+	var left = false;
+	var up = false;
+	var down = false;
 
 	/*      INIT       */
 	// --------------- //
@@ -618,22 +596,12 @@
 		swimmingPool.draw();
 	}
 
-
 	/*    GAME LOOP    */
 	// --------------- //
 	/**
 	 * infinite game loop
 	 * @return {void}
 	 */
-	var nbLoop = true;
-	var equip = false;
-	var timeCount = 0;
-	var timeStartCount = 0;
-	var right = false;
-	var left = false;
-	var up = false;
-	var down = false;
-
 	function gameLoop () {
 		link.update();
 		link.render();
@@ -645,7 +613,6 @@
 			helpBubble.draw();
 		}
 
-		// garden.draw();
 		factoryGit.draw();
 		chillout.draw();
 		city.draw();
@@ -656,9 +623,7 @@
 		timeCount ++;
 		timeStartCount ++;
 		animateStart(startBubble, 45, 7);
-		// animateCloud(cloud, 7, 1);
 		animateCloud(clouds, 7, 1);
-		// cloudCity.draw();
 
 
 		// check if the personnage is in bubble zone
@@ -706,9 +671,6 @@
 			activateRedirect(cityBubble.url)
 		}
 
-
-		// draw the frame
-		// frame();
 		window.requestAnimationFrame(gameLoop);
 	}
 
