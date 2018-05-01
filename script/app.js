@@ -27,6 +27,7 @@
 		this.height = options.height;
 		this.url = options.url || '';
 
+
 		this.draw = () => {
 			ctx.drawImage(img, this.posX, this.posY);
 			// ctx.globalCompositeOperation='luminosity';
@@ -62,6 +63,8 @@
 		this.posX = options.posX;
 		this.posY = options.posY;
 		this.direction = options.direction;
+		this.speed = options.speed || 3;
+
 
 		// update position of sprite
 		this.update = () => {
@@ -85,7 +88,7 @@
 		// draw the position of sprite updated
 		this.render =  () => {
 
-			this.speed = 3;
+
 
 			var max = boxes.length
 
@@ -145,6 +148,9 @@
 			// draw elements under link
 			swimmingPool.draw();
 			mosaicGit.draw();
+			startMosaic.draw();
+			background.draw();
+
 			// triforce.draw();
 			// Draw the animation
 			ctx.drawImage(
@@ -173,8 +179,8 @@
 		var xMax = object.posX + object.width;
 		var yMin = object.posY;
 		var yMax = object.posY + object.height;
-		var x = personnage.posX ;
-		var y = personnage.posY ;
+		var x = personnage.posX + ((personnage.width / personnage.numberOfFrames) / 2);
+		var y = personnage.posY + ((personnage.height / personnage.numberOfFrames) / 2);
 		var speed = personnage.speed;
 		var spriteSize = personnage.width / personnage.numberOfFrames;
 
@@ -232,17 +238,22 @@
 	 * @return {booleen}
 	 */
 	var zoneDetection = (object1, object2) => {
-		if (object1.posX >= object2.posX
-    		&& object1.posX < object2.posX + object2.width
-    		&& object1.posY >= object2.posY
-    		&& object1.posY < object2.posY + object2.height) {
-					console.log("colision");
+
+		// define the x and y detection collision in center of the object
+		var x = object1.posX  + ((object1.width / object1.numberOfFrames) / 2);
+		var y = object1.posY + (object1.height / 2);
+
+		if (x >= object2.posX
+    		&& x< object2.posX + object2.width
+    		&& y >= object2.posY
+    		&& y < object2.posY + object2.height) {
 
 					return true;
 		} else {
 			return false;
 		}
 	}
+
 
 	/**
 	 * Redirect on key press
@@ -283,9 +294,45 @@
 
 	}
 
+	function animateStart (object, delay, speed) {
+		if (link.image == "img/link_static.png" && welcome == false) {
+			object.draw();
+			if (timeStartCount > delay) {
+				if (nbLoop == true) {
+					object.posY = object.posY + speed;
+					nbLoop = false;
+				} else {
+					object.posY = object.posY - speed;
+					nbLoop = true;
+				}
+				timeStartCount = 0;
+			}
+		}
+	}
+
+	function animateCloud (object, delay, speed) {
+		for (var i = 0 ; i < object.length; i++) {
+			object[i].draw();
+		}
+		if (timeCount > delay) {
+		for (var i = 0 ; i < object.length; i++) {
+
+			// if (timeCount > delay) {
+				if (object[i].posX < canvas.width) {
+					object[i].posX = object[i].posX + speed;
+				} else {
+					object[i].posX = 0 - object[i].width;
+				}
+			}
+			timeCount = 0;
+		}
+	}
+
 
 	/* OBJECTS CREATON */
 	// --------------- //
+
+	var speedInit = 3;
 
 	var link = new AnimateSprite ({
 		width						: 380,
@@ -295,10 +342,9 @@
 		ticksPerFrame		: 4,
 		posX						: canvas.width / 2 - ((24 * 1.2) / 2),
 		posY						: canvas.height / 2,
-		direction: ""
+		direction				: "",
+		speed						: speedInit
 	});
-
-
 
 	var linkedin = new FixedSprite({
 		width		: 124, 
@@ -325,8 +371,8 @@
 	});
 
 	var house = new FixedSprite({
-		width		: 80, 
-		height	: 70,
+		width		: 96, 
+		height	: 80,
 		image		: "img/house_color.png",
 		posX		: canvas.width / 2,
 		posY		: 120
@@ -337,7 +383,7 @@
 		height	: 103,
 		image		: "img/bubble_room.png",
 		posX		: house.posX + 15,
-		posY		: house.posY - 65
+		posY		: house.posY - 85
 	});
 
 	var garden = new FixedSprite({
@@ -359,11 +405,11 @@
 
 
 	var chillout = new FixedSprite({
-		width		: 160, 
-		height	: 80,
+		width		:223, 
+		height	: 85,
 		image		: "img/chillout_color.png",
-		posX		: swimmingPool.posX + (swimmingPool.height / 1.35),
-		posY		: swimmingPool.posY + swimmingPool.height - 20
+		posX		: (swimmingPool.posX) +30,
+		posY		: (swimmingPool.posY + swimmingPool.height) - 10
  	});
 
 	var factoryGit = new FixedSprite({
@@ -383,13 +429,13 @@
 		posY		: factoryGit.posY + factoryGit.height
 	});
 
-	// var triforce = new FixedSprite({
-	// 	width		: 80, 
-	// 	height	: 84,
-	// 	image		: "img/triforce.png",
-	// 	posX		: link.posX - 25,
-	// 	posY		: link.posY -24
-	// });
+	var triforce = new FixedSprite({
+		width		: 80, 
+		height	: 84,
+		image		: "img/triforce.png",
+		posX		: link.posX - 25,
+		posY		: link.posY -24
+	});
 
 	var linkedinBubble = new FixedSprite({
 		width		: 150, 
@@ -465,19 +511,19 @@
 	});
 
 	var cityZoneBubble = {
-		posX 		: city.posX - 50,
+		posX 		: city.posX ,
 		posY 		: city.posY - 50,
-		height 	: city.height ,
+		height 	: 20,
 		width 	: city.width
 	}
 
 	var startBubble = new FixedSprite({
-		width		: 300, 
+		width		: 390, 
 		height	: 50,
 		image		: "img/bubble_start.png",
-		posX		: link.posX  - (300 / 2),
-		posY		: link.posY - 80,
-		url			: "game.html"
+		posX		: (canvas.width / 2) - (390 / 2),
+		posY		: link.posY - 80
+
 	});
 
 	var welcomeBubble = new FixedSprite({
@@ -485,15 +531,82 @@
 		height	: 50,
 		image		: "img/bubble_welcome.png",
 		posX		: 10,
-		posY		: 20,
-		url			: "game.html"
+		posY		: 20
+
+	});
+
+	var helpBubble = new FixedSprite({
+		width		: 200, 
+		height	: 150,
+		image		: "img/bubble_help.png",
+		posX		: swimmingPool.posX,
+		posY		: 150
+	});
+
+	// clouds
+	var cloud1 = new FixedSprite({
+		width		: 290, 
+		height	: 194,
+		image		: "img/cloud.png",
+		posX		: city.posX + 50,
+		posY		: city.posY + 50
+	});
+
+	var cloud2 = new FixedSprite({
+		width		: 290, 
+		height	: 194,
+		image		: "img/cloud.png",
+		posX		: (canvas.width / 2) - 100 ,
+		posY		: city.posY - 20
+	});
+
+	var cloud3 = new FixedSprite({
+		width		: 290, 
+		height	: 194,
+		image		: "img/cloud.png",
+		posX		: city.posX - 150,
+		posY		: city.posY - 20
+	});
+
+	var cloud4 = new FixedSprite({
+		width		: 290, 
+		height	: 194,
+		image		: "img/cloud.png",
+		posX		: (city.posX + city.width) - 500,
+		posY		: city.posY - 20
+	});
+
+	var cloudCity = new FixedSprite({
+		width		: 4000, 
+		height	: 264,
+		image		: "img/cloud_city.png",
+		posX		: 0,
+		posY		: city.posY / 1.1
+	});
+
+	var background = new FixedSprite({
+		width		: 1024, 
+		height	: 768,
+		image		: "img/background.png",
+		posX		: 0,
+		posY		: 0
+	});
+
+	var startMosaic = new FixedSprite({
+		width		: 300, 
+		height	: 300,
+		image		: "img/start_mosaic.png",
+		posX		: (canvas.width / 2)- (300 / 2),
+		posY		: (canvas.height / 2)- (300 / 2)
 	});
 
 
 
-	var boxes = [linkedin,truck, house, factoryGit, city, chillout]
-	var welcome = false;
 
+	var boxes = [linkedin, truck, house, factoryGit, city, chillout]
+	var welcome = false;
+	var help = false;
+	var clouds = [cloud1, cloud2, cloud3, cloud4]
 
 	/*      INIT       */
 	// --------------- //
@@ -515,38 +628,33 @@
 	var nbLoop = true;
 	var equip = false;
 	var timeCount = 0;
+	var timeStartCount = 0;
+
 	function gameLoop () {
 		link.update();
 		link.render();
 		linkedin.draw();
-
 		truck.draw();
 		house.draw();
+
+		if (help == true) {
+			helpBubble.draw();
+		}
+
 		// garden.draw();
 		factoryGit.draw();
-		// mosaicGit.draw();
-		// swimmingPool.draw();
 		chillout.draw();
 		city.draw();
 		welcomeBubble.draw();
 		bubbleRoom.draw();
 
+		// statics animations
 		timeCount ++;
-		if (link.image == "img/link_static.png" && welcome == false) {
-			console.log(nbLoop);
-			startBubble.draw();
-			if (timeCount > 45) {
-				if (nbLoop == true) {
-					startBubble.posY = startBubble.posY + 7;
-					nbLoop = false;
-				} else {
-					startBubble.posY = startBubble.posY - 7;
-					nbLoop = true;
-
-				}
-				timeCount = 0;
-			}
-		}
+		timeStartCount ++;
+		animateStart(startBubble, 45, 7);
+		// animateCloud(cloud, 7, 1);
+		animateCloud(clouds, 7, 1);
+		// cloudCity.draw();
 
 
 		// check if the personnage is in bubble zone
@@ -590,7 +698,7 @@
 			cityBubble.posX = link.posX - 40;
 			cityBubble.posY = link.posY - 60;
 			cityBubble.draw();
-			console.log("TTTTTTT");
+
 			activateRedirect(cityBubble.url)
 		}
 
@@ -610,12 +718,117 @@
 	// --------------- //
 	$(document).ready(function()
 	{
-		$(this).on({
-			keydown: function(e)
-			{
-				switch (e.keyCode) {
 
-					case 38:
+			// MULTIPLE KEY LISTENER
+			var tickPerFrameIncrease = 6;
+			var speedIncrease = 6;
+
+			var map = {37: false, 38: false, 39: false, 40: false, 83: false, 69: false};
+			$(document).keydown(function(e) {
+				if (e.keyCode in map) {
+					map[e.keyCode] = true;
+
+					// RUN -------------------------------------
+
+					// left
+					if (map[37] && map[83]) {
+						link.speed = speedIncrease;
+						link.ticksPerFrame = tickPerFrameIncrease;
+						link.direction = "left";
+						if (zoneDetection(link, swimmingPool)) {
+								link.image = "img/left_swim.png";
+						} else {
+							if (equip == true) {
+								link.image = "img/left_shield.png";
+							} else {
+								link.image = "img/left.png";
+							}
+						}
+					}
+					// right
+					if (map[39] && map[83]) {
+						link.speed = speedIncrease;
+						link.ticksPerFrame = tickPerFrameIncrease;
+						link.direction = "right";
+						if (zoneDetection(link, swimmingPool)) {
+								link.image = "img/right_swim.png";
+						} else {
+							if (equip == true) {
+								link.image = "img/right_shield.png";
+							} else {
+								link.image = "img/right.png";
+							}
+						}
+					}
+
+					// up
+					if (map[38] && map[83]) {
+						link.speed = speedIncrease;
+						link.ticksPerFrame = tickPerFrameIncrease;
+						link.direction = "up";
+						if (zoneDetection(link, swimmingPool)) {
+								link.image = "img/up_swim.png";
+						} else {
+							if (equip == true) {
+								link.image = "img/up_shield.png";
+							} else {
+								link.image = "img/up.png";
+							}
+						}
+					}
+
+					// down
+					if (map[40] && map[83]) {
+						link.speed = speedIncrease;
+						link.ticksPerFrame = tickPerFrameIncrease;
+						link.direction = "down";
+						if (zoneDetection(link, swimmingPool)) {
+								link.image = "img/down_swim.png";
+						} else {
+							if (equip == true) {
+								link.image = "img/down_shield.png";
+							} else {
+								link.image = "img/down.png";
+							}
+						}
+					}
+
+					// SWORD --------------------------------
+					if (map[39] && map[69] || map[69]) {
+						if (zoneDetection(link, swimmingPool)) {
+								link.image = "img/right_swim.png";
+						} else {
+							link.numberOfFrames = 7;
+							link.width = 270;
+							link.image = "img/right_sword.png";
+						}
+					}
+					if (map[37] && map[69] ) {
+						if (zoneDetection(link, swimmingPool)) {
+								link.image = "img/left_swim.png";
+						} else {
+							link.numberOfFrames = 7;
+							link.width = 270;
+							link.image = "img/left_sword.png";
+						}
+					}
+
+				}
+			}).keyup(function(e) {
+				if (e.keyCode in map) {
+					link.speed = speedInit;
+					link.ticksPerFrame = 4;
+					map[e.keyCode] = false;
+				}
+			});
+
+			// SINGLE KEY LISTENER
+			$(this).on({
+				keydown: function(e)
+				{
+					switch (e.keyCode) {
+
+						case 38:
 						console.log("-> UP");
 						link.direction = "up";
 						if (zoneDetection(link, swimmingPool)) {
@@ -632,7 +845,7 @@
 						welcome = true;
 						break;
 
-					case 40:
+						case 40:
 						console.log("-> DOWN");
 						link.direction = "down";
 						if (zoneDetection(link, swimmingPool)) {
@@ -647,22 +860,26 @@
 						welcome = true;
 						break;
 
-					case 37:
-						console.log("-> LEFT");
-						link.direction = "left";
-						if (zoneDetection(link, swimmingPool)) {
-							link.image = "img/left_swim.png";
-						} else {
-							if (equip == true) {
-								link.image = "img/left_shield.png";
+						case 37:
+							console.log("-> LEFT");
+							link.direction = "left";
+							if (zoneDetection(link, swimmingPool)) {
+								link.image = "img/left_swim.png";
 							} else {
-								link.image = "img/left.png";
+								if (e.keyCode == 8) {
+									console.log("AJFSFWEKFSEKFS")
+									link.speed = 6;
+								}
+								if (equip == true) {
+									link.image = "img/left_shield.png";
+								} else {
+									link.image = "img/left.png";
+								}
 							}
-						}
-						welcome = true;
-						break;
+							welcome = true;
+							break;
 
-					case 39:
+						case 39:
 						console.log("-> RIGHT");
 						link.direction = "right";
 						if (zoneDetection(link, swimmingPool)) {
@@ -678,64 +895,73 @@
 						welcome = true;
 						break;
 
-						case 69:
-							console.log("->E");
+						// case 69:
+						// console.log("->E");
+						//
+						// if (zoneDetection(link, swimmingPool)) {
+						// 	// link.image = "img/right_swim.png";
+						// } else {
+						// 	link.numberOfFrames = 7;
+						// 	link.width = 270;
+						// 	link.image = "img/right_sword.png";
+						// }
+						//
+						// welcome = true;
+						// break;
 
-							if (zoneDetection(link, swimmingPool)) {
-								// link.image = "img/right_swim.png";
+						case 87:
+						console.log("->W");
+
+						if (zoneDetection(link, swimmingPool)) {
+							// link.image = "img/right_swim.png";
+						} else {
+							link.numberOfFrames = 7;
+							link.width = 270;
+							link.image = "img/left_sword.png";
+						}
+
+						welcome = true;
+						break;
+
+						case 88:
+						console.log("->X");
+						if (zoneDetection(link, swimmingPool)) {
+							// link.image = "img/right_swim.png";
+						} else {
+							if (equip == false) {
+								link.image = "img/link_static_shield.png";
+								equip = true;
 							} else {
-								link.numberOfFrames = 7;
-								link.width = 270;
-								link.image = "img/right_sword.png";
+								link.image = "img/link_static.png";
+								equip = false;
 							}
+						}
+						welcome = true;
+						break;
 
-							welcome = true;
-							break;
+						case 82:
+						console.log("->R");
 
-							case 87:
-								console.log("->W");
+						welcome = true;
+						break;
 
-								if (zoneDetection(link, swimmingPool)) {
-									// link.image = "img/right_swim.png";
-								} else {
-									link.numberOfFrames = 7;
-									link.width = 270;
-									link.image = "img/left_sword.png";
-								}
+						case 72:
+						console.log("->H");
+						if (help == false) {
+							help = true;
+						} else {
+							help = false;
+						}
+						break;
 
-								welcome = true;
-								break;
+					}
+				},
 
-								case 78:
-									console.log("->N");
+				keyup: function(e)
+				{
+					switch (e.keyCode) {
 
-									if (zoneDetection(link, swimmingPool)) {
-										// link.image = "img/right_swim.png";
-									} else {
-										link.image = "img/link_static_shield.png";
-										equip = true;
-									}
-									welcome = true;
-									break;
-									case 82:
-										console.log("->R");
-
-										if (zoneDetection(link, swimmingPool)) {
-											// link.image = "img/right_swim.png";
-										} else {
-											link.image = "img/link_static.png";
-											equip = false;
-										}
-										welcome = true;
-										break;
-				}
-			},
-
-			keyup: function(e)
-			{
-				switch (e.keyCode) {
-
-					case 38:
+						case 38:
 						console.log("-> UP");
 						link.direction = "";
 						if (zoneDetection(link, swimmingPool)) {
@@ -749,7 +975,7 @@
 						}
 						break;
 
-					case 40:
+						case 40:
 						console.log("-> DOWN");
 						link.direction = "";
 						if (zoneDetection(link, swimmingPool)) {
@@ -763,7 +989,7 @@
 						}
 						break;
 
-					case 37:
+						case 37:
 						console.log("-> LEFT");
 						link.direction = "";
 						if (zoneDetection(link, swimmingPool)) {
@@ -777,7 +1003,7 @@
 						}
 						break;
 
-					case 39:
+						case 39:
 						console.log("-> RIGHT");
 						link.direction = "";
 						if (zoneDetection(link, swimmingPool)) {
@@ -792,40 +1018,40 @@
 						break;
 
 						case 69:
-							console.log("-> E up");
-							link.direction = "";
-							if (zoneDetection(link, swimmingPool)) {
-								link.numberOfFrames = 10;
-								link.width = 380;
-								link.image = "img/down_swim.png";
+						console.log("-> E up");
+						link.direction = "";
+						if (zoneDetection(link, swimmingPool)) {
+							link.numberOfFrames = 10;
+							link.width = 380;
+							link.image = "img/down_swim.png";
+						} else {
+							link.numberOfFrames = 10;
+							link.width = 380;
+							if (equip == true) {
+								link.image = "img/link_static_shield.png";
 							} else {
-								link.numberOfFrames = 10;
-								link.width = 380;
-								if (equip == true) {
-									link.image = "img/link_static_shield.png";
-								} else {
-									link.image = "img/link_static.png";
-								}
+								link.image = "img/link_static.png";
 							}
-							break;
+						}
+						break;
 
 						case 87:
-							console.log("-> W up");
-							link.direction = "";
-							if (zoneDetection(link, swimmingPool)) {
-								link.numberOfFrames = 10;
-								link.width = 380;
-								link.image = "img/down_swim.png";
+						console.log("-> W up");
+						link.direction = "";
+						if (zoneDetection(link, swimmingPool)) {
+							link.numberOfFrames = 10;
+							link.width = 380;
+							link.image = "img/down_swim.png";
+						} else {
+							link.numberOfFrames = 10;
+							link.width = 380;
+							if (equip == true) {
+								link.image = "img/link_static_shield.png";
 							} else {
-								link.numberOfFrames = 10;
-								link.width = 380;
-								if (equip == true) {
-									link.image = "img/link_static_shield.png";
-								} else {
-									link.image = "img/link_static.png";
-								}
+								link.image = "img/link_static.png";
 							}
-							break;
+						}
+						break;
 				}
 			}
 		});
