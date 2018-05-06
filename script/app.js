@@ -830,7 +830,7 @@
 		height	: 103,
 		image		: "img/bubble_room.png",
 		posX		: house.posX  + 28,
-		posY		: house.posY - 200
+		posY		: house.posY - 150
 	});
 
 	var city = new FixedSprite({
@@ -1145,7 +1145,7 @@
 
 
 		if (checkZone(link, enemyList)) {
-			if (lifeTick > 20) {
+			if (lifeTick > 10) {
 				link.life = link.life - 1;
 				lifeTick = 0;
 			} else {

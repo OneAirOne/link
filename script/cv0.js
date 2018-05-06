@@ -1,9 +1,10 @@
 (function() {
 
 	var canvas = document.getElementById("return");
-	canvas.height = "110";
+	// canvas.width = "400";
+	canvas.height = "1600";
 	canvas.width = window.innerWidth
-
+	// canvas.height = window.innerHeight
 
 	var ctx = canvas.getContext("2d");
 
@@ -245,13 +246,16 @@
 	 * @param  {string} url [description]
 	 * @return {void}
 	 */
-	 var activateRedirect = (url) => {
-		 document.body.addEventListener("keydown", function (event) {
-			 if (event.keyCode === 65) {
-				 document.location = url;
-			 }
-		 });
-	 }
+	var activateRedirect = (url) => {
+		document.body.addEventListener("keydown", function (event) {
+			if (event.keyCode === 65) {
+				document.location = url;
+			}
+		});
+	}
+
+
+
 
 	/* OBJECTS CREATON */
 	// --------------- //
@@ -287,9 +291,17 @@
 	var backZoneBubble = {
 		posX 		: back.posX - (0.7 * back.width),
 		posY 		: back.posY - (0.7 * back.height),
-		height 	: back.height * 10,
-		width 	: back.width * 10
+		height 	: back.height * 4,
+		width 	: back.width * 4
 	}
+
+	var cv = new FixedSprite({
+		width		: 1000, 
+		height	: 1439,
+		image		: "img/cv.png",
+		posX		: 0,
+		posY		: 150
+	});
 
 	var boxes = [back];
 
@@ -314,7 +326,7 @@
 		link.update();
 		link.render();
 		back.draw();
-
+		cv.draw();
 
 		// check if the personnage is in bubble zone
 		if (zoneDetection(link, backZoneBubble)) {
@@ -328,27 +340,76 @@
 		window.requestAnimationFrame(gameLoop);
 	}
 
-	onkeydown = function(e) {
-			var key = e.keyCode;
-			var key_letter = String.fromCharCode(key);
-
-			if(key == 37 || key_letter == "Q")    //Le déplacement à gauche
-			gauche = true;
-			if(key == 38 || key_letter == "Z")    //Le déplacement en haut
-			haut = true;
-			if(key == 39 || key_letter == "D")    //Le déplacement à droite
-			droite = true;
-			if(key == 40 || key_letter == "S")    //Le déplacement en bas
-			bas = true;
-
-			if(gauche || droite || haut || bas) // Bloquer le défilement
-			return false;
-		}
-
-
 
 	/* MAIN */
 	init();
 	gameLoop();
 
+
+	/*   GAME CONTROL  */
+	// --------------- //
+	$(document).ready(function()
+	{
+		$(this).on({
+			keydown: function(e)
+			{
+				switch (e.keyCode) {
+
+					case 38:
+						console.log("-> UP");
+						link.direction = "up";
+						link.image = "img/up.png";
+						break;
+
+					case 40:
+						console.log("-> DOWN");
+						link.direction = "down";
+						link.image = "img/down.png";
+						break;
+
+					case 37:
+						console.log("-> LEFT");
+						link.direction = "left";
+						link.image = "img/left.png";
+						break;
+
+					case 39:
+						console.log("-> RIGHT");
+						link.direction = "right";
+						link.image = "img/right.png";
+						break;
+				}
+			},
+
+			keyup: function(e)
+			{
+				switch (e.keyCode) {
+
+					case 38:
+						console.log("-> UP");
+						link.direction = "";
+						link.image = "img/link_static.png";
+						break;
+
+					case 40:
+						console.log("-> DOWN");
+						link.direction = "";
+						link.image = "img/link_static.png";
+						break;
+
+					case 37:
+						console.log("-> LEFT");
+						link.direction = "";
+						link.image = "img/link_static.png";
+						break;
+
+					case 39:
+						console.log("-> RIGHT");
+						link.direction = "";
+						link.image = "img/link_static.png";
+						break;
+				}
+			}
+		});
+	});
 })();

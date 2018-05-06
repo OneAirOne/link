@@ -314,6 +314,25 @@
 	function init () {
 	}
 
+	function noscroll() {
+	  window.scrollTo( 0, 0 );
+	}
+	function scrollToLink() {
+		console.log(window.pageYOffset);
+			if (link.posY < window.pageYOffset)
+			 window.addEventListener('DOMMouseScroll', preventDefault, false);
+			// window.addEventListener('scroll', noscroll);
+			// window.removeEventListener('scroll', noscroll);
+			// window.scrollBy(0, 1);
+	}
+
+	function preventDefault(e) {
+  e = e || window.event;
+  if (e.preventDefault)
+      e.preventDefault();
+  e.returnValue = false;
+}
+
 
 	/*    GAME LOOP    */
 	// --------------- //
@@ -322,7 +341,7 @@
 	 * @return {void}
 	 */
 	function gameLoop () {
-
+		scrollToLink();
 		link.update();
 		link.render();
 		back.draw();
@@ -339,6 +358,7 @@
 
 		window.requestAnimationFrame(gameLoop);
 	}
+
 
 
 	/* MAIN */

@@ -1,0 +1,179 @@
+html, body {
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+}
+
+body {
+	font-size: 1em;
+	font-family: 'Noto Sans', sans-serif;
+}
+
+select, button {
+	height:22px;
+	width: 100px;
+	margin-left: 10px;
+}
+
+h1 {
+	font-size: 1.6em;
+	margin-top: 5%;
+	margin-left: 15%;
+
+
+	/* text-align: center; */
+}
+
+input {
+	height:25px;
+	width: 40px;
+}
+
+label {
+	margin-right: 5px;
+}
+
+#intro2048 {
+	text-align: justify;
+	margin-left: 15%;
+	margin-right: 15%;
+
+}
+
+
+#asid2048{
+	float: right;
+	/* text-align: justify; */
+
+	width: 40%;
+	height: 100%;
+	/* border: 1px solid black; */
+	margin-top: 1%;
+	margin-right: 10%;
+}
+
+#scene {
+	float:left;
+	border: 1px solid black;
+	padding-top: 5px;
+	padding-left: 5px;
+	height: 400px;
+	width: 400px;
+	margin-top: 2%;
+	margin-left: 15%;
+}
+
+
+.score {
+	margin-top: 1%;
+	margin-bottom: 0%;
+	display: inline-block;
+	margin-left: 15%;
+	font-size: 1.5em;
+}
+
+.grid {
+	position: relative;
+	display: inline-block;
+	height: 95px;
+	width: 95px;
+	border: 1px solid rgba(15, 116, 133, .5);
+	border-radius: 5%;
+	box-sizing: border-box;
+	margin-right: 5px;
+}
+
+.element {
+	position: absolute;
+	vertical-align: middle;
+	text-align: center;
+	line-height: 90px;
+	margin-right: 5px;
+	margin-bottom: 5px;
+	height: 95px;
+	width: 95px;
+	border-radius: 5%;
+	box-sizing: border-box;
+}
+
+
+div[color="2"] {
+
+	background: #28E642;
+	font-size: 1.2em;
+}
+
+div[color="4"] {
+	background: #A3B9BF;
+	font-size: 1.2em;
+}
+
+div[color="8"] {
+	background: #FEDA32;
+	font-size: 1.2em;
+}
+
+div[color="16"] {
+	background: #F8591F;
+	font-size: 1.2em;
+}
+
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+/* #ticTacToe {
+float: right;
+} */
+
+table {
+	margin-top: 4%;
+	margin-left: 10%;
+	max-width: 50%;
+	float: left;
+}
+
+td {
+		width:  80px;
+		height: 80px;
+		text-align: center;
+}
+
+.msg {
+	text-align: right;
+	margin-right: 25%;
+}
+
+.clear {
+  clear: both;
+}
+
+#asideTicTacToe {
+	float: left;
+	width: 30%;
+	/* border: 1px solid black; */
+	margin-top: 1%;
+	margin-left: 15%;
+	/* padding-right: 15%; */
+}
+
+#asideSapin {
+	margin-top: 1%;
+	margin-left: 15%;
+}
+#sapin {
+	margin-top: 1%;
+	margin-left: 20%;
+	margin-left: 20%;
+}
+
+#asidePuissance4 {
+	margin-top: 1%;
+	margin-left: 15%;
+}
+#puissance4 {
+	margin-top: 1%;
+	margin-left: 20%;
+	margin-left: 20%;
+}

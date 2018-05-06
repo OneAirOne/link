@@ -1,14 +1,118 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-	<head>
-		<meta charset="utf-8">
-		<link rel="stylesheet" href="css/app.css">
-		<title>cv</title>
-	</head>
-	<body>
-		<canvas id="return" style="background: url() no-repeat center center;" ></canvas>
-		<p>Game</p>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		<script type="text/javascript" src="script/game.js"></script>
-	</body>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="css/app.css">
+	<link rel="stylesheet" href="css/game.css">
+	<link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
+	<title>cv</title>
+</head>
+<body>
+	<canvas id="return" style="background: url() no-repeat center center;" ></canvas>
+	<div id="intro2048">
+		<p>
+			Après 7 années travaillées dans la finance puis la data, j'ai décidé
+			d'améliorer mes compétences en développement et d'effectuer la formation intensive
+			"Coding Academy by Epitech".  Ce portefolio développé en javascript et canvas fait
+			office de démonstration de certaines notions algorithmique.
+			<br>
+			<br>
+			Vous trouverez ci-dessous quelques réalisations effectuée durant cette formation.
+			L'intégralité du code est disponible sur mon GitHub, accessible depuis la page principale.
+		</p>
+
+	</div>
+
+
+	<h1>Jeu 2048</h1>
+	<hr width="71%" color="grey">
+	<div class="gameScreen"></div>
+
+	<aside id="asid2048">
+		<p>
+			Développé en 5 jours pour un rush JQuery.
+			<br>
+			3 jours de développement pour l'algorithme et le squelette.
+			<br>
+			2 jours de développement pour les animations.
+			<br>
+			<br>
+			<small>Technologies utilisées : javascript/JQuery</small>
+		</p>
+	</aside>
+	<div class="clear">
+
+	</div>
+
+	<h1>Jeu Morpion</h1>
+	<hr width="71%" color="grey">
+	<aside id="asideTicTacToe">
+		<p>
+			Développé en 2 heures.
+			IA basée sur du "machine learning" en cours de réalisation.
+			<br>
+			<br>
+			<small>Technologies utilisées : javascript/JQuery</small>
+		</p>
+	</aside>
+	<table class="input-a-tag">
+		<tr class= "row_1">
+			<td class="col_1 d_1 draw"></td>
+			<td class="col_2 draw"></td>
+			<td class="col_3 d_2 draw"></td>
+		</tr>
+		<tr class= "row_2">
+			<td class="col_1 draw"></td>
+			<td class="col_2 d_1 d_2 draw"></td>
+			<td class="col_3 draw"></td>
+		</tr>
+		<tr class= "row_3">
+			<td class="col_1 d_2 draw"></td>
+			<td class="col_2 draw"></td>
+			<td class="col_3 d_1 draw"></td>
+		</tr>
+	</table>
+
+	<div class="clear">
+
+	</div>
+	<h1>Jeu Puissance4</h1>
+	<hr width="71%" color="grey">
+	<aside id="asidePuissance4">
+		<p>
+			Piscine de C, développé en 3 jours.
+
+			<br>
+			<br>
+			<small>Technologies utilisée : C</small>
+		</p>
+	</aside>
+
+	<video id= 'puissance4' controls src="video/puissance4.mov" autoplay="true"  loop="true">Ici la description alternative</video>
+
+	<h1>Sapin</h1>
+	<hr width="71%" color="grey">
+	<aside id="asideSapin">
+		<p>
+			Examen final de la piscine de C, développé en une journée.
+
+			<br>
+			<br>
+			<small>Technologies utilisée : C</small>
+		</p>
+	</aside>
+	<video id= 'sapin' controls src="video/sapin.mov" autoplay="true"  loop="true">Ici la description alternative</video>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript" src="script/game_2048.js"></script>
+	<script type="text/javascript" src="script/tic-tac-toe.js"></script>
+	<script type="text/javascript" src="script/game.js"></script>
+	<script type="text/javascript">
+	$(function() {
+		$(document).ready(function() {
+			$(".gameScreen").game2048()
+		})
+	});
+	</script>
+</body>
 </html>
