@@ -4,58 +4,64 @@
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="css/app.css">
 	<link rel="stylesheet" href="css/game.css">
+	<link rel="stylesheet" href="css/animate.css">
+
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
 	<title>cv</title>
 </head>
 <body>
 	<canvas id="return" style="background: url() no-repeat center center;" ></canvas>
+
 	<div id="intro2048">
 		<p>
 			Après 7 années travaillées dans la finance puis la data, j'ai décidé
 			d'améliorer mes compétences en développement et d'effectuer la formation intensive
 			"Coding Academy by Epitech".  Ce portefolio développé en javascript et canvas fait
 			office de démonstration de certaines notions algorithmique.
-			<br>
-			<br>
-			Vous trouverez ci-dessous quelques réalisations effectuée durant cette formation.
+			<br/>
+			<br/>
+			Vous trouverez ci-dessous quelques réalisations effectuée durant cette formation et mon précédent emploi.
 			L'intégralité du code est disponible sur mon GitHub, accessible depuis la page principale.
 		</p>
-
 	</div>
 
 
 	<h1>Jeu 2048</h1>
 	<hr width="71%" color="grey">
+	<a class="github" href="https://github.com/OneAirOne/game2048">Code GitHub</a>
 	<div class="gameScreen"></div>
-
 	<aside id="asid2048">
 		<p>
 			Développé en 5 jours pour un rush JQuery.
-			<br>
-			3 jours de développement pour l'algorithme et le squelette.
-			<br>
-			2 jours de développement pour les animations.
-			<br>
-			<br>
+			<br/>
+				>> 3 jours de développement pour l'algorithme et le squelette.
+			<br/>
+				>> 2 jours de développement pour les animations.
+			<br/>
+			<br/>
 			<small>Technologies utilisées : javascript/JQuery</small>
+			<br/>
+			<img src="img/js.png" width="30px" height="30px" alt="logo-javascript">
 		</p>
 	</aside>
-	<div class="clear">
 
-	</div>
+	<div class="clear"></div>
 
 	<h1>Jeu Morpion</h1>
 	<hr width="71%" color="grey">
+	<a class="github" href="https://github.com/OneAirOne/tic-tac-toe">Code GitHub</a>
 	<aside id="asideTicTacToe">
 		<p>
 			Développé en 2 heures.
 			IA basée sur du "machine learning" en cours de réalisation.
-			<br>
-			<br>
+			<br/>
+			<br/>
 			<small>Technologies utilisées : javascript/JQuery</small>
+			<br/>
+			<img src="img/js.png" width="30px" height="30px" alt="logo-javascript">
 		</p>
 	</aside>
-	<table class="input-a-tag">
+	<table class="ticTacToe">
 		<tr class= "row_1">
 			<td class="col_1 d_1 draw"></td>
 			<td class="col_2 draw"></td>
@@ -73,37 +79,106 @@
 		</tr>
 	</table>
 
-	<div class="clear">
+	<div class="clear"></div>
 
-	</div>
 	<h1>Jeu Puissance4</h1>
 	<hr width="71%" color="grey">
-	<aside id="asidePuissance4">
+	<a class="github" href="https://github.com/OneAirOne/puissance4">Code GitHub</a>
+	<div id="introPuissance4">
 		<p>
 			Piscine de C, développé en 3 jours.
-
-			<br>
-			<br>
-			<small>Technologies utilisée : C</small>
+			<br/>
+			<br/>
+			<small>Technologie utilisée : C</small>
+			<br/>
+			<img src="img/c.png" alt="logo-c">
+		</p>
+	</div>
+	<video id= 'puissance4' controls src="video/puissance4.mov" autoplay="true"  loop="true">Ici la description alternative</video>
+	<aside id="puissance4Description">
+		<img src="img/puissance4.png" alt="">
+		<p>
+			Reproduction du jeu puissance4 en C.
+			<br/>
+			L'algorithme analyse si 4 jetons sont alignés sur une ligne, une colonne ou une diagonale.
 		</p>
 	</aside>
 
-	<video id= 'puissance4' controls src="video/puissance4.mov" autoplay="true"  loop="true">Ici la description alternative</video>
+	<div class="clear"></div>
 
 	<h1>Sapin</h1>
 	<hr width="71%" color="grey">
-	<aside id="asideSapin">
+	<a class="github" href="https://github.com/OneAirOne/sapin_piscineC_epitech">Code GitHub</a>
+	<div id="asideSapin">
 		<p>
 			Examen final de la piscine de C, développé en une journée.
 
-			<br>
-			<br>
-			<small>Technologies utilisée : C</small>
+			<br/>
+			<br/>
+			<small>Technologie utilisée : C</small>
+			<br/>
+			<img src="img/c.png" alt="logo-c">
+		</p>
+	</div>
+	<video id= 'sapin' controls src="video/sapin.mov" autoplay="true"  loop="true">Ici la description alternative</video>
+	<aside id="sapinDescription">
+		<img src="img/sapin.png" alt="">
+		<p>
+			L'algorithme affiche un sapin à n segments, chaque segment comportant 3 + n
+			branches. La largeur d'une branche est de 2 étoiles de plus que la branche précédente.
+			Lors d'un changement de segment la largeur est celle de la branche
+			supérieure
 		</p>
 	</aside>
-	<video id= 'sapin' controls src="video/sapin.mov" autoplay="true"  loop="true">Ici la description alternative</video>
+
+	<div class="clear"></div>
+
+	<h1>Projet Data</h1>
+	<hr width="71%" color="grey">
+	<a class="github" href="https://github.com/OneAirOne/realtime">Code GitHub</a>
+	<div id="data">
+		<p>
+			Indexation de fichier EDI (Electronic Data Interchange) dans le cadre d'un poc bigdata.
+			<br/>
+			<br/>
+			<small>Technologie utilisée : Ruby, Elasticsearch, Kibana</small>
+		</p>
+		<img class="logoElk" src="img/ruby.png" alt="logo-ruby">
+		<img class="logoElk" src="img/elastic.png" alt="logo-elastic">
+		<img class="logoElk" src="img/kibana.png" alt="logo-kibana">
+		<br/>
+
+		<img id="realtime" src="img/gif_elk.gif" alt=""/>
+	</div>
+
+
+	<aside id="dataDescription">
+		<p>
+			Poc realisé lors de ma dernière mission chez Pickup. Ce projet avait pour objectif de démontrer l'intérêt du format JSON
+			et des technologies NOSQL pour le traitement et le suivi des données reçues des partenaires et des services web.
+			Ce projet s'est déroulé sous forme de lab et s'est étendu sur une période de 6 mois. La phase de développement à durée 3 mois.
+		</p>
+	</aside>
+
+	<div class="clear"></div>
+
+	<div id="archiDescription">
+		<p>Architechture des composants</p>
+	</div>
+
+	<img class="archi" src="img/archi.png" alt=""/>
+
+	<div id="perfDescription">
+		<p>Gestion des performance avec Map Reduce</p>
+	</div>
+
+	<img class="archi" src="img/archi2.png" alt=""/>
+
+	<!-- Back To Top -->
+	<a href="javascript:void(0);" class="js-back-to-top back-to-top">Haut</a>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript" src="script/jquery.back-to-top.js" ></script>
 	<script type="text/javascript" src="script/game_2048.js"></script>
 	<script type="text/javascript" src="script/tic-tac-toe.js"></script>
 	<script type="text/javascript" src="script/game.js"></script>
@@ -114,5 +189,10 @@
 		})
 	});
 	</script>
+	<footer>
+		<div class="foot">
+			Developped by : Erwan Gilbert
+		</div>
+	</footer>
 </body>
 </html>

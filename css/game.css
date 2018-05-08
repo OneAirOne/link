@@ -1,9 +1,11 @@
-html, body {
+html {
     max-width: 100% !important;
     overflow-x: hidden !important;
+		/* Line-Height: 2; */
 }
 
 body {
+	position: relative;
 	font-size: 1em;
 	font-family: 'Noto Sans', sans-serif;
 }
@@ -18,9 +20,6 @@ h1 {
 	font-size: 1.6em;
 	margin-top: 5%;
 	margin-left: 15%;
-
-
-	/* text-align: center; */
 }
 
 input {
@@ -32,24 +31,6 @@ label {
 	margin-right: 5px;
 }
 
-#intro2048 {
-	text-align: justify;
-	margin-left: 15%;
-	margin-right: 15%;
-
-}
-
-
-#asid2048{
-	float: right;
-	/* text-align: justify; */
-
-	width: 40%;
-	height: 100%;
-	/* border: 1px solid black; */
-	margin-top: 1%;
-	margin-right: 10%;
-}
 
 #scene {
 	float:left;
@@ -60,6 +41,8 @@ label {
 	width: 400px;
 	margin-top: 2%;
 	margin-left: 15%;
+	padding-bottom: 0;
+	border-radius: 2%;
 }
 
 
@@ -71,12 +54,12 @@ label {
 	font-size: 1.5em;
 }
 
-.grid {
+.gridGame {
 	position: relative;
 	display: inline-block;
 	height: 95px;
 	width: 95px;
-	border: 1px solid rgba(15, 116, 133, .5);
+	border: 1px solid rgba(217, 217, 217, .8);
 	border-radius: 5%;
 	box-sizing: border-box;
 	margin-right: 5px;
@@ -95,27 +78,61 @@ label {
 	box-sizing: border-box;
 }
 
-
 div[color="2"] {
-
-	background: #28E642;
+	background: #91B9F0;
 	font-size: 1.2em;
 }
 
 div[color="4"] {
-	background: #A3B9BF;
+	background: #F4CC2F;
 	font-size: 1.2em;
 }
 
 div[color="8"] {
-	background: #FEDA32;
+	background: #F08A24;
 	font-size: 1.2em;
 }
 
 div[color="16"] {
-	background: #F8591F;
+	background: #F36337;
 	font-size: 1.2em;
 }
+
+div[color="32"] {
+	background: #D9301B;
+	font-size: 1.2em;
+}
+
+div[color="64"] {
+	background: #7CBFB3;
+	font-size: 1.2em;
+}
+
+div[color="128"] {
+	background: #0F7367;
+	font-size: 1.2em;
+}
+
+div[color="256"] {
+	background: #CACBD5;
+	font-size: 1.2em;
+}
+
+div[color="512"] {
+	background: #666F88;
+	font-size: 1.2em;
+}
+
+div[color="1024"] {
+	background: #7F4D41;
+	font-size: 1.2em;
+}
+
+div[color="2048"] {
+	background: #FCFD37;
+	font-size: 1.2em;
+}
+
 
 
 table, th, td {
@@ -123,15 +140,10 @@ table, th, td {
     border-collapse: collapse;
 }
 
-/* #ticTacToe {
-float: right;
-} */
-
-table {
-	margin-top: 4%;
-	margin-left: 10%;
-	max-width: 50%;
-	float: left;
+.ticTacToe {
+	margin-right: 30%;
+	margin-top: 5%;
+	margin-left: 5%;
 }
 
 td {
@@ -142,38 +154,251 @@ td {
 
 .msg {
 	text-align: right;
-	margin-right: 25%;
+	margin-right: 30%;
+	margin-top: 5%
 }
 
 .clear {
   clear: both;
 }
 
+#intro2048 {
+	Line-Height: 2;
+	text-align: justify;
+	margin-left: 15%;
+	margin-right: 15%;
+
+}
+
+#asid2048{
+	Line-Height: 2;
+	float: right;
+	width: 40%;
+	height: 100%;
+	margin-top: 2%;
+	margin-right: 10%;
+}
+
 #asideTicTacToe {
+	Line-Height: 2;
 	float: left;
 	width: 30%;
-	/* border: 1px solid black; */
+	margin-top: 2%;
+	margin-left: 15%;
+	margin-right: 5%;
+}
+
+#puissance4 {
+	float: left;
 	margin-top: 1%;
 	margin-left: 15%;
-	/* padding-right: 15%; */
+	width: 40%;
+	height: 40%;
+}
+
+#introPuissance4 {
+	margin-top: 1%;
+	margin-left: 15%;
+	margin-right: 10%;
+}
+
+#puissance4Description {
+	float: right;
+	width: 30%;
+	height: 100%;
+	margin-right: 10%;
+}
+
+#puissance4Description img{
+	margin-top: 5%;
+	margin-left: 5%;
+	width: 50%;
+	height: 50%;
+}
+#puissance4Description p {
+	Line-Height: 2;
+	margin-left: 5%;
+	margin-right: : 5%;
 }
 
 #asideSapin {
+	Line-Height: 2;
+	display: inline-block;
 	margin-top: 1%;
 	margin-left: 15%;
 }
 #sapin {
-	margin-top: 1%;
-	margin-left: 20%;
-	margin-left: 20%;
-}
-
-#asidePuissance4 {
+	float: left;
 	margin-top: 1%;
 	margin-left: 15%;
+	width: 40%;
+	height: 40%;
 }
-#puissance4 {
+
+#sapinDescription {
+	float: right;
+	width: 30%;
+	height: 100%;
+	margin-right: 10%;
+}
+
+#sapinDescription p {
+	line-Height: 2;
+}
+
+#sapinDescription img{
+		display: block;
+		margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 29%;
+		height: 29%;
+}
+
+#data {
 	margin-top: 1%;
-	margin-left: 20%;
-	margin-left: 20%;
+	margin-left: 15%;
+	margin-right: 10%;
+}
+
+#dataDescription {
+	margin-right: 10%;
+}
+
+#realtime{
+		float: left;
+		margin-top: 5%;
+    width: 55%;
+		height: 55%;
+}
+
+#dataDescription p {
+	float: right;
+	line-Height: 2;
+	margin-top: 4%;
+	margin-bottom: 1px;
+	width: 32%;
+}
+
+.archi {
+	width: 50%;
+	margin-left: 15%;
+}
+
+.logoElk {
+	height: 30px !important;
+}
+
+#archiDescription {
+	margin-top: 5%;
+	margin-left: 15%;
+}
+
+#perfDescription {
+	margin-top: 5%;
+	margin-left: 15%;
+}
+
+.github {
+float: right;
+margin-top: 1%;
+margin-right: 15%;
+border: 1px solid #CA4B4C;
+background-color: white;
+color: #CA4B4C;
+padding: 14px 25px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+}
+
+.github:hover {
+	color: #CA4B4C;
+	background-color: #CA4B4C;
+	color: white;
+
+}
+footer {
+		margin-top: 5%;
+		text-align: center;
+    height: 100px;
+		color: white;
+    background: #212830;
+}
+.foot {
+	padding-top: 2%;
+}
+
+/*--------------------------------------------------
+    [Back To Top Theme Button]
+----------------------------------------------------*/
+.back-to-top {
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  display: inline-block;
+  z-index: 9;
+  width: 50px;
+  height: 45px;
+  font-size: 12px;
+  font-weight: 400;
+  color: #fff;
+  text-align: center;
+  line-height: 3;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background: #515769;
+  border-radius: 3px;
+  visibility: hidden;
+  opacity: 0;
+	padding: 12px 6px 6px 6px;
+  -webkit-transform: translate3d(0, 50px, 0);
+  -moz-transform: translate3d(0, 50px, 0);
+  transform: translate3d(0, 50px, 0);
+  transition-duration: 300ms;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.7, 1, 0.7, 1);
+	text-decoration: none;
+}
+
+.back-to-top:hover {
+  color: #fff;
+  transition-duration: 300ms;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.7, 1, 0.7, 1);
+}
+
+.back-to-top:focus, .back-to-top:hover {
+  text-decoration: none;
+}
+
+/* The Button Becomes Visible */
+.back-to-top.back-to-top-is-visible {
+  visibility: visible;
+  opacity: .6;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  transition-duration: 300ms;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.7, 1, 0.7, 1);
+}
+
+.back-to-top.back-to-top-is-visible:hover {
+  opacity: 1;
+  transition-duration: 300ms;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.7, 1, 0.7, 1);
+}
+
+/* If the user keeps scrolling down, the button is out of focus and becomes less visible */
+.back-to-top.back-to-top-fade-out {
+  opacity: .4;
+}
+
+.back-to-top.back-to-top-fade-out:hover {
+  opacity: 1;
+  transition-duration: 300ms;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.7, 1, 0.7, 1);
 }

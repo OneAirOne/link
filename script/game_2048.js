@@ -41,7 +41,7 @@
 
 				for (var x = 0 ; x < param ; x++) {
 
-					$("#scene").last().append("<div class= 'grid' x= " + x + " y= " + y + " empty= 'true'></div>")
+					$("#scene").last().append("<div class= 'gridGame' x= " + x + " y= " + y + " empty= 'true'></div>")
 					var square = $("[x='" + x + "'][y='" + y + "']");
 					// creation of attribute with the pixel position on the window
 					square.attr("posX", square.position().left);
@@ -78,7 +78,7 @@
 		*/
 		function generateTile(randomNbr)
 		{
-			var emptyElement =  $(".grid[empty = 'true']");
+			var emptyElement =  $(".gridGame[empty = 'true']");
 			var randomIndex = Math.random() * emptyElement.length;
 			var element = $(emptyElement[parseInt(randomIndex)]);
 			var posX = element.attr("posX");
@@ -145,7 +145,7 @@
 									// -------- deplacement du cursor vers active -> move
 									var square = $("[class=element][x='" + next + "'][y='" + y + "']");
 									var posX = active.attr("posX");
-									square.animate({left: parseFloat(posX) + "px"},300);
+									square.animate({left: parseFloat(posX) + "px"},300).css("-webkit-translation-timing-function", "cubic-bezier(.25,.55,.26,.76)");
 									// update of the div to move
 									square.attr("x", x);
 									// update of the grid
@@ -172,7 +172,7 @@
 									var sum = squareVal + squareActiveVal;
 									// -------- deplacement du cursor vers active -> move
 									var posX = active.attr("posX");
-									square.animate({left: parseFloat(posX) + "px"}, 200);
+									square.animate({left: parseFloat(posX) + "px"}, 200).css("-webkit-translation-timing-function", "cubic-bezier(.25,.55,.26,.76)");
 									squareActive.remove();
 									square.html(sum);
 									square.attr("color", sum);
@@ -224,7 +224,7 @@
 									// -------- deplacement du cursor vers active -> move
 									var square = $("[class=element][x='" + next + "'][y='" + y + "']");
 									var posX = active.attr("posX");
-									square.animate({left: parseFloat(posX) + "px"},300);
+									square.animate({left: parseFloat(posX) + "px"},300).css("-webkit-translation-timing-function", "cubic-bezier(.25,.55,.26,.76)");
 									// update of the div to move
 									square.attr("x", x);
 									// update of the grid
@@ -253,7 +253,7 @@
 									var sum = squareVal + squareActiveVal;
 									// -------- deplacement du cursor vers active -> move
 									var posX = active.attr("posX");
-									square.animate({left: parseFloat(posX) + "px"}, 200);
+									square.animate({left: parseFloat(posX) + "px"}, 200).css("-webkit-translation-timing-function", "cubic-bezier(0,0.5,0.5,0)");
 									squareActive.remove();
 									square.html(sum);
 									square.attr("color", sum);
@@ -308,7 +308,7 @@
 									// -------- deplacement du cursor vers active -> move
 									var square = $("[class=element][x='" + x + "'][y='" + next + "']");
 									var posY = active.attr("posY");
-									square.animate({top: parseFloat(posY) + "px"},300);
+									square.animate({top: parseFloat(posY) + "px"},300).css("-webkit-translation-timing-function", "cubic-bezier(.25,.55,.26,.76)");
 									// update of the div to move
 									square.attr("y", y);
 									// update of the grid
@@ -339,7 +339,7 @@
 
 									// -------- deplacement du cursor vers active -> move
 									var posY = active.attr("posY");
-									square.animate({top: parseFloat(posY) + "px"}, 200);
+									square.animate({top: parseFloat(posY) + "px"}, 200).css("-webkit-translation-timing-function", "cubic-bezier(.25,.55,.26,.76)");
 									squareActive.remove();
 									square.html(sum);
 									square.attr("color", sum);
@@ -395,7 +395,7 @@
 									// -------- deplacement du cursor vers active -> move
 									var square = $("[class=element][x='" + x + "'][y='" + next + "']");
 									var posY = active.attr("posY");
-									square.animate({top: parseFloat(posY) + "px"},300);
+									square.animate({top: parseFloat(posY) + "px"},300).css("-webkit-translation-timing-function", "cubic-bezier(.25,.55,.26,.76)");
 									// update of the div to move
 									square.attr("y", y);
 									// update of the grid
@@ -423,7 +423,7 @@
 									var sum = squareVal + squareActiveVal;
 									// -------- deplacement du cursor vers active -> move
 									var posY = active.attr("posY");
-									square.animate({top: parseFloat(posY) + "px"}, 200);
+									square.animate({top: parseFloat(posY) + "px"}, 200).css("-webkit-translation-timing-function", "cubic-bezier(.25,.55,.26,.76)");
 									squareActive.remove();
 									square.html(sum);
 									square.attr("color", sum);

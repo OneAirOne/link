@@ -85,7 +85,6 @@
 
 			this.speed = 3;
 
-
 			var max = boxes.length
 
 			if (this.direction == "right" ) {
@@ -245,13 +244,6 @@
 	 * @param  {string} url [description]
 	 * @return {void}
 	 */
-	 var activateRedirect = (url) => {
-		 document.body.addEventListener("keydown", function (event) {
-			 if (event.keyCode === 65) {
-				 document.location = url;
-			 }
-		 });
-	 }
 
 	/* OBJECTS CREATON */
 	// --------------- //
@@ -276,11 +268,11 @@
 	});
 
 	var backBubble = new FixedSprite({
-		width		: 150, 
-		height	: 36,
-		image		: "img/bubble_back.png",
-		posX		: 0,
-		posY		: 0,
+		width		: 639, 
+		height	: 56,
+		image		: "img/back_game.png",
+		posX		: 10,
+		posY		: 20,
 		url			: "index.html"
 	});
 
@@ -292,6 +284,7 @@
 	}
 
 	var boxes = [back];
+
 
 	/*      INIT       */
 	// --------------- //
@@ -314,16 +307,7 @@
 		link.update();
 		link.render();
 		back.draw();
-
-
-		// check if the personnage is in bubble zone
-		if (zoneDetection(link, backZoneBubble)) {
-			backBubble.posX = link.posX - 30;
-			backBubble.posY = link.posY - 55;
-			backBubble.draw();
-			console.log(backBubble.url);
-			activateRedirect(backBubble.url)
-		}
+		backBubble.draw();
 
 		window.requestAnimationFrame(gameLoop);
 	}
@@ -331,6 +315,10 @@
 	onkeydown = function(e) {
 			var key = e.keyCode;
 			var key_letter = String.fromCharCode(key);
+
+			if(key == 65) {
+				document.location = "index.html";
+			}
 
 			if(key == 37 || key_letter == "Q")    //Le déplacement à gauche
 			gauche = true;
@@ -344,8 +332,6 @@
 			if(gauche || droite || haut || bas) // Bloquer le défilement
 			return false;
 		}
-
-
 
 	/* MAIN */
 	init();

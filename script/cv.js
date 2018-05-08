@@ -1,10 +1,8 @@
 (function() {
 
 	var canvas = document.getElementById("return");
-	// canvas.width = "400";
 	canvas.height = "1600";
 	canvas.width = window.innerWidth
-	// canvas.height = window.innerHeight
 
 	var ctx = canvas.getContext("2d");
 
@@ -84,7 +82,7 @@
 		// draw the position of sprite updated
 		this.render =  () => {
 
-			this.speed = 3;
+			this.speed = 8;
 
 
 			var max = boxes.length
@@ -138,9 +136,6 @@
 			}
 			// update the image source
 			img.src = this.image;
-
-			// Clear the canvas
-			ctx.clearRect(0, 0, canvas.width , canvas.height);
 
 			// Draw the animation
 			ctx.drawImage(
@@ -246,15 +241,6 @@
 	 * @param  {string} url [description]
 	 * @return {void}
 	 */
-	var activateRedirect = (url) => {
-		document.body.addEventListener("keydown", function (event) {
-			if (event.keyCode === 65) {
-				document.location = url;
-			}
-		});
-	}
-
-
 
 
 	/* OBJECTS CREATON */
@@ -317,22 +303,6 @@
 	function noscroll() {
 	  window.scrollTo( 0, 0 );
 	}
-	function scrollToLink() {
-		console.log(window.pageYOffset);
-			if (link.posY < window.pageYOffset)
-			 window.addEventListener('DOMMouseScroll', preventDefault, false);
-			// window.addEventListener('scroll', noscroll);
-			// window.removeEventListener('scroll', noscroll);
-			// window.scrollBy(0, 1);
-	}
-
-	function preventDefault(e) {
-  e = e || window.event;
-  if (e.preventDefault)
-      e.preventDefault();
-  e.returnValue = false;
-}
-
 
 	/*    GAME LOOP    */
 	// --------------- //
@@ -341,11 +311,12 @@
 	 * @return {void}
 	 */
 	function gameLoop () {
-		scrollToLink();
+		ctx.clearRect(0, 0, canvas.width , canvas.height);
+		cv.draw();
 		link.update();
 		link.render();
 		back.draw();
-		cv.draw();
+
 
 		// check if the personnage is in bubble zone
 		if (zoneDetection(link, backZoneBubble)) {
@@ -353,13 +324,16 @@
 			backBubble.posY = link.posY - 55;
 			backBubble.draw();
 			console.log(backBubble.url);
-			activateRedirect(backBubble.url)
+			// activateRedirect(backBubble.url)
 		}
 
 		window.requestAnimationFrame(gameLoop);
 	}
 
-
+	var right = false;
+	var left = false;
+	var up = false;
+	var down = false;
 
 	/* MAIN */
 	init();
@@ -377,27 +351,46 @@
 
 					case 38:
 						console.log("-> UP");
+						up = true;
+						right = false;
+						left = false;
+						down = false;
 						link.direction = "up";
 						link.image = "img/up.png";
 						break;
 
 					case 40:
 						console.log("-> DOWN");
+						up = false;
+						right = false;
+						left = false;
+						down = true;
 						link.direction = "down";
 						link.image = "img/down.png";
 						break;
 
 					case 37:
 						console.log("-> LEFT");
+						up = false;
+						right = false;
+						left = true;
+						down = false;
 						link.direction = "left";
 						link.image = "img/left.png";
 						break;
 
 					case 39:
 						console.log("-> RIGHT");
+						up = false;
+						right = true;
+						left = false;
+						down = false;
 						link.direction = "right";
 						link.image = "img/right.png";
 						break;
+
+					case 65:
+						document.location = "index.html";
 				}
 			},
 
@@ -408,25 +401,57 @@
 					case 38:
 						console.log("-> UP");
 						link.direction = "";
-						link.image = "img/link_static.png";
+						if (right == true) {
+							link.image = "img/static_right.png";
+						} else if (left == true) {
+							link.image = "img/static_left.png";
+						} else if (up == true) {
+							link.image = "img/static_up.png";
+						} else {
+							link.image = "img/link_static.png";
+						}
 						break;
 
 					case 40:
 						console.log("-> DOWN");
 						link.direction = "";
-						link.image = "img/link_static.png";
+						if (right == true) {
+							link.image = "img/static_right.png";
+						} else if (left == true) {
+							link.image = "img/static_left.png";
+						} else if (up == true) {
+							link.image = "img/static_up.png";
+						} else {
+							link.image = "img/link_static.png";
+						}
 						break;
 
 					case 37:
 						console.log("-> LEFT");
 						link.direction = "";
-						link.image = "img/link_static.png";
+						if (right == true) {
+							link.image = "img/static_right.png";
+						} else if (left == true) {
+							link.image = "img/static_left.png";
+						} else if (up == true) {
+							link.image = "img/static_up.png";
+						} else {
+							link.image = "img/link_static.png";
+						}
 						break;
 
 					case 39:
 						console.log("-> RIGHT");
 						link.direction = "";
-						link.image = "img/link_static.png";
+						if (right == true) {
+							link.image = "img/static_right.png";
+						} else if (left == true) {
+							link.image = "img/static_left.png";
+						} else if (up == true) {
+							link.image = "img/static_up.png";
+						} else {
+							link.image = "img/link_static.png";
+						}
 						break;
 				}
 			}

@@ -1,7 +1,7 @@
 (function() {
 
 	var canvas = document.getElementById("map");
-	canvas.width = window.innerWidth - 30;
+	canvas.width = window.innerWidth;
 	canvas.height = window.innerHeight;
 	var ctx = canvas.getContext("2d");
 
@@ -272,7 +272,7 @@
 	 * @param  {object} object2 another object
 	 * @return {booleen}
 	 */
-	var zoneDetection = (object1, object2) => {
+	function zoneDetection (object1, object2) {
 
 		var x = object1.posX  + ((object1.width / object1.numberOfFrames || 1) / 2);
 		var y = object1.posY + (object1.height / 2);
@@ -484,7 +484,7 @@
 	 */
 	function searchFreeSpace () {
 		var x = Math.floor(Math.random() * Math.floor(canvas.width /1.5));
-		var y = Math.floor(Math.random() * Math.floor(canvas.height/2));
+		var y = Math.floor(Math.random() * Math.floor(canvas.height/3.5));
 
 		var searchZone = {
 			posX			: x,
@@ -492,9 +492,11 @@
 			width : enemySize,
 			height : enemySize
 		}
-		while (checkZone(searchZone, boxes) == true) {
+		while (checkZone(searchZone, spwanBoxes) == true) {
+			console.log(searchZone.posX);
+			console.log(searchZone.posY);
 			searchZone.posX = Math.floor(Math.random() * Math.floor(canvas.width /1.5));
-			searchZone.posY = Math.floor(Math.random() * Math.floor(canvas.height/2));
+			searchZone.posY = Math.floor(Math.random() * Math.floor(canvas.height/3.5));
 		}
 
 		return [x,y];
@@ -509,16 +511,16 @@
 	 * @return {void}
 	 */
 	function outOfZone (object) {
-		if (object.posX > canvas.width) {
+		if (object.posX > canvas.width + 30) {
 			object.posX = 0;
 		}
-		if (object.posX < 0 ) {
+		if (object.posX < - 30) {
 			object.posX = canvas.width;
 		}
-		if (object.poY > canvas.height) {
+		if (object.poY > city.posY) {
 			object.posY = 0;
 		}
-		if (object.posY < 0) {
+		if (object.posY < - 30) {
 			object.posY = city.posY;
 		}
 	}
@@ -628,6 +630,11 @@
 	var lifeTick = 0;
 	var lifeImg = "img/life5.png";
 	var tickGameOver = 0;
+	var killZoneX = 5;//20
+	var killZoneY = 5;
+	var killZoneWidth = 55;//70
+	var killZoneHeight = 55;
+	var maxLifeTick = 20;
 
 
 	// --------------------------------- LINK -------------------------
@@ -669,10 +676,10 @@
 	}
 
 	var enemyKillZone = {
-		posX 		: enemy.posX - 20,
-		posY 		: enemy.posY- 20,
-		height 	: 70,
-		width 	: 70
+		posX 		: enemy.posX - killZoneX,
+		posY 		: enemy.posY- killZoneY,
+		height 	: killZoneHeight,
+		width 	: killZoneWidth
 	}
 
 	var enemy2 = new AnimateSprite ({
@@ -698,10 +705,10 @@
 	}
 
 	var enemyKillZone2 = {
-		posX 		: enemy2.posX - 20,
-		posY 		: enemy2.posY- 20,
-		height 	: 70,
-		width 	: 70
+		posX 		: enemy2.posX - killZoneX,
+		posY 		: enemy2.posY- killZoneY,
+		height 	: killZoneHeight,
+		width 	: killZoneWidth
 	}
 
 	var enemy3 = new AnimateSprite ({
@@ -727,10 +734,10 @@
 	}
 
 	var enemyKillZone3 = {
-		posX 		: enemy3.posX - 20,
-		posY 		: enemy3.posY- 20,
-		height 	: 70,
-		width 	: 70
+		posX 		: enemy3.posX - killZoneX,
+		posY 		: enemy3.posY- killZoneY,
+		height 	: killZoneHeight,
+		width 	: killZoneWidth
 	}
 
 	var enemy4 = new AnimateSprite ({
@@ -756,10 +763,10 @@
 	}
 
 	var enemyKillZone4 = {
-		posX 		: enemy4.posX - 20,
-		posY 		: enemy4.posY- 20,
-		height 	: 70,
-		width 	: 70
+		posX 		: enemy4.posX - killZoneX,
+		posY 		: enemy4.posY- killZoneY,
+		height 	: killZoneHeight,
+		width 	: killZoneWidth
 	}
 
 	var enemy5 = new AnimateSprite ({
@@ -785,10 +792,10 @@
 	}
 
 	var enemyKillZone5 = {
-		posX 		: enemy5.posX - 20,
-		posY 		: enemy5.posY- 20,
-		height 	: 70,
-		width 	: 70
+		posX 		: enemy5.posX - killZoneX,
+		posY 		: enemy5.posY- killZoneY,
+		height 	: killZoneHeight,
+		width 	: killZoneWidth
 	}
 
 
@@ -814,8 +821,15 @@
 		height	: 120,
 		image		: "img/swimmingPool_color.png",
 		posX		: canvas.width / 17,
-		posY		: canvas.height / 1.9
+		posY		: canvas.height / 2.3
 	});
+
+	var spawnSwimmingZone = {
+		posX 		: swimmingPool.posX - 100,
+		posY 		:	swimmingPool.posY - 100,
+		width 	:	swimmingPool.width + 200,
+		height 	:	swimmingPool.height + 200
+	}
 
 	var house = new FixedSprite({
 		width		: 96, 
@@ -827,10 +841,10 @@
 
 	var bubbleRoom = new FixedSprite({
 		width		: 147, 
-		height	: 103,
+		height	: 90,
 		image		: "img/bubble_room.png",
 		posX		: house.posX  + 28,
-		posY		: house.posY - 150
+		posY		: house.posY - 50
 	});
 
 	var city = new FixedSprite({
@@ -1044,6 +1058,7 @@
 
 	var boxes = [linkedin, truck, house, factoryGit, city, chillout];
 	var enemyBoxes = [linkedin, truck, house, factoryGit, city, chillout, swimmingPool];
+	var spwanBoxes = [linkedin, truck, house, factoryGit, city, chillout, spawnSwimmingZone];
 	var enemyList  = [enemy, enemy2, enemy3, enemy4, enemy5];
 	var clouds = [cloud1, cloud2, cloud3, cloud4];
 
@@ -1145,16 +1160,13 @@
 
 
 		if (checkZone(link, enemyList)) {
-			if (lifeTick > 10) {
+			if (lifeTick > maxLifeTick) {
 				link.life = link.life - 1;
 				lifeTick = 0;
 			} else {
 				lifeTick++;
 			}
 		}
-
-
-
 
 		if (help == true) {
 			helpBubble.draw();

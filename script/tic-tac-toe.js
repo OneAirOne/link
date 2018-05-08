@@ -24,9 +24,9 @@
 		if(!isWin){
 
 			setTimeout(function(){
-				window.location.reload(1)
+				// window.location.reload(1)
 			}, 2000)
-			$("table").before("<div class='msg'>Player : " + player + " win :)</div>")
+			$("table").after("<div class='msg'>Player : " + player + " win :)</div>")
 			isWin = 1
 
 		}
@@ -37,9 +37,9 @@
 	function draw() {
 		if(!isWin){
 			setTimeout(function(){
-				window.location.reload(1)
+				// window.location.reload(1)
 			}, 2000)
-			$("table").before("<div class='msg'>no player win, try again !</div>")
+			$("table").after("<div class='msg'>no player win, try again !</div>")
 			isWin = 1
 		}
 	}
@@ -139,7 +139,6 @@
 					$(this).css("background-color", "white")
 			},
 			click: function() {
-				// $(".msg").html("c")
 				// check of player
 				playerIndex = changePlayer(player)
 
@@ -157,7 +156,7 @@
 				}	else {
 					playerIndex = changePlayer(player)
 					player = playerList[playerIndex]
-					$("table").before('<div class="msg">allready used</div>')
+					$("table").after('<div class="msg">already used</div>')
 					setTimeout(function(){
 					}, 2000)
 					setTimeout(function(){
