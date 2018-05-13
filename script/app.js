@@ -1,9 +1,28 @@
 (function() {
 
+	// return if mobile device
+	if (window.innerWidth < 765) {
+		return;
+	}
+
+	// canvas optimisation
+	window.requestAnimFrame = (function(){
+  return  window.requestAnimationFrame       ||
+          window.webkitRequestAnimationFrame ||
+          window.mozRequestAnimationFrame    ||
+          function( callback ){
+            window.setTimeout(callback, 1000 / 60);
+          };
+	})();
+
 	var canvas = document.getElementById("map");
-	canvas.width = window.innerWidth;
+	canvas.width = document.body.clientWidth;
+	canvas.height = document.body.clientHeight;
+	// canvas.width = window.innerWidth;
 	canvas.height = window.innerHeight;
 	var ctx = canvas.getContext("2d");
+
+
 
 	/**
 	 * Class of fixed sprites
@@ -18,12 +37,12 @@
 		var ticksPerFrame = options.ticksPerFrame || 0;
 		var img = new Image();
 		this.image 			= options.image;
-		img.src 				= this.image;
 		this.posX 			= options.posX;
 		this.posY 			= options.posY;
 		this.width 			= options.width;
 		this.height 		= options.height;
 		this.url 				= options.url || '';
+		img.src 				= this.image;
 
 
 		this.draw = () =>
@@ -38,7 +57,13 @@
 				ctx.drawImage(img, this.posX, this.posY);
 			})
 		};
+
+		this.updateImage = () => {
+			img.src = this.image;
+		}
+
 	}
+
 
 
 
@@ -67,6 +92,7 @@
 		this.dead							= options.dead;
 		this.tick							= options.tick;
 		this.life							= options.life;
+		this.color						= options.color;
 
 
 		// update position of sprite
@@ -110,7 +136,7 @@
 						return;
 					} else {
 						if (i == max - 1) {
-							this.posX = this.posX + this.speed
+							this.posX = this.posX + this.speed;
 						}
 					}
 				}
@@ -276,7 +302,7 @@
 
 		var x = object1.posX  + ((object1.width / object1.numberOfFrames || 1) / 2);
 		var y = object1.posY + (object1.height / 2);
-		var object2Width;
+		var object2Width ;
 
 		// if object is AnimateSprite width = width / numberOfFrames
 		if (object2.numberOfFrames) {
@@ -286,13 +312,51 @@
 		}
 
 		if (x >= object2.posX
-    		&& x< object2.posX + object2Width
+    		&& x < object2.posX + object2Width
     		&& y >= object2.posY
     		&& y < object2.posY + object2.height) {
 
 					return true;
 		} else {
 			return false;
+		}
+	}
+
+
+
+	/**
+	 * zone detection for the boxes
+	 * @param  {object} object1 object1
+	 * @param  {object} object2 object2
+	 * @return {booleen}
+	 */
+	function zoneDetectionBoxe (object1, object2) {
+
+		var x = object1.posX;
+		var y = object1.posY;
+		var object2Width;
+		var object1Width;
+
+		// if object is AnimateSprite width = width / numberOfFrames
+		if (object2.numberOfFrames) {
+			object2Width = object2.width / object2.numberOfFrames || 1;
+		} else {
+			object2Width = object2.width;
+		}
+		if (object1.numberOfFrames) {
+			object1Width = object1.width / object1.numberOfFrames || 1;
+		} else {
+			object1Width = object1.width;
+		}
+
+		if((object2.posX >= object1.posX + object1Width)
+    	|| (object2.posX + object2Width <= object1.posX)
+    	|| (object2.posY >= object1.posY + object1.height)
+    	|| (object2.posY + object2.height <= object1.posY)) {
+			return false;
+
+		} else {
+			return true;
 		}
 	}
 
@@ -325,7 +389,7 @@
 	 * @return {void}
 	 */
 	function animateStart (object, delay, speed) {
-		if (link.image == "img/link_static.png" && welcome == false) {
+		if ( welcome == false) {
 			object.draw();
 			if (timeStartCount > delay) {
 				if (nbLoop == true) {
@@ -408,6 +472,24 @@
 
 
 	/**
+	 * check zone between one element and the other
+	 *
+	 * @param  {object} object    one element
+	 * @param  {array} objects   	array of element
+	 * @return {booleen}          true if collision
+	 */
+	function checkZoneBoxes (object, objects) {
+		for (i = 0 ; i < objects.length; i++) {
+
+			if (zoneDetectionBoxe(object, objects[i]) == true) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+
+	/**
 	 * IA for enemy
 	 *
 	 * @param  {array} enemy array of enemy
@@ -423,20 +505,33 @@
 
 					if (enemy[i].moveDirection ==  "down") {
 						enemy[i].moveDirection = "left";
-						enemy[i].image = "img/enemy_nes_left.png";
+						if (enemy[i].color == "yellow") {
+							enemy[i].image = "img/enemy_nes_left.png";
+						} else {
+							enemy[i].image = "img/enemy_nes_left_red.png";
+						}
 
 					} else if (enemy[i].moveDirection == "up") {
 						enemy[i].moveDirection = "right";
-						enemy[i].image = "img/enemy_nes_right.png";
-
+						if (enemy[i].color == "yellow") {
+							enemy[i].image = "img/enemy_nes_right.png";
+						} else {
+							enemy[i].image = "img/enemy_nes_right_red.png";
+						}
 					} else if (enemy[i].moveDirection == "right") {
 						enemy[i].moveDirection = "down";
-						enemy[i].image = "img/enemy_nes_down.png";
-
+						if (enemy[i].color == "yellow") {
+							enemy[i].image = "img/enemy_nes_down.png";
+						} else {
+							enemy[i].image = "img/enemy_nes_down_red.png";
+						}
 					} else if (enemy[i].moveDirection == "left") {
 						enemy[i].moveDirection = "up";
-						enemy[i].image = "img/enemy_nes_up.png";
-
+						if (enemy[i].color == "yellow") {
+							enemy[i].image = "img/enemy_nes_up.png";
+						} else {
+							enemy[i].image = "img/enemy_nes_up_red.png";
+						}
 					}
 					enemy[i].tick  = 0;
 				}
@@ -444,31 +539,47 @@
 			if (enemy[i].moveDirection == "down") {
 				if (checkCollision(enemy[i], enemyBoxes, enemy[i].moveDirection) == true || enemy[i].posY >= canvas.height) {
 					enemy[i].moveDirection = "up";
-					enemy[i].image = "img/enemy_nes_up.png";
+					if (enemy[i].color == "yellow") {
+						enemy[i].image = "img/enemy_nes_up.png";
+					} else {
+						enemy[i].image = "img/enemy_nes_up_red.png";
+					}
 				} else {
-					enemy[i].posY =  enemy[i].posY + 1;
+					enemy[i].posY =  enemy[i].posY + enemy[i].speed;
 				}
 			} else if (enemy[i].moveDirection == "up") {
 				if (checkCollision(enemy[i], enemyBoxes, enemy[i].moveDirection) == true || enemy[i].posY <= 0) {
 					enemy[i].moveDirection = "down";
-					enemy[i].image = "img/enemy_nes_down.png";
+					if (enemy[i].color == "yellow") {
+						enemy[i].image = "img/enemy_nes_down.png";
+					} else {
+						enemy[i].image = "img/enemy_nes_down_red.png";
+					}
 				} else {
-					enemy[i].posY =  enemy[i].posY - 1;
+					enemy[i].posY =  enemy[i].posY - enemy[i].speed;
 				}
 			} else if (enemy[i].moveDirection == "right") {
 
 				if (checkCollision(enemy[i], enemyBoxes, enemy[i].moveDirection) == true || enemy[i].posX >= canvas.width) {
 					enemy[i].moveDirection = "left";
-					enemy[i].image = "img/enemy_nes_left.png";
+					if (enemy[i].color == "yellow") {
+						enemy[i].image = "img/enemy_nes_left.png";
+					} else {
+						enemy[i].image = "img/enemy_nes_left_red.png";
+					}
 				} else {
-					enemy[i].posX =  enemy[i].posX + 1;
+					enemy[i].posX =  enemy[i].posX + enemy[i].speed;
 				}
 			} else if (enemy[i].moveDirection == "left") {
 				if (checkCollision(enemy[i], enemyBoxes, enemy[i].moveDirection) == true || enemy[i].posX <= 0) {
 					enemy[i].moveDirection = "right";
-					enemy[i].image = "img/enemy_nes_right.png";
+					if (enemy[i].color == "yellow") {
+						enemy[i].image = "img/enemy_nes_right.png";
+					} else {
+						enemy[i].image = "img/enemy_nes_right_red.png";
+					}
 				} else {
-					enemy[i].posX =  enemy[i].posX - 1;
+					enemy[i].posX =  enemy[i].posX - enemy[i].speed;
 				}
 			}
 			enemy[i].tick = enemy[i].tick + 1;
@@ -493,12 +604,9 @@
 			height : enemySize
 		}
 		while (checkZone(searchZone, spwanBoxes) == true) {
-			console.log(searchZone.posX);
-			console.log(searchZone.posY);
 			searchZone.posX = Math.floor(Math.random() * Math.floor(canvas.width /1.5));
 			searchZone.posY = Math.floor(Math.random() * Math.floor(canvas.height/3.5));
 		}
-
 		return [x,y];
 	}
 
@@ -539,19 +647,44 @@
 			object.posX = coordinates[0];
 			object.posY = coordinates[1];
 			object.dead = false;
+			// random color
+			nbr =  Math.random();
+			if (nbr > 0.7) {
+				object.speed = 1.8;
+				object.color =  "red";
+			} else {
+				object.speed = 1;
+				object.color = "yellow";
+			}
 		}
 		if (object.moveDirection == "left") {
 			object.moveDirection = "up";
-			object.image = "img/enemy_nes_up.png"
+			if (object.color == "yellow") {
+				object.image = "img/enemy_nes_up.png"
+			} else {
+				object.image = "img/enemy_nes_up_red.png"
+			}
 		} else if (object. moveDirection == "up") {
 			object.moveDirection = "down";
-			object.image = "img/enemy_nes_down.png"
+			if (object.color == "yellow") {
+				object.image = "img/enemy_nes_down.png"
+			} else {
+				object.image = "img/enemy_nes_down_red.png"
+			}
 		} else if (object. moveDirection == "right") {
 			object.moveDirection = "left";
-			object.image = "img/enemy_nes_left.png"
+			if (object.color == "yellow") {
+				object.image = "img/enemy_nes_left.png"
+			} else {
+				object.image = "img/enemy_nes_left_red.png"
+			}
 		} else if (object. moveDirection == "down") {
 			object.moveDirection = "right";
-			object.image = "img/enemy_nes_right.png"
+			if (object.color == "yellow") {
+				object.image = "img/enemy_nes_right.png"
+			} else {
+				object.image = "img/enemy_nes_right_red.png"
+			}
 		}
 	}
 
@@ -567,7 +700,11 @@
 		for (var i = 0 ; i < enemyList.length ; i++) {
 			// scrore update
 			if (enemyList[i].dead == true) {
-				score = score + 5;
+				if (enemyList[i].color == "red") {
+					score = score + 20;
+				} else {
+					score = score + 5;
+				}
 			} else {
 				score;
 			}
@@ -612,8 +749,188 @@
 	}
 
 
+
+	/**
+	 * swimmingPool animation
+	 * @return {void}
+	 */
+	function animateSwimmingPool() {
+		if (tickSwimmingPool > 100) {
+			tickSwimmingPool = 0;
+			if (swimmingPoolAnimateBubble.image == "img/swimmingPool_animate_bubble1.png") {
+				swimmingPoolAnimateBubble.image = "img/swimmingPool_animate_bubble2.png";
+			} else if (swimmingPoolAnimateBubble.image == "img/swimmingPool_animate_bubble2.png"){
+				swimmingPoolAnimateBubble.image = "img/swimmingPool_animate_bubble3.png";
+			} else {
+				swimmingPoolAnimateBubble.image = "img/swimmingPool_animate_bubble1.png";
+			}
+			swimmingPoolAnimateBubble.updateImage();
+		}
+	}
+
+
+
+	/**
+	 * draw a rectangle arround a subject => debug function
+	 * @param  {object} object object to analyse
+	 * @return {void}
+	 */
+	function drawZone (object) {
+		ctx.beginPath();
+		ctx.moveTo(object.posX, object.posY);
+		ctx.lineTo(object.posX + object.width , object.posY);
+		ctx.lineTo(object.posX + object.width , object.posY + object.height);
+		ctx.lineTo(object.posX, object.posY + object.height);
+		ctx.lineTo(object.posX, object.posY);
+		ctx.closePath();
+		ctx.stroke();
+	}
+
+
+
+	/**
+	 * draw multiple object
+	 * @param  {object of object} objects objects of multiple objects
+	 * @return {void}
+	 */
+	function drawObjects (objects) {
+		var nbObject = Object.keys(objects).length;
+
+		for (var i = 1 ; i <= nbObject ; i++) {
+			objects[i].draw();
+		}
+	}
+
+
+
+	/**
+	 * check if each sprite of herb are cut and update image if true
+	 * @param  {[type]} objects [description]
+	 * @return {[type]}         [description]
+	 */
+	function cutCheck (objects) {
+		var nbObject = Object.keys(objects).length;
+
+		for (var i = 1 ; i  <= nbObject ; i++) {
+			if (zoneDetectionBoxe(swordZone, objects[i]) == true) {
+				objects[i].image = "img/herbe_cut.png";
+				// update the image of FixedSprite
+				objects[i].updateImage();
+			}
+		}
+	}
+
+
+
+	/**
+	 * adapte the heart image with the link.life property
+	 * @return {void}
+	 */
+	function checkLife() {
+		if (link.life == lifeInit) {
+			lifeHeart.image = "img/life5.png";
+		} else if (link.life == lifeInit - 1) {
+			lifeHeart.image = "img/life4.png";
+		} else if (link.life == lifeInit - 2) {
+			lifeHeart.image = "img/life3.png";
+		} else if (link.life == lifeInit - 3) {
+			lifeHeart.image = "img/life2.png";
+		} else if (link.life == lifeInit - 4) {
+			lifeHeart.image = "img/life1.png";
+		} else {
+			lifeHeart.image = "img/life0.png";
+		}
+		lifeHeart.updateImage();
+	}
+
+
+
+	/**
+	 * update life of an object
+	 * @param  {object} object object to update
+	 * @return {void}
+	 */
+	var hit = false
+	function lifeUpdate(object) {
+
+		if (hit == false) {
+			if(checkZoneBoxes(object, enemyList)) {
+				if(lifeTick > 80) {
+					object.life = object.life - 1;
+					hit = true;
+					lifeTick = 0;
+				}
+			}
+		}
+		// console.log(lifeTick);
+		if (lifeTick > maxLifeTick) {
+			lifeTick = 0;
+			hit = false
+		}
+		lifeTick++;
+
+		// if (checkZoneBoxes(object, enemyList)) {
+		// 	if (lifeTick > maxLifeTick) {
+		// 		object.life = object.life - 1;
+		// 		lifeTick = 0;
+		// 	} else {
+		// 		lifeTick++;
+		// 	}
+		// }
+	}
+	// function lifeUpdate(object) {
+	// 	if (checkZoneBoxes(object, enemyList)) {
+	// 		if (lifeTick > maxLifeTick) {
+	// 			object.life = object.life - 1;
+	// 			lifeTick = 0;
+	// 		} else {
+	// 			lifeTick++;
+	// 		}
+	// 	}
+	// }
+
+	/**
+	 * heart spawn
+	 * @return {void}
+	 */
+	function lifeSpawn() {
+		// random number
+		var nbr = Math.random();
+		if (nbr > heartProbability && randomHeart == false && tickHeart >= maxTickHeart) {
+			if (link.life < 4) {
+				heartVisible = true;
+				randomHeart = true;
+				heart.draw();
+			}
+		}
+		if (link.life < 4 && randomHeart == true) {
+			heart.draw();
+		}
+	}
+
+	function lifeIncrease() {
+		if (heartVisible == true) {
+			if (zoneDetectionBoxe(lifeZone, heart) == true) {
+				if (link.life < lifeInit) {
+						link.life = link.life + 1;
+						randomHeart = false;
+						heartVisible = false;
+						tickHeart = 0;
+						// change coordinates for the next heart
+						var coordinates = searchFreeSpace();
+						heart.posX = coordinates[0];
+						heart.posY = coordinates[1];
+					}
+			}
+		}
+	}
+
+
+
 	/* OBJECTS CREATON */
 	// --------------- //
+
+	// general settings
 	var welcome = false;
 	var help = false;
 	var nbLoop = true;
@@ -623,18 +940,31 @@
 	var right = false;
 	var left = false;
 	var up = false;
-	var down = false;
+	var down = true;
 	var speedInit = 3;
 	var enemySize = 30;
 	var score = 0;
 	var lifeTick = 0;
-	var lifeImg = "img/life5.png";
 	var tickGameOver = 0;
-	var killZoneX = 5;//20
-	var killZoneY = 5;
-	var killZoneWidth = 55;//70
-	var killZoneHeight = 55;
-	var maxLifeTick = 20;
+	var tickSwimmingPool = 0;
+	var heartVisible;
+	var randomHeart = false;
+	var lifeInit = 5;
+	var tickHeart = 0;
+	var heartProbability = 0.98;
+
+	// gameplay settings
+	var swordOffsetX = 15;
+	var swordOffsetY = 15;
+	var lifeOffsetX = 2;
+	var lifeOffsetY = 2;
+	var initMaxLifeTick = 150;
+	var maxLifeTick = initMaxLifeTick;
+	var killZoneX = -3;
+	var killZoneY = -3;
+	var killZoneWidth = 30;
+	var killZoneHeight = 30;
+	var maxTickHeart = 500;
 
 
 	// --------------------------------- LINK -------------------------
@@ -649,8 +979,9 @@
 		direction				: "",
 		speed						: speedInit,
 		dead						: false,
-		life						: 5
+		life						: lifeInit
 	});
+
 
 	// --------------------------------- ENEMY -------------------------
 	var enemy = new AnimateSprite ({
@@ -659,28 +990,30 @@
 		image						: "img/enemy_nes_right.png",
 		numberOfFrames	: 10,
 		ticksPerFrame		: 4,
-		posX						: 500,
-		posY						: 600,
+		posX						: 200,
+		posY						: 50,
 		direction				: "",
-		speed						: speedInit,
+		speed						: 1,
 		moveDirection   : "right",
 		dead						: false,
-		tick						: 0
+		tick						: 0,
+		color 					: 'yellow'
 	});
 
-	var enemyZone = {
-		posX 		: enemy.posX - 5,
-		posY 		: enemy.posY- 5,
-		height 	: 20,
-		width 	: 20
-	}
+	// var enemyZone = {
+	// 	posX 		: enemy.posX - 5,
+	// 	posY 		: enemy.posY- 5,
+	// 	height 	: 20,
+	// 	width 	: 20
+	// }
 
 	var enemyKillZone = {
-		posX 		: enemy.posX - killZoneX,
-		posY 		: enemy.posY- killZoneY,
+		posX 		: enemy.posX + killZoneX,
+		posY 		: enemy.posY + killZoneY,
 		height 	: killZoneHeight,
 		width 	: killZoneWidth
 	}
+
 
 	var enemy2 = new AnimateSprite ({
 		width						: 300,
@@ -691,22 +1024,23 @@
 		posX						: 150,
 		posY						: 250,
 		direction				: "",
-		speed						: speedInit,
+		speed						: 1,
 		moveDirection   : "left",
 		dead						: false,
-		tick						: 0
+		tick						: 0,
+		color 					: 'yellow'
 	});
 
-	var enemyZone2 = {
-		posX 		: enemy2.posX - 5,
-		posY 		: enemy2.posY- 5,
-		height 	: 20,
-		width 	: 20
-	}
+	// var enemyZone2 = {
+	// 	posX 		: enemy2.posX - 5,
+	// 	posY 		: enemy2.posY- 5,
+	// 	height 	: 20,
+	// 	width 	: 20
+	// }
 
 	var enemyKillZone2 = {
-		posX 		: enemy2.posX - killZoneX,
-		posY 		: enemy2.posY- killZoneY,
+		posX 		: enemy2.posX + killZoneX,
+		posY 		: enemy2.posY + killZoneY,
 		height 	: killZoneHeight,
 		width 	: killZoneWidth
 	}
@@ -720,22 +1054,25 @@
 		posX						: 580,
 		posY						: 250,
 		direction				: "",
-		speed						: speedInit,
+		speed						: 1,
 		moveDirection   : "down",
 		dead						: false,
-		tick						: 0
+		tick						: 0,
+		color 					: 'yellow'
 	});
 
-	var enemyZone3 = {
-		posX 		: enemy3.posX - 5,
-		posY 		: enemy3.posY- 5,
-		height 	: 20,
-		width 	: 20
-	}
+	// var enemyZone3 = {
+	// 	posX 		: enemy3.posX - 5,
+	// 	posY 		: enemy3.posY- 5,
+	// 	height 	: 20,
+	// 	width 	: 20
+	// }
+
+
 
 	var enemyKillZone3 = {
-		posX 		: enemy3.posX - killZoneX,
-		posY 		: enemy3.posY- killZoneY,
+		posX 		: enemy3.posX + killZoneX,
+		posY 		: enemy3.posY + killZoneY,
 		height 	: killZoneHeight,
 		width 	: killZoneWidth
 	}
@@ -749,22 +1086,23 @@
 		posX						: 1200,
 		posY						:	200,
 		direction				: "",
-		speed						: speedInit,
+		speed						: 1,
 		moveDirection   : "down",
 		dead						: false,
-		tick						: 0
+		tick						: 0,
+		color 					: 'yellow'
 	});
 
-	var enemyZone4 = {
-		posX 		: enemy4.posX - 5,
-		posY 		: enemy4.posY- 5,
-		height 	: 20,
-		width 	: 20
-	}
+	// var enemyZone4 = {
+	// 	posX 		: enemy4.posX - 5,
+	// 	posY 		: enemy4.posY - 5,
+	// 	height 	: 20,
+	// 	width 	: 20
+	// }
 
 	var enemyKillZone4 = {
-		posX 		: enemy4.posX - killZoneX,
-		posY 		: enemy4.posY- killZoneY,
+		posX 		: enemy4.posX + killZoneX,
+		posY 		: enemy4.posY + killZoneY,
 		height 	: killZoneHeight,
 		width 	: killZoneWidth
 	}
@@ -778,27 +1116,36 @@
 		posX						: 1000,
 		posY						: -5,
 		direction				: "",
-		speed						: speedInit,
+		speed						: 1,
 		moveDirection   : "right",
 		dead						: false,
-		tick						: 0
+		tick						: 0,
+		color 					: 'yellow'
 	});
 
-	var enemyZone5 = {
-		posX 		: enemy5.posX - 5,
-		posY 		: enemy5.posY- 5,
-		height 	: 20,
-		width 	: 20
-	}
+	// var enemyZone5 = {
+	// 	posX 		: enemy5.posX - 5,
+	// 	posY 		: enemy5.posY- 5,
+	// 	height 	: 20,
+	// 	width 	: 20
+	// }
 
 	var enemyKillZone5 = {
-		posX 		: enemy5.posX - killZoneX,
-		posY 		: enemy5.posY- killZoneY,
+		posX 		: enemy5.posX + killZoneX,
+		posY 		: enemy5.posY + killZoneY,
 		height 	: killZoneHeight,
 		width 	: killZoneWidth
 	}
+	// ----------------------------------------------------
 
+	var heart = new FixedSprite({
+		width		: 20, 
+		height	: 20,
+		image		: "img/heart.png",
+		posX		: link.posX + 30,
+		posY		: link.posY + 30,
 
+	});
 
 	var linkedin = new FixedSprite({
 		width		: 124, 
@@ -824,6 +1171,14 @@
 		posY		: canvas.height / 2.3
 	});
 
+	var swimmingPoolAnimateBubble = new FixedSprite({
+		width		: 240, 
+		height	: 120,
+		image		: "img/swimmingPool_animate_bubble1.png",
+		posX		: swimmingPool.posX,
+		posY		: swimmingPool.posY
+	});
+
 	var spawnSwimmingZone = {
 		posX 		: swimmingPool.posX - 100,
 		posY 		:	swimmingPool.posY - 100,
@@ -832,7 +1187,7 @@
 	}
 
 	var house = new FixedSprite({
-		width		: 96, 
+		width		: 100, 
 		height	: 80,
 		image		: "img/house_color.png",
 		posX		: canvas.width / 2,
@@ -866,7 +1221,7 @@
 	var factoryGit = new FixedSprite({
 		width		: 240, 
 		height	: 108,
-		image		: "img/factory_git_color.png",
+		image		: "img/gitLab_color.png",
 		posX		: canvas.width / 1.4,
 		posY		: canvas.height / 2.8
 	});
@@ -1001,42 +1356,58 @@
 
 	var cloud1 = new FixedSprite({
 		width		: 290, 
-		height	: 194,
+		height	: 174,
 		image		: "img/cloud.png",
-		posX		: city.posX + 50,
-		posY		: city.posY + 50
+		posX		: city.posX + 20,
+		posY		: city.posY + 20
 	});
 
 	var cloud2 = new FixedSprite({
 		width		: 290, 
-		height	: 194,
+		height	: 174,
 		image		: "img/cloud.png",
-		posX		: (canvas.width / 2) - 100 ,
-		posY		: city.posY - 20
+		posX		: city.posX + 200,
+		posY		: city.posY + 100
 	});
 
 	var cloud3 = new FixedSprite({
 		width		: 290, 
-		height	: 194,
+		height	: 174,
 		image		: "img/cloud.png",
-		posX		: city.posX - 150,
-		posY		: city.posY - 20
+		posX		: swimmingPool.posX,
+		posY		: swimmingPool.posY - 200
 	});
 
 	var cloud4 = new FixedSprite({
 		width		: 290, 
-		height	: 194,
+		height	: 174,
 		image		: "img/cloud.png",
 		posX		: (city.posX + city.width) - 500,
 		posY		: city.posY - 20
 	});
 
-	var cloudCity = new FixedSprite({
-		width		: 4000, 
-		height	: 264,
-		image		: "img/cloud_city.png",
-		posX		: 0,
-		posY		: city.posY / 1.1
+	var cloud5 = new FixedSprite({
+		width		: 290, 
+		height	: 174,
+		image		: "img/cloud.png",
+		posX		: (factoryGit.posX - 50),
+		posY		: factoryGit.posY + 150
+	});
+
+	var cloud6 = new FixedSprite({
+		width		: 290, 
+		height	: 174,
+		image		: "img/cloud.png",
+		posX		: (linkedin.posX - 200),
+		posY		: linkedin.posY + 10
+	});
+
+	var cloud7 = new FixedSprite({
+		width		: 290, 
+		height	: 174,
+		image		: "img/cloud.png",
+		posX		: canvas.width / 2,
+		posY		: city.posY + 100
 	});
 
 	var background = new FixedSprite({
@@ -1047,20 +1418,82 @@
 		posY		: 0
 	});
 
-	var startMosaic = new FixedSprite({
-		width		: 300, 
-		height	: 300,
-		image		: "img/start_mosaic.png",
-		posX		: (canvas.width / 2)- (300 / 2),
-		posY		: (canvas.height / 2)- (300 / 2)
+	var pave = new FixedSprite({
+		width		: 30, 
+		height	: 15,
+		image		: "img/paves.png",
+		posX		: house.posX + 17,
+		posY		: house.posY + 80
 	});
+
+	var lifeHeart = new FixedSprite({
+		width		: 100, 
+		height	: 15,
+		image		: "img/life5.png",
+		posX		:  welcomeBubble.posX + 40,
+		posY		:  welcomeBubble.posY + 60
+	});
+
+	// creation of an object of herb object
+	var herbs = {};
+	var startXPosition = house.posX - 95;
+	var startYPosition = house.posY - 66;
+
+	for (var i = 1 ; i <= 50 ; i++) {
+
+		var width = 16;
+		var height = 16;
+		var name = "herbe";
+
+		herbs[i] = new FixedSprite({
+			width		: width, 
+			height	: height,
+			image		: "img/herbe.png",
+			posX		: startXPosition,
+			posY		: startYPosition
+		});
+
+		// update position of the herb
+		startXPosition  =  startXPosition + width;
+
+		if (i % 10 == 0) {
+			startXPosition = house.posX - 95;
+			startYPosition = startYPosition + height;
+		}
+
+		if (i > 30 && i % 5 == 0) {
+			startXPosition = house.posX - 95;
+			startYPosition = startYPosition + height;
+		}
+	}
+
+	var swordZone = new FixedSprite({
+		width		: 39, 
+		height	: 39,
+		image		: "",
+		posX		: 0,
+		posY		: 0
+	});
+
+	var lifeZone = new FixedSprite({
+		width		: 5, //23
+		height	: 5, //25
+		image		: "",
+		posX		: 0,
+		posY		: 0
+	});
+
+
 
 
 	var boxes = [linkedin, truck, house, factoryGit, city, chillout];
 	var enemyBoxes = [linkedin, truck, house, factoryGit, city, chillout, swimmingPool];
 	var spwanBoxes = [linkedin, truck, house, factoryGit, city, chillout, spawnSwimmingZone];
 	var enemyList  = [enemy, enemy2, enemy3, enemy4, enemy5];
-	var clouds = [cloud1, cloud2, cloud3, cloud4];
+	var enemyKillZoneList = [enemyKillZone, enemyKillZone2, enemyKillZone3, enemyKillZone4, enemyKillZone5];
+	var clouds = [cloud1, cloud2, cloud3, cloud4, cloud5, cloud6, cloud7];
+
+
 
 
 	/*      INIT       */
@@ -1070,8 +1503,9 @@
 	 * @return {void} [
 	 */
 	function init () {
-		// swimmingPool.draw();
+
 	}
+
 
 	/*    GAME LOOP    */
 	// --------------- //
@@ -1081,112 +1515,93 @@
 	 */
 	function gameLoop () {
 
+		// clear the canvas each boucle cycle
 		ctx.clearRect(0, 0, canvas.width , canvas.height);
 
-		var lifeHeart = new FixedSprite({
-			width		: 100, 
-			height	: 15,
-			image		: lifeImg,
-			posX		:  welcomeBubble.posX + 40,
-			posY		:  welcomeBubble.posY + 60
-		});
-		if (link.life == 5) {
-			lifeImg = "img/life5.png";
-		} else if (link.life == 4) {
-			lifeImg = "img/life4.png";
-		} else if (link.life == 3) {
-			lifeImg = "img/life3.png";
-		} else if (link.life == 2) {
-			lifeImg = "img/life2.png";
-		} else if (link.life == 1) {
-			lifeImg = "img/life1.png";
+		// update score
+		drawScore(enemyList);
+
+		// modify life sensibility when equip with the shield
+		if (equip == true) {
+			maxLifeTick = 50;
 		} else {
-			lifeImg = "img/life0.png";
+			maxLifeTick = initMaxLifeTick;
 		}
 
-		drawScore(enemyList);
+		// life>>
+		lifeUpdate(link);
+		checkLife();
 		lifeHeart.draw();
+		lifeSpawn();
+		lifeIncrease();
+
+		// element under link
 		mosaicGit.draw();
-		startMosaic.draw();
+		pave.draw();
 		swimmingPool.draw();
+		swimmingPoolAnimateBubble.draw();
+		animateSwimmingPool();
+		drawObjects(herbs);
+
+		// dev>>
+		// drawZone(swordZone);
+		// drawZone(lifeZone);
+		// drawZone(enemyKillZone);
+		// drawZone(enemyKillZone2);
+		// drawZone(enemyKillZone3);
+		// drawZone(enemyKillZone4);
+		// drawZone(enemyKillZone5);
+
+		// update link boxes
+		swordZone.posX = link.posX + (link.width /10 / 2) - swordOffsetX;
+		swordZone.posY = link.posY + (link.height / 2) - swordOffsetY;
+		lifeZone.posX = link.posX + (link.width /10 / 2) - lifeOffsetX;
+		lifeZone.posY = link.posY + (link.height / 2) - lifeOffsetY;
 
 		enemyMove(enemyList);
 
-		if (enemy.dead == true){
-			spawn(enemy);
+		// spawn enemy if dead
+		for (var i = 0 ; i < enemyList.length ; i++) {
+			if (enemyList[i].dead == true) {
+				spawn(enemyList[i]);
+			}
+			enemyList[i].update();
+			enemyList[i].render();
 		}
-		enemy.update();
-		enemy.render();
 
-		if (enemy2.dead == true){
-			spawn(enemy2);
+		// update enemyKillZone
+ 		for (var i = 0 ; i < enemyKillZoneList.length ; i++) {
+			enemyKillZoneList[i].posX = enemyList[i].posX + killZoneX;
+			enemyKillZoneList[i].posY = enemyList[i].posY + killZoneY;
+
 		}
-		enemy2.update();
-		enemy2.render();
-
-		if (enemy3.dead == true){
-			spawn(enemy3);
-		}
-		enemy3.update();
-		enemy3.render();
-
-		if (enemy4.dead == true){
-			spawn(enemy4);
-		}
-		enemy4.update();
-		enemy4.render();
-
-		if (enemy5.dead == true){
-			spawn(enemy5);
-		}
-		enemy5.update();
-		enemy5.render();
-
-		// update enemy info
-		enemyKillZone.posX = enemy.posX - 20,
-		enemyKillZone.posY = enemy.posY- 20,
-		enemyKillZone2.posX = enemy2.posX - 20,
-		enemyKillZone2.posY = enemy2.posY- 20,
-		enemyKillZone3.posX = enemy3.posX - 20,
-		enemyKillZone3.posY = enemy3.posY- 20,
-		enemyKillZone4.posX = enemy4.posX - 20,
-		enemyKillZone4.posY = enemy4.posY- 20,
-		enemyKillZone5.posX = enemy5.posX - 20,
-		enemyKillZone5.posY = enemy5.posY- 20,
 
 		// update link info
 		link.update();
 		link.render();
-
-
-		if (checkZone(link, enemyList)) {
-			if (lifeTick > maxLifeTick) {
-				link.life = link.life - 1;
-				lifeTick = 0;
-			} else {
-				lifeTick++;
-			}
-		}
-
-		if (help == true) {
-			helpBubble.draw();
-		}
-
 		linkedin.draw();
 		truck.draw();
 		house.draw();
 		factoryGit.draw();
 		chillout.draw();
 		city.draw();
-		welcomeBubble.draw();
 		bubbleRoom.draw();
 
+		// time management
+		timeCount++;
+		timeStartCount++;
+		tickSwimmingPool++;
+		tickHeart++
+
 		// statics animations
-		timeCount ++;
-		timeStartCount ++;
 		animateStart(startBubble, 45, 7);
 		animateCloud(clouds, 7, 1);
+		welcomeBubble.draw();
 
+		// help menu
+		if (help == true) {
+			helpBubble.draw();
+		}
 
 		// check if the personnage is in bubble zone
 		if (zoneDetection(link, houseZoneBubble)) {
@@ -1225,14 +1640,13 @@
 			cityBubble.posX = link.posX - 40;
 			cityBubble.posY = link.posY - 60;
 			cityBubble.draw();
-			// activateRedirect(cityBubble.url, cityZoneBubble);
 		}
-		// drawLoose();
 		checkLoose();
-
-
-		window.requestAnimationFrame(gameLoop);
+		requestAnimFrame(gameLoop);
+		// window.requestAnimationFrame(gameLoop);
 	}
+
+
 
 
 	/* MAIN */
@@ -1288,19 +1702,19 @@
 								link.numberOfFrames = 7;
 								link.width = 270;
 								link.image = "img/left_sword.png";
-								if (zoneDetection(link, enemyKillZone) == true) {
+								if (zoneDetectionBoxe(link, enemyKillZone) == true) {
 									enemy.dead = true;
 								}
-								if (zoneDetection(link, enemyKillZone2) == true) {
+								if (zoneDetectionBoxe(link, enemyKillZone2) == true) {
 									enemy2.dead = true;
 								}
-								if (zoneDetection(link, enemyKillZone3) == true) {
+								if (zoneDetectionBoxe(link, enemyKillZone3) == true) {
 									enemy3.dead = true;
 								}
-								if (zoneDetection(link, enemyKillZone4) == true) {
+								if (zoneDetectionBoxe(link, enemyKillZone4) == true) {
 									enemy4.dead = true;
 								}
-								if (zoneDetection(link, enemyKillZone5) == true) {
+								if (zoneDetectionBoxe(link, enemyKillZone5) == true) {
 									enemy5.dead = true;
 								}
 							}
@@ -1336,19 +1750,19 @@
 								link.numberOfFrames = 7;
 								link.width = 270;
 								link.image = "img/right_sword.png";
-								if (zoneDetection(link, enemyKillZone) == true) {
+								if (zoneDetectionBoxe(link, enemyKillZone) == true) {
 									enemy.dead = true;
 								}
-								if (zoneDetection(link, enemyKillZone2) == true) {
+								if (zoneDetectionBoxe(link, enemyKillZone2) == true) {
 									enemy2.dead = true;
 								}
-								if (zoneDetection(link, enemyKillZone3) == true) {
+								if (zoneDetectionBoxe(link, enemyKillZone3) == true) {
 									enemy3.dead = true;
 								}
-								if (zoneDetection(link, enemyKillZone4) == true) {
+								if (zoneDetectionBoxe(link, enemyKillZone4) == true) {
 									enemy4.dead = true;
 								}
-								if (zoneDetection(link, enemyKillZone5) == true) {
+								if (zoneDetectionBoxe(link, enemyKillZone5) == true) {
 									enemy5.dead = true;
 								}
 							}
@@ -1385,19 +1799,19 @@
 								link.numberOfFrames = 7;
 								link.width = 270;
 								link.image = "img/up_sword.png";
-								if (zoneDetection(link, enemyKillZone) == true) {
+								if (zoneDetectionBoxe(link, enemyKillZone) == true) {
 									enemy.dead = true;
 								}
-								if (zoneDetection(link, enemyKillZone2) == true) {
+								if (zoneDetectionBoxe(link, enemyKillZone2) == true) {
 									enemy2.dead = true;
 								}
-								if (zoneDetection(link, enemyKillZone3) == true) {
+								if (zoneDetectionBoxe(link, enemyKillZone3) == true) {
 									enemy3.dead = true;
 								}
-								if (zoneDetection(link, enemyKillZone4) == true) {
+								if (zoneDetectionBoxe(link, enemyKillZone4) == true) {
 									enemy4.dead = true;
 								}
-								if (zoneDetection(link, enemyKillZone5) == true) {
+								if (zoneDetectionBoxe(link, enemyKillZone5) == true) {
 									enemy5.dead = true;
 								}
 							}
@@ -1434,19 +1848,19 @@
 								link.numberOfFrames = 7;
 								link.width = 270;
 								link.image = "img/down_sword.png";
-								if (zoneDetection(link, enemyKillZone) == true) {
+								if (zoneDetectionBoxe(link, enemyKillZone) == true) {
 									enemy.dead = true;
 								}
-								if (zoneDetection(link, enemyKillZone2) == true) {
+								if (zoneDetectionBoxe(link, enemyKillZone2) == true) {
 									enemy2.dead = true;
 								}
-								if (zoneDetection(link, enemyKillZone3) == true) {
+								if (zoneDetectionBoxe(link, enemyKillZone3) == true) {
 									enemy3.dead = true;
 								}
-								if (zoneDetection(link, enemyKillZone4) == true) {
+								if (zoneDetectionBoxe(link, enemyKillZone4) == true) {
 									enemy4.dead = true;
 								}
-								if (zoneDetection(link, enemyKillZone5) == true) {
+								if (zoneDetectionBoxe(link, enemyKillZone5) == true) {
 									enemy5.dead = true;
 								}
 							}
@@ -1489,21 +1903,27 @@
 							} else if (up == true ) {
 								link.image = "img/up_sword.png";
 							}
-							if (zoneDetection(link, enemyKillZone) == true) {
+
+							if (zoneDetectionBoxe(link, enemyKillZone) == true) {
 								enemy.dead = true;
 							}
-							if (zoneDetection(link, enemyKillZone2) == true) {
+							if (zoneDetectionBoxe(link, enemyKillZone2) == true) {
 								enemy2.dead = true;
 							}
-							if (zoneDetection(link, enemyKillZone3) == true) {
+							if (zoneDetectionBoxe(link, enemyKillZone3) == true) {
 								enemy3.dead = true;
 							}
-							if (zoneDetection(link, enemyKillZone4) == true) {
+							if (zoneDetectionBoxe(link, enemyKillZone4) == true) {
 								enemy4.dead = true;
 							}
-							if (zoneDetection(link, enemyKillZone5) == true) {
+							if (zoneDetectionBoxe(link, enemyKillZone5) == true) {
 								enemy5.dead = true;
 							}
+							cutCheck(herbs);
+							// // herbe
+							// if (zoneDetectionBoxe(swordZone, herb) == true) {
+							// 	herb.image = "img/herbe_cut.png";
+							// }
 
 						}
 					}
@@ -1555,11 +1975,11 @@
 					link.width = 380;
 					if (equip == true) {
 						if (right == true) {
-							link.image = "img/link_static_shield.png";
+							link.image = "img/right_shield_static.png";
 						} else if (left == true) {
-							link.image = "img/link_static_shield.png";
+							link.image = "img/left_shield_static.png";
 						} else if (up == true) {
-							link.image = "img/link_static_shield.png";
+							link.image = "img/up_shield_static.png";
 						} else {
 							link.image = "img/link_static_shield.png";
 						}
