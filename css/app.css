@@ -35,7 +35,7 @@ body {
 	/* border: 1px solid black; */
 }
 
-@media only screen
+ @media only screen
 and (max-width: 768px)
  {
  #map {
@@ -56,9 +56,9 @@ and (max-width: 768px)
 
 @media only screen
 and (min-width: 769px) {
-	#deviceMin {
+	/* #deviceMin {
 		display: none;
-	}
+	} */
 	.deviceMin {
 		display: none;
 	}

@@ -99,7 +99,6 @@
 	});
 
 	function gameLoop () {
-		console.log(link);
 		// clear the canvas each boucle cycle
 		ctx.clearRect(0, 0, canvas.width , canvas.height);
 		// update link info
