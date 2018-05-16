@@ -343,6 +343,18 @@
 
 	/*   GAME CONTROL  */
 	// --------------- //
+	// mouse clickable zones
+	$(document).mousedown(function(e) {
+		var mouse = {
+			posX 		: parseInt(e.clientX),
+			posY 		: parseInt(e.clientY),
+			width 	:	1,
+			height	: 1
+		}
+		if (zoneDetection(mouse, back)) {
+			window.location.href = "index.html";
+		}
+	})
 	$(document).ready(function()
 	{
 		$(this).on({

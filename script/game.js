@@ -312,6 +312,18 @@
 		window.requestAnimationFrame(gameLoop);
 	}
 
+	// mouse clickable zones
+	$(document).mousedown(function(e) {
+		var mouse = {
+			posX 		: parseInt(e.clientX),
+			posY 		: parseInt(e.clientY),
+			width 	:	1,
+			height	: 1
+		}
+		if (zoneDetection(mouse, back)) {
+			window.location.href = "index.html";
+		}
+	})
 	onkeydown = function(e) {
 			var key = e.keyCode;
 			var key_letter = String.fromCharCode(key);
