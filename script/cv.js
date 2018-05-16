@@ -82,7 +82,7 @@
 		// draw the position of sprite updated
 		this.render =  () => {
 
-			this.speed = 8;
+			this.speed = speed;
 
 
 			var max = boxes.length
@@ -334,6 +334,7 @@
 	var left = false;
 	var up = false;
 	var down = false;
+	var speed = 9;
 
 	/* MAIN */
 	init();
@@ -390,6 +391,9 @@
 						break;
 
 					case 65:
+						document.location = "index.html";
+						break;
+					case 81:
 						document.location = "index.html";
 				}
 			},

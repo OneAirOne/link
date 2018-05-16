@@ -316,7 +316,7 @@
 			var key = e.keyCode;
 			var key_letter = String.fromCharCode(key);
 
-			if(key == 65) {
+			if(key == 65 || key == 81) {
 				document.location = "index.html";
 			}
 

@@ -348,7 +348,7 @@
 	 */
 	var activateRedirect = (url, object) => {
 		document.body.addEventListener("keydown", function (event) {
-			if (event.keyCode === 81) {
+			if (event.keyCode === 81 || event.keyCode === 65) {
 				if (zoneDetection(link, object)) {
 					window.location.href = url;
 				}
@@ -842,7 +842,6 @@
 	 * @param  {object} object object to update
 	 * @return {void}
 	 */
-	var hit = false
 	function lifeUpdate(object) {
 
 		if (hit == false) {
@@ -874,14 +873,25 @@
 		// random number
 		var nbr = Math.random();
 		if (nbr > heartProbability && randomHeart == false && tickHeart >= maxTickHeart) {
-			if (link.life < 4) {
+			if (link.life < minLife) {
 				heartVisible = true;
 				randomHeart = true;
 				heart.draw();
 			}
 		}
-		if (link.life < 4 && randomHeart == true) {
+		// draw every loop cycle
+		if (link.life < minLife && randomHeart == true) {
 			heart.draw();
+		}
+		if (heartDelay > MaxheartDelay) {
+			randomHeart = false;
+			heartVisible = false;
+			tickHeart = 0;
+			// change coordinates for the next heart
+			var coordinates = searchFreeSpace();
+			heart.posX = coordinates[0];
+			heart.posY = coordinates[1];
+			heartDelay = 0;
 		}
 	}
 
@@ -943,9 +953,10 @@
 	var randomHeart = false;
 	var lifeInit = 5;
 	var tickHeart = 0;
-	var heartProbability = 0.98;
+	var hit = false
+	var heartDelay = 0;
 
-	// gameplay settings
+	// gameplay>> settings
 	var swordOffsetX = 15;
 	var swordOffsetY = 15;
 	var lifeOffsetX = 6;
@@ -956,9 +967,12 @@
 	var killZoneY = -3;
 	var killZoneWidth = 30;
 	var killZoneHeight = 30;
-	var maxTickHeart = 60;//500
-	var initFirstTick = 60;
+	var maxTickHeart = 10;//500
+	var heartProbability = 0.995;
+	var minLife = 4;
+	var initFirstTick = 10;
 	var maxLifeFirstTick = initFirstTick;
+	var MaxheartDelay = 1000;
 
 	// --------------------------------- LINK -------------------------
 	var link = new AnimateSprite ({
@@ -1329,8 +1343,8 @@
 		width		: 290, 
 		height	: 174,
 		image		: "img/cloud.png",
-		posX		: swimmingPool.posX,
-		posY		: swimmingPool.posY - 200
+		posX		: swimmingPool.posX + 200,
+		posY		: swimmingPool.posY - 150
 	});
 
 	var cloud4 = new FixedSprite({
@@ -1353,8 +1367,8 @@
 		width		: 290, 
 		height	: 174,
 		image		: "img/cloud.png",
-		posX		: (linkedin.posX - 200),
-		posY		: linkedin.posY + 10
+		posX		: (linkedin.posX - 300),
+		posY		: linkedin.posY + 100
 	});
 
 	var cloud7 = new FixedSprite({
@@ -1388,6 +1402,42 @@
 		posX		:  welcomeBubble.posX + 40,
 		posY		:  welcomeBubble.posY + 60
 	});
+
+	var sewer = new FixedSprite({
+		width		: 100, 
+		height	: 15,
+		image		: "img/sewer.png",
+		posX		:  truck.posX - 70,
+		posY		:  truck.posY + 90
+	});
+
+	var sewer2 = new FixedSprite({
+		width		: 100, 
+		height	: 15,
+		image		: "img/sewer.png",
+		posX		:  city.posX + 120,
+		posY		:  city.posY + 50
+	});
+
+
+	var extinguisher = new FixedSprite({
+		width		: 100, 
+		height	: 15,
+		image		: "img/extinguisher.png",
+		posX		:  truck.posX + 40,
+		posY		:  truck.posY + 50
+	});
+
+	var brokenRoad = new FixedSprite({
+		width		: 100, 
+		height	: 15,
+		image		: "img/broken_road.png",
+		posX		:  truck.posX - 150,
+		posY		:  truck.posY
+	});
+
+
+
 
 	// creation of an object of herb object
 	var herbs = {};
@@ -1475,6 +1525,10 @@
 
 		// update score
 		drawScore(enemyList);
+		// help info
+		ctx.font = "15px Arial";
+		ctx.fillStyle = 'black';
+		ctx.fillText(`press 'H' for help`,welcomeBubble.posX + 40 ,welcomeBubble.posY + 125);
 
 		// modify life sensibility when equip with the shield
 		if (equip == true) {
@@ -1484,10 +1538,7 @@
 		}
 
 		// life>>
-
 		lifeUpdate(lifeZone);
-		// checkLife();
-		// lifeHeart.updateImage();
 		lifeHeart.draw();
 		lifeSpawn();
 		lifeIncrease();
@@ -1499,20 +1550,24 @@
 		swimmingPoolAnimateBubble.draw();
 		animateSwimmingPool();
 		drawObjects(herbs);
+		sewer.draw();
+		sewer2.draw();
+		extinguisher.draw();
+		// brokenRoad.draw();
 
 		// dev>>
-		drawZone(swordZone);
-		drawZone(lifeZone);
-		drawZone(enemyKillZone);
-		drawZone(enemyKillZone2);
-		drawZone(enemyKillZone3);
-		drawZone(enemyKillZone4);
-		drawZone(enemyKillZone5);
+		// drawZone(swordZone);
+		// drawZone(lifeZone);
+		// drawZone(enemyKillZone);
+		// drawZone(enemyKillZone2);
+		// drawZone(enemyKillZone3);
+		// drawZone(enemyKillZone4);
+		// drawZone(enemyKillZone5);
 
 		// update link boxes
-		swordZone.posX = link.posX + (link.width /10 / 2) - swordOffsetX;
+		swordZone.posX = link.posX + (link.width /link.numberOfFrames / 2) - swordOffsetX;
 		swordZone.posY = link.posY + (link.height / 2) - swordOffsetY;
-		lifeZone.posX = link.posX + (link.width /10 / 2) - lifeOffsetX;
+		lifeZone.posX = link.posX + (link.width /link.numberOfFrames / 2) - lifeOffsetX;
 		lifeZone.posY = link.posY + (link.height / 2) - lifeOffsetY;
 
 		enemyMove(enemyList);
@@ -1548,17 +1603,17 @@
 		timeCount++;
 		timeStartCount++;
 		tickSwimmingPool++;
-		tickHeart++
-
-		// statics animations
-		animateStart(startBubble, 45, 7);
-		animateCloud(clouds, 7, 1);
-		welcomeBubble.draw();
-
-		// help menu
-		if (help == true) {
-			helpBubble.draw();
+		tickHeart++;
+		if (heartVisible == true) {
+			heartDelay++;
 		}
+		welcomeBubble.draw();
+		// statics animations
+		animateCloud(clouds, 7, 1);
+		animateStart(startBubble, 45, 7);
+
+
+
 
 		// check if the personnage is in bubble zone
 		if (zoneDetection(link, houseZoneBubble)) {
@@ -1597,6 +1652,11 @@
 			cityBubble.posX = link.posX - 40;
 			cityBubble.posY = link.posY - 60;
 			cityBubble.draw();
+		}
+
+		// help menu
+		if (help == true) {
+			helpBubble.draw();
 		}
 		checkLoose();
 		requestAnimFrame(gameLoop);
@@ -1642,7 +1702,7 @@
 			})
 
 			// MULTIPLE KEY LISTENER
-			var map = {37: false, 38: false, 39: false, 40: false, 83: false, 69: false, 88: false, 72: false, 81: false, 13: false};
+			var map = {37: false, 38: false, 39: false, 40: false, 83: false, 69: false, 88: false, 72: false, 65: false, 81: false, 13: false};
 			$(document).keydown(function(e) {
 				if (e.keyCode in map) {
 					map[e.keyCode] = true;
