@@ -12,21 +12,31 @@
 		</script>
 		<meta charset="utf-8">
 		<link rel="stylesheet" href="css/app.css">
-		<link rel="icon" type="image/png" href="favicon.png" />
+		<link rel="icon" type="image/png" href="img/favicon.png" />
 		<link href="https://fonts.googleapis.com/css?family=Exo+2" rel="stylesheet">
 		<title>Erwan Gilbert</title>
 	</head>
 	<body >
-		<h1 class="deviceMin">Bienvenu sur mon portfolio</h1>
 		<div class="deviceMin">
 			Je vous invite à visiter ce site sur pc pour profiter
 			pleinement de son interactivité.
 			<br/>
 			Une version mobile est en cours de développement et sera bientôt disponible.
+			<br/>
+			<br>
 		</div>
-		<canvas id="map" style="background: url(img/pattern.png) repeat center center;" ></canvas>
+		<!-- <canvas id="map"></canvas> -->
+		<canvas id="map" style="background: url(img/test.png) repeat center center;" ></canvas>
+		<script src="/socket.io/socket.io.js"></script>
+		<script>
+		  // var socket = io('http://localhost:3000');
+		  // socket.on('news', function (data) {
+		  //   console.log(data);
+		  //   socket.emit('my other event', { my: 'data' });
+		  // });
+		</script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		<script type="text/javascript" src="script/jquery-3.3.1.min.js"></script>
-		<script type="text/javascript" src="script/app.js"></script>
+		<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
 	</body>
 </html>

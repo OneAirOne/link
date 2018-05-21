@@ -1,9 +1,10 @@
 (function() {
 
+	// var socket = io();
 	// return if mobile device
-	if (window.innerWidth < 765) {
-		return;
-	}
+	// if (window.innerWidth < 765) {
+	// 	return;
+	// }
 
 	// browser compatibility
 	window.requestAnimFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
@@ -38,8 +39,7 @@
 		img.src 				= this.image;
 
 
-		this.draw = () =>
-		{
+		this.draw = () => {
 			ctx.drawImage(img, this.posX, this.posY);
 			return;
 		};
@@ -98,6 +98,7 @@
 
 		/**
 		 * Update sprite position
+		 *
 		 * @return {void}
 		 */
 		this.update = () => {
@@ -120,6 +121,7 @@
 
 		/**
 		 * draw image
+		 *
 		 * @return {void}
 		 */
 		this.draw = () => {
@@ -268,7 +270,6 @@
 	}
 
 
-
 	/**
 	 * Detect if object1 is in zone of object2
 	 *
@@ -304,6 +305,7 @@
 
 	/**
 	 * zone detection for the boxes
+	 *
 	 * @param  {object} object1 object1
 	 * @param  {object} object2 object2
 	 * @return {booleen}
@@ -693,9 +695,9 @@
 			// scrore update
 			if (enemyList[i].dead == true) {
 				if (enemyList[i].color == "red") {
-					score = score + 20;
+					score = score + redPoint;
 				} else {
-					score = score + 5;
+					score = score + yellowPoint;
 				}
 			} else {
 				score;
@@ -730,6 +732,7 @@
 			ctx.fillStyle = 'black';
 			ctx.fillRect(0,0,canvas.width,canvas.height);
 			drawScore(enemyList);
+			drawLevel('white');
 			gameOver.draw();
 			if (tickGameOver < 50) {
 				pressEnter.draw();
@@ -744,6 +747,7 @@
 
 	/**
 	 * swimmingPool animation
+	 *
 	 * @return {void}
 	 */
 	function animateSwimmingPool() {
@@ -764,6 +768,7 @@
 
 	/**
 	 * draw a rectangle arround a subject => debug function
+	 *
 	 * @param  {object} object object to analyse
 	 * @return {void}
 	 */
@@ -782,6 +787,7 @@
 
 	/**
 	 * draw multiple object
+	 *
 	 * @param  {object of object} objects objects of multiple objects
 	 * @return {void}
 	 */
@@ -797,6 +803,7 @@
 
 	/**
 	 * check if each sprite of herb are cut and update image if true
+	 *
 	 * @param  {[type]} objects [description]
 	 * @return {[type]}         [description]
 	 */
@@ -816,6 +823,7 @@
 
 	/**
 	 * adapte the heart image with the link.life property
+	 *
 	 * @return {void}
 	 */
 	function checkLife() {
@@ -839,6 +847,7 @@
 
 	/**
 	 * update life of an object
+	 *
 	 * @param  {object} object object to update
 	 * @return {void}
 	 */
@@ -867,6 +876,7 @@
 
 	/**
 	 * heart spawn
+	 *
 	 * @return {void}
 	 */
 	function lifeSpawn() {
@@ -883,7 +893,7 @@
 		if (link.life < minLife && randomHeart == true) {
 			heart.draw();
 		}
-		if (heartDelay > MaxheartDelay) {
+		if (heartDelay > maxHeartDelay) {
 			randomHeart = false;
 			heartVisible = false;
 			tickHeart = 0;
@@ -898,7 +908,8 @@
 
 
 	/**
-	 * increase lif
+	 * increase life
+	 *
 	 * @return {void}
 	 */
 	function lifeIncrease() {
@@ -919,10 +930,25 @@
 		}
 	}
 
+
+
+	/**
+	 * check enemy life
+	 *
+	 * @return {void}
+	 */
 	function checkEnemyLife() {
 		for (var i = 0 ; i < enemyKillZoneList.length ; i++) {
 			if (zoneDetectionBoxe(link, enemyKillZoneList[i]) == true) {
 				enemyList[i].dead = true;
+				dammage = true;
+				deadX = enemyList[i].posX;
+				deadY = enemyList[i].posY;
+				if(enemyList[i].color == "red") {
+					nbPoints = `+ ${redPoint}`;
+				} else {
+					nbPoints = `+ ${yellowPoint}`;
+				}
 			}
 		}
 	}
@@ -955,6 +981,15 @@
 	var tickHeart = 0;
 	var hit = false
 	var heartDelay = 0;
+	var newMsg = false;
+	var contentMsg;
+	var tickMsg = 0;
+	var tickDammage = 0;
+	var dammage = false;
+	var nbPoints = 0;
+	var deadX;
+	var deadY;
+
 
 	// gameplay>> settings
 	var swordOffsetX = 15;
@@ -972,7 +1007,26 @@
 	var minLife = 4;
 	var initFirstTick = 10;
 	var maxLifeFirstTick = initFirstTick;
-	var MaxheartDelay = 1000;
+	var maxHeartDelay = 1000;
+	var level = 0;
+	var maxTickMsg = 140;
+	var maxDammage = 50;
+	var redPoint = 20;
+	var yellowPoint = 5;
+	var shieldOption = 120;
+
+	// socket
+	var hightScore = 0;
+	var socket = io('http://localhost:3000');
+  socket.on('news', function (data) {
+  	hightScore = data["hightScore"];
+
+		if (data["nbUser"] != undefined) {
+			contentMsg = data;
+			newMsg = true;
+		}
+  });
+
 
 	// --------------------------------- LINK -------------------------
 	var link = new AnimateSprite ({
@@ -1105,11 +1159,56 @@
 		height 	: killZoneHeight,
 		width 	: killZoneWidth
 	}
+
+	var enemy6 = new AnimateSprite ({
+		width						: 300,
+		height					: enemySize,
+		image						: "img/enemy_nes_right.png",
+		numberOfFrames	: 10,
+		ticksPerFrame		: 4,
+		posX						: 1000,
+		posY						: -5,
+		direction				: "",
+		speed						: 1,
+		moveDirection   : "right",
+		dead						: true,
+		tick						: 0,
+		color 					: 'yellow'
+	});
+
+	var enemyKillZone6 = {
+		posX 		: enemy6.posX + killZoneX,
+		posY 		: enemy6.posY + killZoneY,
+		height 	: killZoneHeight,
+		width 	: killZoneWidth
+	}
+	var enemy7 = new AnimateSprite ({
+		width						: 300,
+		height					: enemySize,
+		image						: "img/enemy_nes_right.png",
+		numberOfFrames	: 10,
+		ticksPerFrame		: 4,
+		posX						: 1000,
+		posY						: -5,
+		direction				: "",
+		speed						: 1,
+		moveDirection   : "right",
+		dead						: true,
+		tick						: 0,
+		color 					: 'yellow'
+	});
+
+	var enemyKillZone7 = {
+		posX 		: enemy7.posX + killZoneX,
+		posY 		: enemy7.posY + killZoneY,
+		height 	: killZoneHeight,
+		width 	: killZoneWidth
+	}
 	// ----------------------------------------------------
 
 	var heart = new FixedSprite({
-		width		: 20, 
-		height	: 20,
+		width		: 18, 
+		height	: 14,
 		image		: "img/heart.png",
 		posX		: link.posX + 30,
 		posY		: link.posY + 30,
@@ -1241,7 +1340,7 @@
 		image		: "img/bubble_cv.png",
 		posX		: 10,
 		posY		: 10,
-		url			: "cv.html"
+		url			: "cv"
 	});
 
 	var houseZoneBubble = {
@@ -1257,7 +1356,7 @@
 		image		: "img/bubble_game.png",
 		posX		: 10,
 		posY		: 10,
-		url			: "game.html"
+		url			: "game"
 	});
 
 	var swimmingPoolZoneBubble = {
@@ -1273,7 +1372,7 @@
 		image		: "img/bubble_nothing.png",
 		posX		: 10,
 		posY		: 10,
-		url			: "game.html"
+		url			: ""
 	});
 
 	var cityZoneBubble = {
@@ -1407,7 +1506,7 @@
 		width		: 100, 
 		height	: 15,
 		image		: "img/sewer.png",
-		posX		:  truck.posX - 70,
+		posX		:  truck.posX - 40,
 		posY		:  truck.posY + 90
 	});
 
@@ -1421,19 +1520,19 @@
 
 
 	var extinguisher = new FixedSprite({
-		width		: 100, 
-		height	: 15,
+		width		: 25, 
+		height	: 32,
 		image		: "img/extinguisher.png",
 		posX		:  truck.posX + 40,
-		posY		:  truck.posY + 50
+		posY		:  truck.posY + 80
 	});
 
-	var brokenRoad = new FixedSprite({
-		width		: 100, 
-		height	: 15,
-		image		: "img/broken_road.png",
-		posX		:  truck.posX - 150,
-		posY		:  truck.posY
+	var start_mosaic = new FixedSprite({
+		width		: 62, 
+		height	: 62,
+		image		: "img/triforce.png",
+		posX		:  canvas.width / 2 -10,
+		posY		:  canvas.height / 2
 	});
 
 
@@ -1481,8 +1580,8 @@
 	});
 
 	var lifeZone = new FixedSprite({
-		width		: 20, //23
-		height	: 20, //25
+		width		: 20, 
+		height	: 20,
 		image		: "",
 		posX		: 0,
 		posY		: 0
@@ -1491,14 +1590,56 @@
 
 
 
-	var boxes = [linkedin, truck, house, factoryGit, city, chillout];
+	var boxes = [linkedin, truck, house, factoryGit, city, chillout, extinguisher];
 	var enemyBoxes = [linkedin, truck, house, factoryGit, city, chillout, swimmingPool];
 	var spwanBoxes = [linkedin, truck, house, factoryGit, city, chillout, spawnSwimmingZone];
 	var enemyList  = [enemy, enemy2, enemy3, enemy4, enemy5];
 	var enemyKillZoneList = [enemyKillZone, enemyKillZone2, enemyKillZone3, enemyKillZone4, enemyKillZone5];
 	var clouds = [cloud1, cloud2, cloud3, cloud4, cloud5, cloud6, cloud7];
 
+	var generate = false;
 
+	function levelUp() {
+
+		if (score % 50 == 0 && generate == false) {
+
+			level++;
+
+			var newEnemy = 		new AnimateSprite ({
+					width						: 300,
+					height					: enemySize,
+					image						: "img/enemy_nes_right.png",
+					numberOfFrames	: 10,
+					ticksPerFrame		: 4,
+					posX						: 200,
+					posY						: 50,
+					direction				: "",
+					speed						: 1,
+					moveDirection   : "right",
+					dead						: false,
+					tick						: 0,
+					color 					: 'yellow'
+				})
+
+			enemyList.push(
+				newEnemy
+			)
+
+
+			enemyKillZoneList.push(
+				{
+					posX 		: enemy.posX + killZoneX,
+					posY 		: enemy.posY + killZoneY,
+					height 	: killZoneHeight,
+					width 	: killZoneWidth
+				}
+			)
+			generate = true;
+		}
+		if (score % 50 != 0) {
+			generate = false;
+		}
+	}
 
 
 	/*      INIT       */
@@ -1508,7 +1649,34 @@
 	 * @return {void} [
 	 */
 	function init () {
+		// getHightScore();
+	}
 
+	function drawLevel (color){
+		ctx.fillStyle = color;
+		ctx.font = "12px Arial";
+		ctx.fillText(`Level ${level}`, welcomeBubble.posX + 40, welcomeBubble.posY + 150);
+	}
+
+	function drawHightScore (color){
+		ctx.fillStyle = color;
+		ctx.font = "16px Arial";
+		ctx.fillText(`Hight Score ${hightScore}`, welcomeBubble.posX + 40, welcomeBubble.posY + 175);
+	}
+
+	function drawNewScore (color){
+		ctx.fillStyle = color;
+		ctx.font = "18px Arial";
+		ctx.fillText(`New hight score ! `, welcomeBubble.posX + 170, welcomeBubble.posY + 74);
+		ctx.font = "12px Arial";
+		ctx.fillText(`${contentMsg["nbUser"]} player connected`, welcomeBubble.posX + 170, welcomeBubble.posY + 97);
+	}
+
+	function drawDammage(color, points) {
+		ctx.fillStyle = color;
+		ctx.font = "15px Arial";
+		var points = nbPoints;
+		ctx.fillText(points, deadX, deadY);
 	}
 
 
@@ -1520,19 +1688,46 @@
 	 */
 	function gameLoop () {
 
+		// update hightscore on server side
+		if(score > hightScore) {
+			socket.emit('newsResponse', { newHightScore: score });
+
+		}
+
 		// clear the canvas each boucle cycle
 		ctx.clearRect(0, 0, canvas.width , canvas.height);
 
 		// update score
 		drawScore(enemyList);
+
 		// help info
 		ctx.font = "15px Arial";
 		ctx.fillStyle = 'black';
-		ctx.fillText(`press 'H' for help`,welcomeBubble.posX + 40 ,welcomeBubble.posY + 125);
+		ctx.fillText(`Press 'H' for help`,welcomeBubble.posX + 40 ,welcomeBubble.posY + 125);
+
+		// level
+		drawLevel('black');
+		drawHightScore('black');
+		if (newMsg == true) {
+			drawNewScore('black');
+			tickMsg++;
+		}
+		if (tickMsg > maxTickMsg) {
+			newMsg = false;
+			tickMsg = 0;
+		}
+		if (dammage == true) {
+			drawDammage('black');
+			tickDammage++;
+		}
+		if (tickDammage > maxDammage) {
+			dammage = false;
+			tickDammage = 0;
+		}
 
 		// modify life sensibility when equip with the shield
 		if (equip == true) {
-			maxLifeFirstTick = 120;
+			maxLifeFirstTick = shieldOption;
 		} else {
 			maxLifeFirstTick = initFirstTick;
 		}
@@ -1542,6 +1737,7 @@
 		lifeHeart.draw();
 		lifeSpawn();
 		lifeIncrease();
+		levelUp();
 
 		// element under link
 		mosaicGit.draw();
@@ -1553,7 +1749,6 @@
 		sewer.draw();
 		sewer2.draw();
 		extinguisher.draw();
-		// brokenRoad.draw();
 
 		// dev>>
 		// drawZone(swordZone);
@@ -1604,6 +1799,7 @@
 		timeStartCount++;
 		tickSwimmingPool++;
 		tickHeart++;
+
 		if (heartVisible == true) {
 			heartDelay++;
 		}
@@ -1611,8 +1807,6 @@
 		// statics animations
 		animateCloud(clouds, 7, 1);
 		animateStart(startBubble, 45, 7);
-
-
 
 
 		// check if the personnage is in bubble zone

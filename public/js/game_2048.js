@@ -5,6 +5,7 @@
 
 		/**
 		* display message befor a select tag
+		*
 		* @param  {string} tag target tag where would spawn the message
 		* @param  {[type]} msg message
 		*/
@@ -26,6 +27,7 @@
 
 		/**
 		* display the grid
+		*
 		* @param  {int} param side size of the grid
 		*/
 		function drawGrid(param)
@@ -56,6 +58,7 @@
 		/**
 		* return the number 2 or the number 4
 		* 2 have 2/3 of chance to be generate
+		*
 		* @return {int} random number
 		*/
 		function generateNumber()
@@ -74,6 +77,7 @@
 
 		/**
 		* generate random tile with random number
+		*
 		* @param  {int} randomNbr 2 or 4 -> generate by generateNumber function
 		*/
 		function generateTile(randomNbr)
@@ -104,6 +108,7 @@
 
 		/**
 		* init of the game
+		*
 		* @param  {int} gridSize the size of the grid to determinate the number of init spawn
 		*/
 		function init(gridSize)
@@ -122,7 +127,9 @@
 
 		/**
 		* move right all numbers
+		*
 		* @param  {int} sizeGrid the size of the grid
+		* @return {booleen}        true if move
 		*/
 		function move_right(sizeGrid)
 		{
@@ -203,6 +210,13 @@
 			}
 		}
 
+
+
+		/**
+		 * move left
+		 * @param  {int} sizeGrid 	size of the grid
+		 * @return {booleen}        true if move
+		 */
 		function move_left(sizeGrid)
 		{
 				var move = 0;
@@ -286,6 +300,13 @@
 			}
 		}
 
+
+
+		/**
+		 * move up
+		 * @param  {int} sizeGrid 	size of the grid
+		 * @return {booleen}        true if move
+		 */
 		function move_up(sizeGrid)
 		{
 				var move = 0;
@@ -373,6 +394,13 @@
 			}
 		}
 
+
+
+		/**
+		 * move down
+		 * @param  {int} sizeGrid 	size of the grid
+		 * @return {booleen}        true if move
+		 */
 		function move_down(sizeGrid)
 		{
 				var move = 0;
@@ -456,6 +484,12 @@
 		}
 
 
+
+		/**
+		 * chew if the round is win
+		 * @param  {int} sizeGrid size of the grid
+		 * @return {boleen}          return 1 if no possibility
+		 */
 		function checkWin(sizeGrid)
 		{
 			var y = 0;
@@ -512,8 +546,10 @@
 				y = 0;
 				x++;
 			}
-			if ((mergePossibility == 0) && (nbElement == maxElement)) {
-				return 1;
+			if (nbElement == maxElement + 1 ) {
+				if (mergePossibility == 0) {
+					return 1;
+				}
 			}
 		}
 
