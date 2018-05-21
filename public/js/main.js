@@ -38,17 +38,30 @@
 		this.url 				= options.url || '';
 		img.src 				= this.image;
 
-
+		/**
+		 * draw image
+		 *
+		 * @return {void}
+		 */
 		this.draw = () => {
 			ctx.drawImage(img, this.posX, this.posY);
 			return;
 		};
 
+		/**
+		 * init draw image
+		 *
+		 * @return {void}
+		 */
 		this.initDraw = () => {
 			ctx.drawImage(img, this.posX, this.posY);
 			return;
 		};
 
+		/**
+		 * Udate image loaded
+		 * @return {[type]} [description]
+		 */
 		this.updateImage = () => {
 			img.src = this.image;
 		}
@@ -118,6 +131,8 @@
 						}
 				}
 		};
+
+
 
 		/**
 		 * draw image
@@ -1661,13 +1676,13 @@
 	function drawHightScore (color){
 		ctx.fillStyle = color;
 		ctx.font = "16px Arial";
-		ctx.fillText(`Hight Score ${hightScore}`, welcomeBubble.posX + 40, welcomeBubble.posY + 175);
+		ctx.fillText(`High Score ${hightScore}`, welcomeBubble.posX + 40, welcomeBubble.posY + 175);
 	}
 
 	function drawNewScore (color){
 		ctx.fillStyle = color;
 		ctx.font = "18px Arial";
-		ctx.fillText(`New hight score ! `, welcomeBubble.posX + 170, welcomeBubble.posY + 74);
+		ctx.fillText(`New high score ! `, welcomeBubble.posX + 170, welcomeBubble.posY + 74);
 		ctx.font = "12px Arial";
 		ctx.fillText(`${contentMsg["nbUser"]} player connected`, welcomeBubble.posX + 170, welcomeBubble.posY + 97);
 	}

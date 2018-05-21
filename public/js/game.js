@@ -61,7 +61,13 @@
 		this.posY = options.posY;
 		this.direction = options.direction;
 
-		// update position of sprite
+		img.src = this.image;
+
+		/**
+		 * Update sprite position
+		 *
+		 * @return {void}
+		 */
 		this.update = () => {
 
 				tickCount += 1;
@@ -80,7 +86,32 @@
 				}
 		};
 
-		// draw the position of sprite updated
+
+
+		/**
+		 * draw image
+		 *
+		 * @return {void}
+		 */
+		this.draw = () => {
+			ctx.drawImage(
+				img,
+				frameIndex * this.width / this.numberOfFrames, // x position on the sprite sheet
+				0,
+				this.width / this.numberOfFrames, // x size of the frame
+				this.height,
+				this.posX,
+				this.posY,
+				(this.width / this.numberOfFrames)*1.2,
+				(this.height)*1.2);
+		}
+
+
+
+		/**
+		 * render sprite and move posX or posY position
+		 * @return {void}
+		 */
 		this.render =  () => {
 
 			this.speed = 3;
@@ -134,23 +165,8 @@
 				}
 
 			}
-			// update the image source
-			img.src = this.image;
 
-			// Clear the canvas
-			ctx.clearRect(0, 0, canvas.width , canvas.height);
-
-			// Draw the animation
-			ctx.drawImage(
-				img,
-				frameIndex * this.width / this.numberOfFrames, // x position on the sprite sheet
-				0,
-				this.width / this.numberOfFrames, // x size of the frame
-				this.height,
-				this.posX,
-				this.posY,
-				(this.width / this.numberOfFrames)*1.2,
-				(this.height)*1.2);
+			this.draw();
 		};
 	}
 

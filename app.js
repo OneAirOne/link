@@ -20,7 +20,7 @@ app.get(['/index','/'], (req, res) => {
 app.get('/game', (req, res) => {
 	res.sendFile(path.join(__dirname+'/game.html'));
 });
-app.get(['/cv','/'], (req, res) => {
+app.get(['/cv'], (req, res) => {
 	res.sendFile(path.join(__dirname+'/cv.html'));
 });
 

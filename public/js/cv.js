@@ -4,6 +4,9 @@
 	canvas.height = "1600";
 	canvas.width = window.innerWidth
 
+	window.requestAnimFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
+                              window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+
 	var ctx = canvas.getContext("2d");
 
 	/**
@@ -60,6 +63,16 @@
 		this.posY = options.posY;
 		this.direction = options.direction;
 
+		img.src = this.image;
+
+		/**
+		 * update the image
+		 * @return {[type]} [description]
+		 */
+		this.updateImage = () => {
+			img.src = this.image;
+		}
+
 		// update position of sprite
 		this.update = () => {
 
@@ -78,6 +91,24 @@
 						}
 				}
 		};
+
+		/**
+		 * draw image
+		 *
+		 * @return {void}
+		 */
+		this.draw = () => {
+			ctx.drawImage(
+				img,
+				frameIndex * this.width / this.numberOfFrames, // x position on the sprite sheet
+				0,
+				this.width / this.numberOfFrames, // x size of the frame
+				this.height,
+				this.posX,
+				this.posY,
+				(this.width / this.numberOfFrames)*1.2,
+				(this.height)*1.2);
+		}
 
 		// draw the position of sprite updated
 		this.render =  () => {
@@ -134,20 +165,7 @@
 				}
 
 			}
-			// update the image source
-			img.src = this.image;
-
-			// Draw the animation
-			ctx.drawImage(
-				img,
-				frameIndex * this.width / this.numberOfFrames, // x position on the sprite sheet
-				0,
-				this.width / this.numberOfFrames, // x size of the frame
-				this.height,
-				this.posX,
-				this.posY,
-				(this.width / this.numberOfFrames)*1.2,
-				(this.height)*1.2);
+			this.draw();
 		};
 	}
 
@@ -313,6 +331,7 @@
 	function gameLoop () {
 		ctx.clearRect(0, 0, canvas.width , canvas.height);
 		cv.draw();
+
 		link.update();
 		link.render();
 		back.draw();
@@ -325,7 +344,7 @@
 			backBubble.draw();
 		}
 
-		window.requestAnimationFrame(gameLoop);
+		window.requestAnimFrame(gameLoop);
 	}
 
 	var right = false;
@@ -368,6 +387,7 @@
 						down = false;
 						link.direction = "up";
 						link.image = "img/up.png";
+						link.updateImage();
 						break;
 
 					case 40:
@@ -378,6 +398,7 @@
 						down = true;
 						link.direction = "down";
 						link.image = "img/down.png";
+						link.updateImage();
 						break;
 
 					case 37:
@@ -388,6 +409,7 @@
 						down = false;
 						link.direction = "left";
 						link.image = "img/left.png";
+						link.updateImage();
 						break;
 
 					case 39:
@@ -398,6 +420,7 @@
 						down = false;
 						link.direction = "right";
 						link.image = "img/right.png";
+						link.updateImage();
 						break;
 
 					case 65:
@@ -424,6 +447,7 @@
 						} else {
 							link.image = "img/link_static.png";
 						}
+						link.updateImage();
 						break;
 
 					case 40:
@@ -438,6 +462,7 @@
 						} else {
 							link.image = "img/link_static.png";
 						}
+						link.updateImage();
 						break;
 
 					case 37:
@@ -452,6 +477,7 @@
 						} else {
 							link.image = "img/link_static.png";
 						}
+						link.updateImage();
 						break;
 
 					case 39:
@@ -466,6 +492,7 @@
 						} else {
 							link.image = "img/link_static.png";
 						}
+						link.updateImage();
 						break;
 				}
 			}
