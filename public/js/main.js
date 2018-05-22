@@ -1,6 +1,5 @@
 (function() {
 
-	// var socket = io();
 	// return if mobile device
 	// if (window.innerWidth < 765) {
 	// 	return;
@@ -724,7 +723,7 @@
 			} else {
 				ctx.fillStyle = 'black';
 			}
-			ctx.fillText(`score : ${score}`,welcomeBubble.posX + 40 ,welcomeBubble.posY + 100);
+			ctx.fillText(`score : ${score}`,welcomeBubble.posX + 20 ,welcomeBubble.posY + 100);
 		}
 	}
 
@@ -948,6 +947,100 @@
 
 
 	/**
+	 * draw level
+	 *
+	 * @param  {string} color font color
+	 * @return {void}
+	 */
+	function drawLevel (color){
+		ctx.fillStyle = color;
+		ctx.font = "14px Arial";
+		ctx.fillText(`Level ${level}`, welcomeBubble.posX + 20, welcomeBubble.posY + 175);
+	}
+
+
+
+	/**
+	 * draw hightScore
+	 *
+	 * @param  {string} color font color
+	 * @return {void}
+	 */
+	function drawHightScore (color){
+		ctx.fillStyle = color;
+		ctx.font = "bold 16px Arial";
+		ctx.fillText(`High Score `, welcomeBubble.posX + 20, welcomeBubble.posY + 130);
+		ctx.font = "14px Arial";
+		ctx.fillText(`${bestPlayer} : ${hightScore}`, welcomeBubble.posX + 20, welcomeBubble.posY + 150);
+	}
+
+
+
+	/**
+	 * draw new score
+	 *
+	 * @param  {string} color font color
+	 * @return {void}
+	 */
+	function drawNewScore (color){
+		ctx.fillStyle = color;
+		ctx.font = "18px Arial";
+		ctx.fillText(`New high score from ${bestPlayer} !`, welcomeBubble.posX + 170, welcomeBubble.posY + 95);
+	}
+
+
+
+	/**
+	 * draw nb of player
+	 *
+	 * @param  {string} color font color
+	 * @return {void}
+	 */
+	function drawNbPlayer (color) {
+			if (nbUserConnected != undefined) {
+				ctx.fillStyle = color;
+				ctx.font = "12px Arial";
+				if (nbUserConnected == 1) {
+					ctx.fillText(`${nbUserConnected} player connected`, welcomeBubble.posX + 190, welcomeBubble.posY + 60);
+				} else {
+					ctx.fillText(`${nbUserConnected} players connected`, welcomeBubble.posX + 190, welcomeBubble.posY + 60);
+				}
+			}
+	}
+
+
+
+	/**
+	 * draw help info
+	 *
+	 * @param  {string} color font color
+	 * @return {void}
+	 */
+	function drawHelpInfo (color) {
+		ctx.font = " 15px Arial";
+		ctx.fillStyle = 'black';
+		ctx.fillText(`Press 'H' for help`,welcomeBubble.posX + 20 ,welcomeBubble.posY + 200);
+	}
+
+
+
+	/**
+	 * draw dammage
+	 *
+	 * @param  {string} color  font color
+	 * @param  {int} points points to draw
+	 * @return {[type]}        [description]
+	 */
+	function drawDammage(color, points) {
+		ctx.fillStyle = color;
+		ctx.font = "15px Arial";
+		var points = nbPoints;
+		ctx.fillText(points, deadX, deadY);
+	}
+
+
+
+	/**
 	 * check enemy life
 	 *
 	 * @return {void}
@@ -965,6 +1058,71 @@
 					nbPoints = `+ ${yellowPoint}`;
 				}
 			}
+		}
+	}
+
+
+
+	/**
+	 * ask player name
+	 *
+	 * @return {void}
+	 */
+	function askName () {
+		var txt;
+		var person = prompt("Please enter your name:", "Erwan");
+		if (person == null || person == "") {
+			playerName = "random"
+		} else {
+			playerName = person;
+		}
+	}
+
+
+
+	/**
+	 * increase level
+	 *
+	 * @return {void}
+	 */
+	function levelUp() {
+
+		if (score % 50 == 0 && generate == false) {
+
+			level++;
+
+			var newEnemy = 		new AnimateSprite ({
+					width						: 300,
+					height					: enemySize,
+					image						: "img/enemy_nes_right.png",
+					numberOfFrames	: 10,
+					ticksPerFrame		: 4,
+					posX						: 200,
+					posY						: 50,
+					direction				: "",
+					speed						: 1,
+					moveDirection   : "right",
+					dead						: false,
+					tick						: 0,
+					color 					: 'yellow'
+				})
+
+			enemyList.push(
+				newEnemy
+			)
+
+			enemyKillZoneList.push(
+				{
+					posX 		: enemy.posX + killZoneX,
+					posY 		: enemy.posY + killZoneY,
+					height 	: killZoneHeight,
+					width 	: killZoneWidth
+				}
+			)
+			generate = true;
+		}
+		if (score % 50 != 0) {
+			generate = false;
 		}
 	}
 
@@ -997,13 +1155,19 @@
 	var hit = false
 	var heartDelay = 0;
 	var newMsg = false;
-	var contentMsg;
+	var nbUserConnected;
 	var tickMsg = 0;
 	var tickDammage = 0;
 	var dammage = false;
 	var nbPoints = 0;
 	var deadX;
 	var deadY;
+	var keyPush;
+	var bestPlayer;
+	var hightScore = 0;
+	var playerName;
+	var generate = false;
+	var dev = true;
 
 
 	// gameplay>> settings
@@ -1031,16 +1195,24 @@
 	var shieldOption = 120;
 
 	// socket
-	var hightScore = 0;
-	var socket = io('http://localhost:3000');
+	if (dev == true) {
+		var socket = io('http://localhost:3000');
+	} else {
+		var socket = io('http://51.254.38.133:3000');
+	}
+
+
   socket.on('news', function (data) {
   	hightScore = data["hightScore"];
+		nbUserConnected = data["nbUser"];
+		bestPlayer = data["playerName"];
 
-		if (data["nbUser"] != undefined) {
-			contentMsg = data;
+		if (data["publish"] == "new") {
 			newMsg = true;
 		}
   });
+
+
 
 
 	// --------------------------------- LINK -------------------------
@@ -1513,7 +1685,7 @@
 		width		: 100, 
 		height	: 15,
 		image		: "img/life5.png",
-		posX		:  welcomeBubble.posX + 40,
+		posX		:  welcomeBubble.posX + 20,
 		posY		:  welcomeBubble.posY + 60
 	});
 
@@ -1612,113 +1784,56 @@
 	var enemyKillZoneList = [enemyKillZone, enemyKillZone2, enemyKillZone3, enemyKillZone4, enemyKillZone5];
 	var clouds = [cloud1, cloud2, cloud3, cloud4, cloud5, cloud6, cloud7];
 
-	var generate = false;
-
-	function levelUp() {
-
-		if (score % 50 == 0 && generate == false) {
-
-			level++;
-
-			var newEnemy = 		new AnimateSprite ({
-					width						: 300,
-					height					: enemySize,
-					image						: "img/enemy_nes_right.png",
-					numberOfFrames	: 10,
-					ticksPerFrame		: 4,
-					posX						: 200,
-					posY						: 50,
-					direction				: "",
-					speed						: 1,
-					moveDirection   : "right",
-					dead						: false,
-					tick						: 0,
-					color 					: 'yellow'
-				})
-
-			enemyList.push(
-				newEnemy
-			)
 
 
-			enemyKillZoneList.push(
-				{
-					posX 		: enemy.posX + killZoneX,
-					posY 		: enemy.posY + killZoneY,
-					height 	: killZoneHeight,
-					width 	: killZoneWidth
-				}
-			)
-			generate = true;
-		}
-		if (score % 50 != 0) {
-			generate = false;
-		}
-	}
+
 
 
 	/*      INIT       */
 	// --------------- //
 	/**
 	 * init the game
+	 *
 	 * @return {void} [
 	 */
 	function init () {
 		// getHightScore();
 	}
 
-	function drawLevel (color){
-		ctx.fillStyle = color;
-		ctx.font = "12px Arial";
-		ctx.fillText(`Level ${level}`, welcomeBubble.posX + 40, welcomeBubble.posY + 150);
-	}
 
-	function drawHightScore (color){
-		ctx.fillStyle = color;
-		ctx.font = "16px Arial";
-		ctx.fillText(`High Score ${hightScore}`, welcomeBubble.posX + 40, welcomeBubble.posY + 175);
-	}
 
-	function drawNewScore (color){
-		ctx.fillStyle = color;
-		ctx.font = "18px Arial";
-		ctx.fillText(`New high score ! `, welcomeBubble.posX + 170, welcomeBubble.posY + 74);
-		ctx.font = "12px Arial";
-		ctx.fillText(`${contentMsg["nbUser"]} player connected`, welcomeBubble.posX + 170, welcomeBubble.posY + 97);
-	}
 
-	function drawDammage(color, points) {
-		ctx.fillStyle = color;
-		ctx.font = "15px Arial";
-		var points = nbPoints;
-		ctx.fillText(points, deadX, deadY);
-	}
 
 
 	/*    GAME LOOP    */
 	// --------------- //
+
 	/**
 	 * infinite game loop
+	 *
 	 * @return {void}
 	 */
 	function gameLoop () {
 
-		// update hightscore on server side
-		if(score > hightScore) {
-			socket.emit('newsResponse', { newHightScore: score });
+		// ask name of player if make an high score
+		if(score > hightScore && playerName == undefined && keyPush == false) {
+			askName();
+		}
 
+		// update hightscore on server side
+		if(score > hightScore && playerName != undefined) {
+			socket.emit('newsResponse', { newHightScore: score, playerName: playerName });
 		}
 
 		// clear the canvas each boucle cycle
 		ctx.clearRect(0, 0, canvas.width , canvas.height);
+		drawNbPlayer("black");
 
 		// update score
 		drawScore(enemyList);
 
 		// help info
-		ctx.font = "15px Arial";
-		ctx.fillStyle = 'black';
-		ctx.fillText(`Press 'H' for help`,welcomeBubble.posX + 40 ,welcomeBubble.posY + 125);
+		drawHelpInfo("black");
 
 		// level
 		drawLevel('black');
@@ -1913,6 +2028,7 @@
 			// MULTIPLE KEY LISTENER
 			var map = {37: false, 38: false, 39: false, 40: false, 83: false, 69: false, 88: false, 72: false, 65: false, 81: false, 13: false};
 			$(document).keydown(function(e) {
+
 				if (e.keyCode in map) {
 					map[e.keyCode] = true;
 
@@ -1950,6 +2066,7 @@
 						right = false;
 						up = false;
 						down = false;
+						keyPush = true;
 						link.updateImage();
 					}
 					// right
@@ -1985,6 +2102,7 @@
 						left = false;
 						up = false;
 						down = false;
+						keyPush = true;
 						link.updateImage();
 					}
 
@@ -2021,6 +2139,7 @@
 						right = false;
 						left = false;
 						down = false;
+						keyPush = true;
 						link.updateImage();
 					}
 
@@ -2057,6 +2176,7 @@
 						right = false;
 						up = false;
 						left = false;
+						keyPush = true;
 						link.updateImage();
 					}
 
@@ -2080,6 +2200,7 @@
 							checkEnemyLife()
 							cutCheck(herbs);
 						}
+						keyPush = true;
 						link.updateImage();
 					}
 
@@ -2114,6 +2235,7 @@
 					}
 				}
 			}).keyup(function(e) {
+				keyPush = false;
 				// check si pas d'autre keydown
 				link.direction = "";
 				if (e.keyCode in map) {
