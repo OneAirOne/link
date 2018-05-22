@@ -1070,7 +1070,7 @@
 	 */
 	function askName () {
 		var txt;
-		var person = prompt("Please enter your name:", "Erwan");
+		var person = prompt("New High Score ! Please enter your name:", "Erwan");
 		if (person == null || person == "") {
 			playerName = "random"
 		} else {
