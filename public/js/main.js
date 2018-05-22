@@ -1167,7 +1167,7 @@
 	var hightScore = 0;
 	var playerName;
 	var generate = false;
-	var dev = true;
+	var dev = false;
 
 
 	// gameplay>> settings
