@@ -29,13 +29,13 @@
 		var tickCount = 0;
 		var ticksPerFrame = options.ticksPerFrame || 0;
 		var img = new Image();
-		this.image 			= options.image;
-		this.posX 			= options.posX;
-		this.posY 			= options.posY;
-		this.width 			= options.width;
-		this.height 		= options.height;
-		this.url 				= options.url || '';
-		img.src 				= this.image;
+		this.image     = options.image;
+		this.posX      = options.posX;
+		this.posY      = options.posY;
+		this.width     = options.width;
+		this.height    = options.height;
+		this.url       = options.url || '';
+		img.src        = this.image;
 
 		/**
 		 * draw image
@@ -601,20 +601,20 @@
 	 * @return {array} array of coordinates
 	 */
 	function searchFreeSpace () {
-		var x = Math.floor(Math.random() * Math.floor(canvas.width /1.5));
-		var y = Math.floor(Math.random() * Math.floor(canvas.height/3.5));
+		var x = Math.floor(Math.random() * Math.floor(canvas.width - enemySize ));
+		var y = Math.floor(Math.random() * Math.floor(canvas.height - enemySize));
 
 		var searchZone = {
 			posX			: x,
 			posY			:	y,
-			width : enemySize,
-			height : enemySize
+			width 		: enemySize * 3,
+			height 		: enemySize * 3
 		}
 		while (checkZone(searchZone, spwanBoxes) == true) {
-			searchZone.posX = Math.floor(Math.random() * Math.floor(canvas.width /1.5));
-			searchZone.posY = Math.floor(Math.random() * Math.floor(canvas.height/3.5));
+			searchZone.posX = Math.floor(Math.random() * Math.floor(canvas.width - enemySize));
+			searchZone.posY = Math.floor(Math.random() * Math.floor(canvas.height - enemySize));
 		}
-		return [x,y];
+		return [searchZone.posX,searchZone.posY];
 	}
 
 
@@ -954,8 +954,8 @@
 	 */
 	function drawLevel (color){
 		ctx.fillStyle = color;
-		ctx.font = "14px Arial";
-		ctx.fillText(`Level ${level}`, welcomeBubble.posX + 20, welcomeBubble.posY + 175);
+		ctx.font = "13px Arial";
+		ctx.fillText(`Level ${level}`, welcomeBubble.posX + 20, welcomeBubble.posY + 200);
 	}
 
 
@@ -971,7 +971,11 @@
 		ctx.font = "bold 16px Arial";
 		ctx.fillText(`High Score `, welcomeBubble.posX + 20, welcomeBubble.posY + 130);
 		ctx.font = "14px Arial";
-		ctx.fillText(`${bestPlayer} : ${hightScore}`, welcomeBubble.posX + 20, welcomeBubble.posY + 150);
+		if (bestPlayer != undefined) {
+			ctx.fillText(`${bestPlayer[0]} : ${hightScore[0]}`, welcomeBubble.posX + 20, welcomeBubble.posY + 150);
+			ctx.fillText(`${bestPlayer[1]} : ${hightScore[1]}`, welcomeBubble.posX + 20, welcomeBubble.posY + 165);
+			ctx.fillText(`${bestPlayer[2]} : ${hightScore[2]}`, welcomeBubble.posX + 20, welcomeBubble.posY + 180);
+		}
 	}
 
 
@@ -985,7 +989,8 @@
 	function drawNewScore (color){
 		ctx.fillStyle = color;
 		ctx.font = "18px Arial";
-		ctx.fillText(`New high score from ${bestPlayer} !`, welcomeBubble.posX + 170, welcomeBubble.posY + 95);
+		ctx.fillText(`New high score !`, welcomeBubble.posX + 170, welcomeBubble.posY + 95);
+		// ctx.fillText(`New high score !`, welcomeBubble.posX + 170, welcomeBubble.posY + 95);
 	}
 
 
@@ -1017,9 +1022,9 @@
 	 * @return {void}
 	 */
 	function drawHelpInfo (color) {
-		ctx.font = " 15px Arial";
+		ctx.font = " bold 13px Arial";
 		ctx.fillStyle = 'black';
-		ctx.fillText(`Press 'H' for help`,welcomeBubble.posX + 20 ,welcomeBubble.posY + 200);
+		ctx.fillText(`Press 'H' for help`,welcomeBubble.posX + 20 ,welcomeBubble.posY + 220);
 	}
 
 
@@ -1071,6 +1076,9 @@
 	function askName () {
 		var txt;
 		var person = prompt("New High Score ! Please enter your name:", "Erwan");
+		keyPush = false;
+		link.direction = "";
+		link.updateImage();
 		if (person == null || person == "") {
 			playerName = "random"
 		} else {
@@ -1087,7 +1095,7 @@
 	 */
 	function levelUp() {
 
-		if (score % 50 == 0 && generate == false) {
+		if (score % 50 == 0 && generate == false && enemyList.length <= maxEnemyNb) {
 
 			level++;
 
@@ -1164,10 +1172,10 @@
 	var deadY;
 	var keyPush;
 	var bestPlayer;
-	var hightScore = 0;
+	var hightScore;
 	var playerName;
 	var generate = false;
-	var dev = false;
+	var dev = true;
 
 
 	// gameplay>> settings
@@ -1193,6 +1201,7 @@
 	var redPoint = 20;
 	var yellowPoint = 5;
 	var shieldOption = 120;
+	var maxEnemyNb = 100;
 
 	// socket
 	if (dev == true) {
@@ -1204,8 +1213,8 @@
 
   socket.on('news', function (data) {
   	hightScore = data["hightScore"];
-		nbUserConnected = data["nbUser"];
-		bestPlayer = data["playerName"];
+			nbUserConnected = data["nbUser"];
+			bestPlayer = data["playerName"];
 
 		if (data["publish"] == "new") {
 			newMsg = true;
@@ -1605,8 +1614,8 @@
 		width		: 200, 
 		height	: 150,
 		image		: "img/bubble_help.png",
-		posX		: swimmingPool.posX,
-		posY		: 150
+		posX		: linkedin.posX - 220,
+		posY		: linkedin.posY + 10
 	});
 
 	var cloud1 = new FixedSprite({
@@ -1802,6 +1811,9 @@
 
 
 
+var xControl = 100;
+var yControl = 100;
+var lastRender = Date.now();
 
 
 
@@ -1814,16 +1826,41 @@
 	 * @return {void}
 	 */
 	function gameLoop () {
-
 		// ask name of player if make an high score
-		if(score > hightScore && playerName == undefined && keyPush == false) {
-			askName();
+		if (hightScore != undefined) {
+			if(score >= hightScore[0]) {
+				if (playerName == undefined) {
+					askName();
+				}
+				hightScore[0] = score;
+				bestPlayer[0] = playerName;
+				socket.emit('newsResponse', {
+					newHightScore: hightScore,
+					playerName: bestPlayer,
+				});
+			} else if(score >= hightScore[1]) {
+				if (playerName == undefined) {
+					askName();
+				}
+				hightScore[1] = score;
+				bestPlayer[1] = playerName;
+				socket.emit('newsResponse', {
+					newHightScore: hightScore,
+					playerName: bestPlayer,
+				});
+			} else if (score >= hightScore[2]) {
+				if (playerName == undefined) {
+					askName();
+				}
+				hightScore[2] = score;
+				bestPlayer[2] = playerName;
+				socket.emit('newsResponse', {
+					newHightScore: hightScore,
+					playerName: bestPlayer,
+				});
+			}
 		}
 
-		// update hightscore on server side
-		if(score > hightScore && playerName != undefined) {
-			socket.emit('newsResponse', { newHightScore: score, playerName: playerName });
-		}
 
 		// clear the canvas each boucle cycle
 		ctx.clearRect(0, 0, canvas.width , canvas.height);
@@ -1840,12 +1877,8 @@
 		drawHightScore('black');
 		if (newMsg == true) {
 			drawNewScore('black');
-			tickMsg++;
 		}
-		if (tickMsg > maxTickMsg) {
-			newMsg = false;
-			tickMsg = 0;
-		}
+
 		if (dammage == true) {
 			drawDammage('black');
 			tickDammage++;
@@ -1983,8 +2016,8 @@
 			helpBubble.draw();
 		}
 		checkLoose();
-		requestAnimFrame(gameLoop);
-		// window.requestAnimationFrame(gameLoop);
+		// requestAnimFrame(gameLoop);
+		window.requestAnimationFrame(gameLoop);
 	}
 
 
@@ -2236,7 +2269,6 @@
 				}
 			}).keyup(function(e) {
 				keyPush = false;
-				// check si pas d'autre keydown
 				link.direction = "";
 				if (e.keyCode in map) {
 					link.speed = speedInit;

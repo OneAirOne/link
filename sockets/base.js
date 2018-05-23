@@ -2,7 +2,6 @@ const fs = require('fs');
 var hightScore;
 var connectCounter = 0;
 var srcFile = "hightScore.json"
-var playerName;
 
 // high score load
 fs.readFile(`./${srcFile}`,'utf8', (err, data) => {
@@ -14,49 +13,54 @@ module.exports = function (io) {
 
 		// count users connected
 		connectCounter++;
-		console.log(`${connectCounter} user(s) connected`)
+		// console.log(`${connectCounter} user(s) connected`)
 
 		// emit response on client connexion
-		socket.emit('news', {
-			hightScore: hightScore["hightScore"],
-			playerName: hightScore["playerName"],
-			nbUser: connectCounter
-		});
-		socket.broadcast.emit('news', {
-			hightScore: hightScore['hightScore'],
-			playerName: hightScore['playerName'],
-			nbUser: connectCounter
-		});
-
-		// boadcast clients responses
-	  socket.on('newsResponse', function (data) {
+		if (hightScore != undefined) {
 			socket.emit('news', {
-					hightScore: data['newHightScore'],
-					playerName: data['playerName'],
-					nbUser: connectCounter,
-					publish: "new"
-				 });
-			socket.broadcast.emit('news', {
-				hightScore: data['newHightScore'],
-				playerName: data['playerName'],
-				nbUser: connectCounter,
-				publish: "new"
+				hightScore: hightScore["hightScore"],
+				playerName: hightScore["playerName"],
+				nbUser: connectCounter
 			});
-			// server save on cash
-			hightScore['hightScore'] = data['newHightScore'];
-			hightScore['playerName'] = data['playerName'];
-  	});
-
-		// substract user when disconneted
-		socket.on("disconnect", () => {
-    	connectCounter--;
 			socket.broadcast.emit('news', {
 				hightScore: hightScore['hightScore'],
 				playerName: hightScore['playerName'],
 				nbUser: connectCounter
 			});
-  	});
+
+			// boadcast clients responses
+			socket.on('newsResponse', function (data) {
+				socket.emit('news', {
+					hightScore: data['newHightScore'],
+					playerName: data['playerName'],
+					nbUser: connectCounter,
+					publish: "new"
+				});
+
+				socket.broadcast.emit('news', {
+					hightScore: data['newHightScore'],
+					playerName: data['playerName'],
+					nbUser: connectCounter,
+					publish: "new"
+				});
+				// server save on cash
+				hightScore['hightScore'] = data['newHightScore'];
+				hightScore['playerName'] = data['playerName'];
+			});
+
+			// substract user when disconneted
+			socket.on("disconnect", () => {
+				connectCounter--;
+				socket.broadcast.emit('news', {
+					hightScore: hightScore['hightScore'],
+					playerName: hightScore['playerName'],
+					nbUser: connectCounter
+				});
+			});
+		}
 	});
+
+
 
 	/**
 	 * save highScore
@@ -66,18 +70,12 @@ module.exports = function (io) {
 		try {
 			fs.readFile(`./${srcFile}`,'utf8', (err, data) => {
 				if (err) throw err;
-
 				var json = JSON.parse(data)
-
-				if (json['hightScore'] < hightScore['hightScore'] || json['hightScore'] != undefined) {
-
 					var toSave = JSON.stringify(hightScore)
-
 					fs.writeFile(`./${srcFile}`, toSave, (err) => {
 					  if (err) throw err;
-					  console.log('The file has been saved!');
+					  // console.log('The file has been saved!');
 					});
-				}
 			});
 		} catch (err) {
 			console.error(err.message);
