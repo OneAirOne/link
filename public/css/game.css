@@ -197,6 +197,7 @@ td {
 }
 
 #introPuissance4 {
+	Line-Height: 2;
 	margin-top: 1%;
 	margin-left: 15%;
 	margin-right: 10%;
@@ -256,6 +257,7 @@ td {
 }
 
 #data {
+	Line-Height: 2;
 	margin-top: 1%;
 	margin-left: 15%;
 	margin-right: 10%;
@@ -320,13 +322,22 @@ display: inline-block;
 }
 footer {
 		margin-top: 5%;
-		text-align: center;
+		text-align: left;
     height: 100px;
 		color: white;
     background: #212830;
 }
 .foot {
-	padding-top: 2%;
+	font-size: 0.8em;
+	margin-left: 2%;
+	padding-top: 4%;
+}
+.year {
+	display: inline-block;
+	color: grey;
+}
+.space {
+	margin-left: 0.5%;
 }
 
 /*--------------------------------------------------
