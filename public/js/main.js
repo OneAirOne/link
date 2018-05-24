@@ -318,6 +318,30 @@
 
 
 	/**
+	 * check collision of spawn zone
+	 * @param  {object1} object1 object to spawn
+	 * @param  {object2} object2 object to analyse
+	 * @return {void}
+	 */
+	function zoneSpawnDetection (object1, object2) {
+
+		var x = object1.posX  ;
+		var y = object1.posY ;
+
+		if (x >= object2.posX
+						&& x < object2.posX + object2.width
+						&& y >= object2.posY
+						&& y < object2.posY + object2.height) {
+
+					return true;
+		} else {
+			return false;
+		}
+	}
+
+
+
+	/**
 	 * zone detection for the boxes
 	 *
 	 * @param  {object} object1 object1
@@ -466,6 +490,24 @@
 
 
 	/**
+	 * Check collision for spawn zone
+	 * @param  {object} object  spawn object
+	 * @param  {object} objects list of objects to avoid
+	 * @return {void}
+	 */
+	function checkSpawnZone (object, objects) {
+		for (i = 0 ; i < objects.length; i++) {
+
+			if (zoneSpawnDetection(object, objects[i]) == true) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+
+
+	/**
 	 * check zone between one element and the other
 	 *
 	 * @param  {object} object    one element
@@ -495,7 +537,7 @@
 
 			if (checkZone(enemy[i], enemyBoxes) == false) {
 
-				if (enemy[i].tick >= 500) {
+				if (enemy[i].tick >= Math.random() * enemyChange) {
 
 					if (enemy[i].moveDirection ==  "down") {
 						enemy[i].moveDirection = "left";
@@ -607,10 +649,10 @@
 		var searchZone = {
 			posX			: x,
 			posY			:	y,
-			width 		: enemySize * 3,
-			height 		: enemySize * 3
+			width 		: enemySize * 1,
+			height 		: enemySize * 1
 		}
-		while (checkZone(searchZone, spwanBoxes) == true) {
+		while (checkSpawnZone(searchZone, spwanBoxes) == true) {
 			searchZone.posX = Math.floor(Math.random() * Math.floor(canvas.width - enemySize));
 			searchZone.posY = Math.floor(Math.random() * Math.floor(canvas.height - enemySize));
 		}
@@ -649,7 +691,7 @@
 	 * @return {void}
 	 */
 	function spawn (object) {
-		if (object.dead = true) {
+		if (object.dead == true) {
 			var coordinates = searchFreeSpace();
 			object.posX = coordinates[0];
 			object.posY = coordinates[1];
@@ -1179,7 +1221,7 @@
 
 
 	// gameplay>> settings
-	var swordOffsetX = 15;
+	var swordOffsetX = 16;
 	var swordOffsetY = 15;
 	var lifeOffsetX = 6;
 	var lifeOffsetY = 2;
@@ -1191,7 +1233,7 @@
 	var killZoneHeight = 30;
 	var maxTickHeart = 10;//500
 	var heartProbability = 0.995;
-	var minLife = 4;
+	var minLife = 5;
 	var initFirstTick = 10;
 	var maxLifeFirstTick = initFirstTick;
 	var maxHeartDelay = 1000;
@@ -1202,6 +1244,8 @@
 	var yellowPoint = 5;
 	var shieldOption = 120;
 	var maxEnemyNb = 100;
+	var enemyChange = 5000;
+
 
 	// socket
 	if (dev == true) {
@@ -1443,13 +1487,6 @@
 		posY		: swimmingPool.posY
 	});
 
-	var spawnSwimmingZone = {
-		posX 		: swimmingPool.posX - 100,
-		posY 		:	swimmingPool.posY - 100,
-		width 	:	swimmingPool.width + 200,
-		height 	:	swimmingPool.height + 200
-	}
-
 	var house = new FixedSprite({
 		width		: 100, 
 		height	: 80,
@@ -1686,7 +1723,7 @@
 		width		: 30, 
 		height	: 15,
 		image		: "img/paves.png",
-		posX		: house.posX + 17,
+		posX		: house.posX + 23,
 		posY		: house.posY + 80
 	});
 
@@ -1768,8 +1805,8 @@
 	}
 
 	var swordZone = new FixedSprite({
-		width		: 39, 
-		height	: 39,
+		width		: 42, 
+		height	: 45,
 		image		: "",
 		posX		: 0,
 		posY		: 0
@@ -1783,17 +1820,63 @@
 		posY		: 0
 	});
 
+	var spawnSwimmingZone = {
+		posX 		: swimmingPool.posX - 50,
+		posY 		:	swimmingPool.posY - 50,
+		width 	:	swimmingPool.width + 100,
+		height 	:	swimmingPool.height + 100
+	}
+
+	var spawnLinkedinZone = {
+		posX 		: linkedin.posX - 50,
+		posY 		:	linkedin.posY - 50,
+		width 	:	linkedin.width + 100,
+		height 	:	linkedin.height + 100
+	}
+
+	var spawnTruckZone = {
+		posX 		: truck.posX - 50,
+		posY 		:	truck.posY - 50,
+		width 	:	truck.width + 100,
+		height 	:	truck.height + 100
+	}
+
+	var spawnHouseZone = {
+		posX 		: house.posX - 50,
+		posY 		:	house.posY - 50,
+		width 	:	house.width + 100,
+		height 	:	house.height + 100
+	}
+
+	var spawnFactoryGitZone = {
+		posX 		: factoryGit.posX - 50,
+		posY 		:	factoryGit.posY - 50,
+		width 	:	factoryGit.width + 100,
+		height 	:	factoryGit.height + 100
+	}
+
+	var spawnCityZone = {
+		posX 		: city.posX - 50,
+		posY 		:	city.posY - 50,
+		width 	:	city.width + 100,
+		height 	:	city.height + 100
+	}
+
+	var spawnChilloutZone = {
+		posX 		: chillout.posX - 50,
+		posY 		:	chillout.posY - 50,
+		width 	:	chillout.width + 100,
+		height 	:	chillout.height + 100
+	}
 
 
 
 	var boxes = [linkedin, truck, house, factoryGit, city, chillout, extinguisher];
 	var enemyBoxes = [linkedin, truck, house, factoryGit, city, chillout, swimmingPool];
-	var spwanBoxes = [linkedin, truck, house, factoryGit, city, chillout, spawnSwimmingZone];
+	var spwanBoxes = [spawnLinkedinZone, spawnTruckZone, spawnHouseZone, spawnFactoryGitZone, spawnCityZone, spawnChilloutZone, spawnSwimmingZone];
 	var enemyList  = [enemy, enemy2, enemy3, enemy4, enemy5];
 	var enemyKillZoneList = [enemyKillZone, enemyKillZone2, enemyKillZone3, enemyKillZone4, enemyKillZone5];
 	var clouds = [cloud1, cloud2, cloud3, cloud4, cloud5, cloud6, cloud7];
-
-
 
 
 
@@ -1806,7 +1889,6 @@
 	 * @return {void} [
 	 */
 	function init () {
-		// getHightScore();
 	}
 
 
@@ -2030,282 +2112,282 @@ var lastRender = Date.now();
 
 
 
-	/*   GAME CONTROL  */
-	// --------------- //
-		$(document).ready(function()
-		{
-			var tickPerFrameIncrease = 6;
-			var speedIncrease = 6;
-			// mouse clickable zones
-			$(document).mousedown(function(e) {
-				var mouse = {
-					posX 		: parseInt(e.clientX),
-					posY 		: parseInt(e.clientY),
-					width 	:	1,
-					height	: 1
-				}
-				if (zoneDetection(mouse, house)) {
-					window.location.href = houseBubble.url;
-				}
-				if (zoneDetection(mouse, linkedin)) {
-					window.location.href = linkedinBubble.url;
-				}
-				if (zoneDetection(mouse, factoryGit)) {
-					window.location.href = factoryBubble.url;
-				}
-				if (zoneDetection(mouse, swimmingPool)) {
-					window.location.href = swimmingPoolBubble.url;
-				}
-			})
+		/*   GAME CONTROL  */
+		// --------------- //
+			$(document).ready(function()
+			{
+				var tickPerFrameIncrease = 6;
+				var speedIncrease = 6;
+				// mouse clickable zones
+				$(document).mousedown(function(e) {
+					var mouse = {
+						posX 		: parseInt(e.clientX),
+						posY 		: parseInt(e.clientY),
+						width 	:	1,
+						height	: 1
+					}
+					if (zoneDetection(mouse, house)) {
+						window.location.href = houseBubble.url;
+					}
+					if (zoneDetection(mouse, linkedin)) {
+						window.location.href = linkedinBubble.url;
+					}
+					if (zoneDetection(mouse, factoryGit)) {
+						window.location.href = factoryBubble.url;
+					}
+					if (zoneDetection(mouse, swimmingPool)) {
+						window.location.href = swimmingPoolBubble.url;
+					}
+				})
 
-			// MULTIPLE KEY LISTENER
-			var map = {37: false, 38: false, 39: false, 40: false, 83: false, 69: false, 88: false, 72: false, 65: false, 81: false, 13: false};
-			$(document).keydown(function(e) {
+				// MULTIPLE KEY LISTENER
+				var map = {37: false, 38: false, 39: false, 40: false, 83: false, 69: false, 88: false, 72: false, 65: false, 81: false, 13: false};
+				$(document).keydown(function(e) {
 
-				if (e.keyCode in map) {
-					map[e.keyCode] = true;
+					if (e.keyCode in map) {
+						map[e.keyCode] = true;
 
-					// MOVE -------------------------------------
-					// left
-					if (map[37]) {
-						left = true;
+						// MOVE -------------------------------------
+						// left
+						if (map[37]) {
+							left = true;
 
-						if (map[37] && map[69] ) {
+							if (map[37] && map[69] ) {
+								if (zoneDetection(link, swimmingPool)) {
+										link.image = "img/left_swim.png";
+								} else {
+									link.numberOfFrames = 7;
+									link.width = 270;
+									link.image = "img/left_sword.png";
+									checkEnemyLife()
+								}
+							}
+							if (map[37] && map[83]) {
+								link.speed = speedIncrease;
+								link.ticksPerFrame = tickPerFrameIncrease;
+							}
+							link.direction = "left";
+							outOfZone(link);
 							if (zoneDetection(link, swimmingPool)) {
 									link.image = "img/left_swim.png";
 							} else {
-								link.numberOfFrames = 7;
-								link.width = 270;
-								link.image = "img/left_sword.png";
-								checkEnemyLife()
+								if (equip == true) {
+									link.image = "img/left_shield.png";
+								} else {
+									link.image = "img/left.png";
+								}
 							}
+							welcome = true;
+							right = false;
+							up = false;
+							down = false;
+							keyPush = true;
+							link.updateImage();
 						}
-						if (map[37] && map[83]) {
-							link.speed = speedIncrease;
-							link.ticksPerFrame = tickPerFrameIncrease;
-						}
-						link.direction = "left";
-						outOfZone(link);
-						if (zoneDetection(link, swimmingPool)) {
-								link.image = "img/left_swim.png";
-						} else {
-							if (equip == true) {
-								link.image = "img/left_shield.png";
-							} else {
-								link.image = "img/left.png";
-							}
-						}
-						welcome = true;
-						right = false;
-						up = false;
-						down = false;
-						keyPush = true;
-						link.updateImage();
-					}
-					// right
-					if (map[39]) {
-						right = true;
+						// right
+						if (map[39]) {
+							right = true;
 
-						if (map[39] && map[69] ) {
+							if (map[39] && map[69] ) {
+								if (zoneDetection(link, swimmingPool)) {
+										link.image = "img/right_swim.png";
+								} else {
+									link.numberOfFrames = 7;
+									link.width = 270;
+									link.image = "img/right_sword.png";
+									checkEnemyLife()
+								}
+							}
+							if (map[39] && map[83]) {
+								link.speed = speedIncrease;
+								link.ticksPerFrame = tickPerFrameIncrease;
+							}
+							link.direction = "right";
+							outOfZone(link);
 							if (zoneDetection(link, swimmingPool)) {
 									link.image = "img/right_swim.png";
 							} else {
+								if (equip == true) {
+									link.image = "img/right_shield.png";
+								} else {
+									link.image = "img/right.png";
+								}
+							}
+							welcome = true;
+							left = false;
+							up = false;
+							down = false;
+							keyPush = true;
+							link.updateImage();
+						}
+
+						// up
+						if (map[38]) {
+							up = true;
+
+							if (map[38] && map[69] ) {
+								if (zoneDetection(link, swimmingPool)) {
+										link.image = "img/left_swim.png";
+								} else {
+									link.numberOfFrames = 7;
+									link.width = 270;
+									link.image = "img/up_sword.png";
+									checkEnemyLife()
+								}
+							}
+							if (map[38] && map[83]) {
+								link.speed = speedIncrease;
+								link.ticksPerFrame = tickPerFrameIncrease;
+							}
+							link.direction = "up";
+							outOfZone(link);
+							if (zoneDetection(link, swimmingPool)) {
+									link.image = "img/up_swim.png";
+							} else {
+								if (equip == true) {
+									link.image = "img/up_shield.png";
+								} else {
+									link.image = "img/up.png";
+								}
+							}
+							welcome = true;
+							right = false;
+							left = false;
+							down = false;
+							keyPush = true;
+							link.updateImage();
+						}
+
+						// down
+						if (map[40]) {
+							down = true;
+
+							if (map[40] && map[69]) {
+								if (zoneDetection(link, swimmingPool)) {
+										link.image = "img/left_swim.png";
+								} else {
+									link.numberOfFrames = 7;
+									link.width = 270;
+									link.image = "img/down_sword.png";
+									checkEnemyLife()
+								}
+							}
+							if (map[40] && map[83]) {
+								link.speed = speedIncrease;
+								link.ticksPerFrame = tickPerFrameIncrease;
+							}
+							link.direction = "down";
+							outOfZone(link);
+							if (zoneDetection(link, swimmingPool)) {
+									link.image = "img/down_swim.png";``
+							} else {
+								if (equip == true) {
+									link.image = "img/down_shield.png";
+								} else {
+									link.image = "img/down.png";
+								}
+							}
+							welcome = true;
+							right = false;
+							up = false;
+							left = false;
+							keyPush = true;
+							link.updateImage();
+						}
+
+
+						// SWORD --------------------------------
+						if (map[69]) {
+							if (zoneDetection(link, swimmingPool)) {
+									link.image = "img/left_swim.png";
+							} else {
 								link.numberOfFrames = 7;
 								link.width = 270;
-								link.image = "img/right_sword.png";
+								if (right == true) {
+									link.image = "img/right_sword.png";
+								} else if (left == true) {
+									link.image = "img/left_sword.png";
+								} else if (down == true ) {
+									link.image = "img/down_sword.png";
+								} else if (up == true ) {
+									link.image = "img/up_sword.png";
+								}
 								checkEnemyLife()
+								cutCheck(herbs);
 							}
+							keyPush = true;
+							link.updateImage();
 						}
-						if (map[39] && map[83]) {
-							link.speed = speedIncrease;
-							link.ticksPerFrame = tickPerFrameIncrease;
-						}
-						link.direction = "right";
-						outOfZone(link);
-						if (zoneDetection(link, swimmingPool)) {
+
+
+						// ACTION ------------------------------
+						if (map[88] ) {
+							if (zoneDetection(link, swimmingPool)) {
 								link.image = "img/right_swim.png";
-						} else {
-							if (equip == true) {
-								link.image = "img/right_shield.png";
 							} else {
-								link.image = "img/right.png";
+								if (equip == false) {
+									link.image = "img/link_static_shield.png";
+									equip = true;
+								} else {
+									link.image = "img/link_static.png";
+									equip = false;
+								}
 							}
 						}
-						welcome = true;
-						left = false;
-						up = false;
-						down = false;
-						keyPush = true;
-						link.updateImage();
+						// play again
+						if (map[13] ) {
+							if (link.dead == true) {
+								location.reload();
+							}
+						}
+						// help bubble
+						if (map[72] ) {
+							if (help == false) {
+								help = true;
+							} else {
+								help = false;
+							}
+						}
 					}
-
-					// up
-					if (map[38]) {
-						up = true;
-
-						if (map[38] && map[69] ) {
-							if (zoneDetection(link, swimmingPool)) {
-									link.image = "img/left_swim.png";
-							} else {
-								link.numberOfFrames = 7;
-								link.width = 270;
-								link.image = "img/up_sword.png";
-								checkEnemyLife()
-							}
-						}
-						if (map[38] && map[83]) {
-							link.speed = speedIncrease;
-							link.ticksPerFrame = tickPerFrameIncrease;
-						}
-						link.direction = "up";
-						outOfZone(link);
-						if (zoneDetection(link, swimmingPool)) {
-								link.image = "img/up_swim.png";
-						} else {
-							if (equip == true) {
-								link.image = "img/up_shield.png";
-							} else {
-								link.image = "img/up.png";
-							}
-						}
-						welcome = true;
-						right = false;
-						left = false;
-						down = false;
-						keyPush = true;
-						link.updateImage();
+				}).keyup(function(e) {
+					keyPush = false;
+					link.direction = "";
+					if (e.keyCode in map) {
+						link.speed = speedInit;
+						link.ticksPerFrame = 4;
+						map[e.keyCode] = false;
 					}
-
-					// down
-					if (map[40]) {
-						down = true;
-
-						if (map[40] && map[69]) {
-							if (zoneDetection(link, swimmingPool)) {
-									link.image = "img/left_swim.png";
-							} else {
-								link.numberOfFrames = 7;
-								link.width = 270;
-								link.image = "img/down_sword.png";
-								checkEnemyLife()
-							}
-						}
-						if (map[40] && map[83]) {
-							link.speed = speedIncrease;
-							link.ticksPerFrame = tickPerFrameIncrease;
-						}
-						link.direction = "down";
-						outOfZone(link);
-						if (zoneDetection(link, swimmingPool)) {
-								link.image = "img/down_swim.png";``
-						} else {
-							if (equip == true) {
-								link.image = "img/down_shield.png";
-							} else {
-								link.image = "img/down.png";
-							}
-						}
-						welcome = true;
-						right = false;
-						up = false;
-						left = false;
-						keyPush = true;
-						link.updateImage();
-					}
-
-
-					// SWORD --------------------------------
-					if (map[69]) {
-						if (zoneDetection(link, swimmingPool)) {
-								link.image = "img/left_swim.png";
-						} else {
-							link.numberOfFrames = 7;
-							link.width = 270;
+					if (zoneDetection(link, swimmingPool)) {
+						link.numberOfFrames = 10;
+						link.width = 380;
+						link.image = "img/down_swim.png";
+					} else {
+						link.numberOfFrames = 10;
+						link.width = 380;
+						if (equip == true) {
 							if (right == true) {
-								link.image = "img/right_sword.png";
+								link.image = "img/right_shield_static.png";
 							} else if (left == true) {
-								link.image = "img/left_sword.png";
-							} else if (down == true ) {
-								link.image = "img/down_sword.png";
-							} else if (up == true ) {
-								link.image = "img/up_sword.png";
-							}
-							checkEnemyLife()
-							cutCheck(herbs);
-						}
-						keyPush = true;
-						link.updateImage();
-					}
-
-
-					// ACTION ------------------------------
-					if (map[88] ) {
-						if (zoneDetection(link, swimmingPool)) {
-							link.image = "img/right_swim.png";
-						} else {
-							if (equip == false) {
+								link.image = "img/left_shield_static.png";
+							} else if (up == true) {
+								link.image = "img/up_shield_static.png";
+							} else {
 								link.image = "img/link_static_shield.png";
-								equip = true;
+							}
+
+						} else {
+							if (right == true) {
+								link.image = "img/static_right.png";
+							} else if (left == true) {
+								link.image = "img/static_left.png";
+							} else if (up == true) {
+								link.image = "img/static_up.png";
 							} else {
 								link.image = "img/link_static.png";
-								equip = false;
 							}
 						}
 					}
-					// play again
-					if (map[13] ) {
-						if (link.dead == true) {
-							location.reload();
-						}
-					}
-					// help bubble
-					if (map[72] ) {
-						if (help == false) {
-							help = true;
-						} else {
-							help = false;
-						}
-					}
-				}
-			}).keyup(function(e) {
-				keyPush = false;
-				link.direction = "";
-				if (e.keyCode in map) {
-					link.speed = speedInit;
-					link.ticksPerFrame = 4;
-					map[e.keyCode] = false;
-				}
-				if (zoneDetection(link, swimmingPool)) {
-					link.numberOfFrames = 10;
-					link.width = 380;
-					link.image = "img/down_swim.png";
-				} else {
-					link.numberOfFrames = 10;
-					link.width = 380;
-					if (equip == true) {
-						if (right == true) {
-							link.image = "img/right_shield_static.png";
-						} else if (left == true) {
-							link.image = "img/left_shield_static.png";
-						} else if (up == true) {
-							link.image = "img/up_shield_static.png";
-						} else {
-							link.image = "img/link_static_shield.png";
-						}
-
-					} else {
-						if (right == true) {
-							link.image = "img/static_right.png";
-						} else if (left == true) {
-							link.image = "img/static_left.png";
-						} else if (up == true) {
-							link.image = "img/static_up.png";
-						} else {
-							link.image = "img/link_static.png";
-						}
-					}
-				}
-				link.updateImage();
-			});
-	});
+					link.updateImage();
+				});
+		});
 })();
