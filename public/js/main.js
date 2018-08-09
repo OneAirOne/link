@@ -377,7 +377,6 @@
 	}
 
 
-
 	/**
 	 * Redirect on key press
 	 *
