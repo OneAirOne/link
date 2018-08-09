@@ -11,8 +11,6 @@
 
 	var canvas = document.getElementById("map");
 	canvas.width = document.body.clientWidth;
-	canvas.height = document.body.clientHeight;
-	// canvas.width = window.innerWidth;
 	canvas.height = window.innerHeight;
 	var ctx = canvas.getContext("2d");
 
