@@ -170,6 +170,28 @@
 	}
 
 	/**
+	 * avoid an object to go out of the screen
+	 *
+	 * @param  {object} object element
+	 * @return {void}
+	 */
+	function outOfZone(object) {
+		if (object.posX > canvas.width + 30) {
+			object.posX = 0;
+		}
+		if (object.posX < -30) {
+			object.posX = canvas.width;
+		}
+		if (object.poY > (canvas.height / 2)) {
+			window.scrollTo(0, canvas.height);
+			// object.posY = 1500;
+		}
+		if (object.posY < 0) {
+			object.posY = window.innerHeight;
+		}
+	}
+
+	/**
 	 * Detect colition between a personnage and an object
 	 *
 	 * @param  {object} personnage link
@@ -351,7 +373,7 @@
 	var left = false;
 	var up = false;
 	var down = false;
-	var speed = 9;
+	var speed = 7;
 
 	/* MAIN */
 	init();
@@ -387,6 +409,7 @@
 						down = false;
 						link.direction = "up";
 						link.image = "img/up.png";
+						outOfZone(link);
 						link.updateImage();
 						break;
 
@@ -409,6 +432,7 @@
 						down = false;
 						link.direction = "left";
 						link.image = "img/left.png";
+						outOfZone(link);
 						link.updateImage();
 						break;
 
@@ -420,6 +444,7 @@
 						down = false;
 						link.direction = "right";
 						link.image = "img/right.png";
+						outOfZone(link);
 						link.updateImage();
 						break;
 
