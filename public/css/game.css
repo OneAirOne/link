@@ -203,6 +203,13 @@ td {
 	margin-right: 10%;
 }
 
+#introPepper {
+	Line-Height: 2;
+	margin-top: 1%;
+	margin-left: 15%;
+	margin-right: 10%;
+}
+
 #puissance4Description {
 	float: right;
 	width: 30%;
@@ -413,3 +420,19 @@ footer {
   transition-property: all;
   transition-timing-function: cubic-bezier(0.7, 1, 0.7, 1);
 }
+
+.pepper-link {
+	color: black;
+	text-decoration: none;
+}
+.pepper-img {
+	/* max-height: 600px; */
+	display: block;
+	margin: auto;
+	/* float: right; */
+	/* margin-top: 5%; */
+	width: 75%;
+	height: 75%;
+}
+
+
