@@ -322,8 +322,8 @@
 	}
 
 	var cv = new FixedSprite({
-		width		: 1000, 
-		height	: 1439,
+		width		: 992, 
+		height	: 1403,
 		image		: "img/cv.png",
 		posX		: 0,
 		posY		: 150
