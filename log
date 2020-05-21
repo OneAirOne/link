@@ -1,0 +1,1133 @@
+hightScore undefined
+{ [Error: ENOENT: no such file or directory, open '../hightScore.json']
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '../hightScore.json' }
+SyntaxError: Unexpected token u in JSON at position 0
+    at JSON.parse (<anonymous>)
+    at ReadFileContext.fs.readFile [as callback] (/Users/oneairone/Lab/link/sockets/base.js:9:21)
+    at FSReqWrap.readFileAfterOpen [as oncomplete] (fs.js:238:13)
+hightScore undefined
+{ [Error: ENOENT: no such file or directory, open '../hightScore.json']
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '../hightScore.json' }
+SyntaxError: Unexpected token u in JSON at position 0
+    at JSON.parse (<anonymous>)
+    at ReadFileContext.fs.readFile [as callback] (/Users/oneairone/Lab/link/sockets/base.js:9:21)
+    at FSReqWrap.readFileAfterOpen [as oncomplete] (fs.js:238:13)
+hightScore undefined
+{ [Error: ENOENT: no such file or directory, open '../hightScore.json']
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '../hightScore.json' }
+SyntaxError: Unexpected token u in JSON at position 0
+    at JSON.parse (<anonymous>)
+    at ReadFileContext.fs.readFile [as callback] (/Users/oneairone/Lab/link/sockets/base.js:9:21)
+    at FSReqWrap.readFileAfterOpen [as oncomplete] (fs.js:238:13)
+hightScore undefined
+{ [Error: ENOENT: no such file or directory, open '../hightScore.json']
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '../hightScore.json' }
+SyntaxError: Unexpected token u in JSON at position 0
+    at JSON.parse (<anonymous>)
+    at ReadFileContext.fs.readFile [as callback] (/Users/oneairone/Lab/link/sockets/base.js:9:21)
+    at FSReqWrap.readFileAfterOpen [as oncomplete] (fs.js:238:13)
+hightScore undefined
+{ [Error: ENOENT: no such file or directory, open '../hightScore.json']
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '../hightScore.json' }
+SyntaxError: Unexpected token u in JSON at position 0
+    at JSON.parse (<anonymous>)
+    at ReadFileContext.fs.readFile [as callback] (/Users/oneairone/Lab/link/sockets/base.js:9:21)
+    at FSReqWrap.readFileAfterOpen [as oncomplete] (fs.js:238:13)
+hightScore undefined
+{ [Error: ENOENT: no such file or directory, open '../hightScore.json']
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '../hightScore.json' }
+SyntaxError: Unexpected token u in JSON at position 0
+    at JSON.parse (<anonymous>)
+    at ReadFileContext.fs.readFile [as callback] (/Users/oneairone/Lab/link/sockets/base.js:9:21)
+    at FSReqWrap.readFileAfterOpen [as oncomplete] (fs.js:238:13)
+hightScore undefined
+{ [Error: ENOENT: no such file or directory, open '../hightScore.json']
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '../hightScore.json' }
+SyntaxError: Unexpected token u in JSON at position 0
+    at JSON.parse (<anonymous>)
+    at ReadFileContext.fs.readFile [as callback] (/Users/oneairone/Lab/link/sockets/base.js:9:21)
+    at FSReqWrap.readFileAfterOpen [as oncomplete] (fs.js:238:13)
+hightScore undefined
+{ [Error: ENOENT: no such file or directory, open '../hightScore.json']
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '../hightScore.json' }
+SyntaxError: Unexpected token u in JSON at position 0
+    at JSON.parse (<anonymous>)
+    at ReadFileContext.fs.readFile [as callback] (/Users/oneairone/Lab/link/sockets/base.js:9:21)
+    at FSReqWrap.readFileAfterOpen [as oncomplete] (fs.js:238:13)
+hightScore undefined
+{ [Error: ENOENT: no such file or directory, open '../hightScore.json']
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '../hightScore.json' }
+SyntaxError: Unexpected token u in JSON at position 0
+    at JSON.parse (<anonymous>)
+    at ReadFileContext.fs.readFile [as callback] (/Users/oneairone/Lab/link/sockets/base.js:9:21)
+    at FSReqWrap.readFileAfterOpen [as oncomplete] (fs.js:238:13)
+hightScore undefined
+{ [Error: ENOENT: no such file or directory, open '../hightScore.json']
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '../hightScore.json' }
+SyntaxError: Unexpected token u in JSON at position 0
+    at JSON.parse (<anonymous>)
+    at ReadFileContext.fs.readFile [as callback] (/Users/oneairone/Lab/link/sockets/base.js:9:21)
+    at FSReqWrap.readFileAfterOpen [as oncomplete] (fs.js:238:13)
+hightScore undefined
+{ [Error: ENOENT: no such file or directory, open '../hightScore.json']
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '../hightScore.json' }
+SyntaxError: Unexpected token u in JSON at position 0
+    at JSON.parse (<anonymous>)
+    at ReadFileContext.fs.readFile [as callback] (/Users/oneairone/Lab/link/sockets/base.js:9:21)
+    at FSReqWrap.readFileAfterOpen [as oncomplete] (fs.js:238:13)
+hightScore undefined
+{ [Error: ENOENT: no such file or directory, open '../hightScore.json']
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '../hightScore.json' }
+SyntaxError: Unexpected token u in JSON at position 0
+    at JSON.parse (<anonymous>)
+    at ReadFileContext.fs.readFile [as callback] (/Users/oneairone/Lab/link/sockets/base.js:9:21)
+    at FSReqWrap.readFileAfterOpen [as oncomplete] (fs.js:238:13)
+hightScore undefined
+{ [Error: ENOENT: no such file or directory, open '../hightScore.json']
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '../hightScore.json' }
+SyntaxError: Unexpected token u in JSON at position 0
+    at JSON.parse (<anonymous>)
+    at ReadFileContext.fs.readFile [as callback] (/Users/oneairone/Lab/link/sockets/base.js:9:21)
+    at FSReqWrap.readFileAfterOpen [as oncomplete] (fs.js:238:13)
+hightScore undefined
+{ [Error: ENOENT: no such file or directory, open '../hightScore.json']
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '../hightScore.json' }
+SyntaxError: Unexpected token u in JSON at position 0
+    at JSON.parse (<anonymous>)
+    at ReadFileContext.fs.readFile [as callback] (/Users/oneairone/Lab/link/sockets/base.js:9:21)
+    at FSReqWrap.readFileAfterOpen [as oncomplete] (fs.js:238:13)
+hightScore undefined
+{ [Error: ENOENT: no such file or directory, open '../hightScore.json']
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '../hightScore.json' }
+SyntaxError: Unexpected token u in JSON at position 0
+    at JSON.parse (<anonymous>)
+    at ReadFileContext.fs.readFile [as callback] (/Users/oneairone/Lab/link/sockets/base.js:9:21)
+    at FSReqWrap.readFileAfterOpen [as oncomplete] (fs.js:238:13)
+hightScore undefined
+{ [Error: ENOENT: no such file or directory, open '../hightScore.json']
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '../hightScore.json' }
+SyntaxError: Unexpected token u in JSON at position 0
+    at JSON.parse (<anonymous>)
+    at ReadFileContext.fs.readFile [as callback] (/Users/oneairone/Lab/link/sockets/base.js:9:21)
+    at FSReqWrap.readFileAfterOpen [as oncomplete] (fs.js:238:13)
+hightScore undefined
+hightScore undefined
+hightScore undefined
+hightScore undefined
+readfile
+hightScore undefined
+readfile {"hightScore":[14000,7500,3455],"playerName":["Tib","Tib","OneAir"]}
+hightScore undefined
+hightScore undefined
+hightScore undefined
+hightScore undefined
+hightScore undefined
+SyntaxError: Unexpected token u in JSON at position 0
+    at JSON.parse (<anonymous>)
+    at fs.readFile (/Users/oneairone/Lab/link/sockets/base.js:74:25)
+    at FSReqWrap.readFileAfterClose [as oncomplete] (internal/fs/read_file_context.js:53:3)
+highscore undefined
+{ Error: ENOENT: no such file or directory, open './highscore.json'
+    at Object.openSync (fs.js:439:3)
+    at Object.readFileSync (fs.js:344:35)
+    at module.exports (/Users/oneairone/Lab/link/sockets/base.js:15:6)
+    at Object.<anonymous> (/Users/oneairone/Lab/link/bin/www:38:27)
+    at Module._compile (internal/modules/cjs/loader.js:689:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:700:10)
+    at Module.load (internal/modules/cjs/loader.js:599:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:538:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:530:3)
+    at Object.<anonymous> (/usr/local/lib/node_modules/pm2/lib/ProcessContainerFork.js:32:23)
+  errno: -2,
+  syscall: 'open',
+  code: 'ENOENT',
+  path: './highscore.json' }
+{ Error: ENOENT: no such file or directory, open './highscore.json'
+    at Object.openSync (fs.js:439:3)
+    at Object.readFileSync (fs.js:344:35)
+    at module.exports (/Users/oneairone/Lab/link/sockets/base.js:15:6)
+    at Object.<anonymous> (/Users/oneairone/Lab/link/bin/www:38:27)
+    at Module._compile (internal/modules/cjs/loader.js:689:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:700:10)
+    at Module.load (internal/modules/cjs/loader.js:599:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:538:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:530:3)
+    at Object.<anonymous> (/usr/local/lib/node_modules/pm2/lib/ProcessContainerFork.js:32:23)
+  errno: -2,
+  syscall: 'open',
+  code: 'ENOENT',
+  path: './highscore.json' }
+{ Error: ENOENT: no such file or directory, open './highscore.json'
+    at Object.openSync (fs.js:439:3)
+    at Object.readFileSync (fs.js:344:35)
+    at module.exports (/Users/oneairone/Lab/link/sockets/base.js:15:6)
+    at Object.<anonymous> (/Users/oneairone/Lab/link/bin/www:38:27)
+    at Module._compile (internal/modules/cjs/loader.js:689:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:700:10)
+    at Module.load (internal/modules/cjs/loader.js:599:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:538:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:530:3)
+    at Object.<anonymous> (/usr/local/lib/node_modules/pm2/lib/ProcessContainerFork.js:32:23)
+  errno: -2,
+  syscall: 'open',
+  code: 'ENOENT',
+  path: './highscore.json' }
+{ Error: ENOENT: no such file or directory, open './highscore.json'
+    at Object.openSync (fs.js:439:3)
+    at Object.readFileSync (fs.js:344:35)
+    at module.exports (/Users/oneairone/Lab/link/sockets/base.js:15:6)
+    at Object.<anonymous> (/Users/oneairone/Lab/link/bin/www:38:27)
+    at Module._compile (internal/modules/cjs/loader.js:689:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:700:10)
+    at Module.load (internal/modules/cjs/loader.js:599:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:538:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:530:3)
+    at Object.<anonymous> (/usr/local/lib/node_modules/pm2/lib/ProcessContainerFork.js:32:23)
+  errno: -2,
+  syscall: 'open',
+  code: 'ENOENT',
+  path: './highscore.json' }
+{ Error: ENOENT: no such file or directory, open './highscore.json'
+    at Object.openSync (fs.js:439:3)
+    at Object.readFileSync (fs.js:344:35)
+    at module.exports (/Users/oneairone/Lab/link/sockets/base.js:15:6)
+    at Object.<anonymous> (/Users/oneairone/Lab/link/bin/www:38:27)
+    at Module._compile (internal/modules/cjs/loader.js:689:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:700:10)
+    at Module.load (internal/modules/cjs/loader.js:599:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:538:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:530:3)
+    at Object.<anonymous> (/usr/local/lib/node_modules/pm2/lib/ProcessContainerFork.js:32:23)
+  errno: -2,
+  syscall: 'open',
+  code: 'ENOENT',
+  path: './highscore.json' }
+{ Error: ENOENT: no such file or directory, open './highscore.json'
+    at Object.openSync (fs.js:439:3)
+    at Object.readFileSync (fs.js:344:35)
+    at module.exports (/Users/oneairone/Lab/link/sockets/base.js:15:6)
+    at Object.<anonymous> (/Users/oneairone/Lab/link/bin/www:38:27)
+    at Module._compile (internal/modules/cjs/loader.js:689:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:700:10)
+    at Module.load (internal/modules/cjs/loader.js:599:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:538:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:530:3)
+    at Object.<anonymous> (/usr/local/lib/node_modules/pm2/lib/ProcessContainerFork.js:32:23)
+  errno: -2,
+  syscall: 'open',
+  code: 'ENOENT',
+  path: './highscore.json' }
+{ Error: ENOENT: no such file or directory, open './highscore.json'
+    at Object.openSync (fs.js:439:3)
+    at Object.readFileSync (fs.js:344:35)
+    at module.exports (/Users/oneairone/Lab/link/sockets/base.js:15:6)
+    at Object.<anonymous> (/Users/oneairone/Lab/link/bin/www:38:27)
+    at Module._compile (internal/modules/cjs/loader.js:689:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:700:10)
+    at Module.load (internal/modules/cjs/loader.js:599:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:538:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:530:3)
+    at Object.<anonymous> (/usr/local/lib/node_modules/pm2/lib/ProcessContainerFork.js:32:23)
+  errno: -2,
+  syscall: 'open',
+  code: 'ENOENT',
+  path: './highscore.json' }
+{ Error: ENOENT: no such file or directory, open './highscore.json'
+    at Object.openSync (fs.js:439:3)
+    at Object.readFileSync (fs.js:344:35)
+    at module.exports (/Users/oneairone/Lab/link/sockets/base.js:15:6)
+    at Object.<anonymous> (/Users/oneairone/Lab/link/bin/www:38:27)
+    at Module._compile (internal/modules/cjs/loader.js:689:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:700:10)
+    at Module.load (internal/modules/cjs/loader.js:599:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:538:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:530:3)
+    at Object.<anonymous> (/usr/local/lib/node_modules/pm2/lib/ProcessContainerFork.js:32:23)
+  errno: -2,
+  syscall: 'open',
+  code: 'ENOENT',
+  path: './highscore.json' }
+{ Error: ENOENT: no such file or directory, open './highscore.json'
+    at Object.openSync (fs.js:439:3)
+    at Object.readFileSync (fs.js:344:35)
+    at module.exports (/Users/oneairone/Lab/link/sockets/base.js:15:6)
+    at Object.<anonymous> (/Users/oneairone/Lab/link/bin/www:38:27)
+    at Module._compile (internal/modules/cjs/loader.js:689:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:700:10)
+    at Module.load (internal/modules/cjs/loader.js:599:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:538:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:530:3)
+    at Object.<anonymous> (/usr/local/lib/node_modules/pm2/lib/ProcessContainerFork.js:32:23)
+  errno: -2,
+  syscall: 'open',
+  code: 'ENOENT',
+  path: './highscore.json' }
+{ Error: ENOENT: no such file or directory, open './highscore.json'
+    at Object.openSync (fs.js:439:3)
+    at Object.readFileSync (fs.js:344:35)
+    at module.exports (/Users/oneairone/Lab/link/sockets/base.js:15:6)
+    at Object.<anonymous> (/Users/oneairone/Lab/link/bin/www:38:27)
+    at Module._compile (internal/modules/cjs/loader.js:689:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:700:10)
+    at Module.load (internal/modules/cjs/loader.js:599:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:538:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:530:3)
+    at Object.<anonymous> (/usr/local/lib/node_modules/pm2/lib/ProcessContainerFork.js:32:23)
+  errno: -2,
+  syscall: 'open',
+  code: 'ENOENT',
+  path: './highscore.json' }
+{ Error: ENOENT: no such file or directory, open './highscore.json'
+    at Object.openSync (fs.js:439:3)
+    at Object.readFileSync (fs.js:344:35)
+    at module.exports (/Users/oneairone/Lab/link/sockets/base.js:15:6)
+    at Object.<anonymous> (/Users/oneairone/Lab/link/bin/www:38:27)
+    at Module._compile (internal/modules/cjs/loader.js:689:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:700:10)
+    at Module.load (internal/modules/cjs/loader.js:599:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:538:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:530:3)
+    at Object.<anonymous> (/usr/local/lib/node_modules/pm2/lib/ProcessContainerFork.js:32:23)
+  errno: -2,
+  syscall: 'open',
+  code: 'ENOENT',
+  path: './highscore.json' }
+{ Error: ENOENT: no such file or directory, open './highscore.json'
+    at Object.openSync (fs.js:439:3)
+    at Object.readFileSync (fs.js:344:35)
+    at module.exports (/Users/oneairone/Lab/link/sockets/base.js:15:6)
+    at Object.<anonymous> (/Users/oneairone/Lab/link/bin/www:38:27)
+    at Module._compile (internal/modules/cjs/loader.js:689:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:700:10)
+    at Module.load (internal/modules/cjs/loader.js:599:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:538:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:530:3)
+    at Object.<anonymous> (/usr/local/lib/node_modules/pm2/lib/ProcessContainerFork.js:32:23)
+  errno: -2,
+  syscall: 'open',
+  code: 'ENOENT',
+  path: './highscore.json' }
+{ Error: ENOENT: no such file or directory, open './highscore.json'
+    at Object.openSync (fs.js:439:3)
+    at Object.readFileSync (fs.js:344:35)
+    at module.exports (/Users/oneairone/Lab/link/sockets/base.js:15:6)
+    at Object.<anonymous> (/Users/oneairone/Lab/link/bin/www:38:27)
+    at Module._compile (internal/modules/cjs/loader.js:689:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:700:10)
+    at Module.load (internal/modules/cjs/loader.js:599:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:538:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:530:3)
+    at Object.<anonymous> (/usr/local/lib/node_modules/pm2/lib/ProcessContainerFork.js:32:23)
+  errno: -2,
+  syscall: 'open',
+  code: 'ENOENT',
+  path: './highscore.json' }
+{ Error: ENOENT: no such file or directory, open './highscore.json'
+    at Object.openSync (fs.js:439:3)
+    at Object.readFileSync (fs.js:344:35)
+    at module.exports (/Users/oneairone/Lab/link/sockets/base.js:15:6)
+    at Object.<anonymous> (/Users/oneairone/Lab/link/bin/www:38:27)
+    at Module._compile (internal/modules/cjs/loader.js:689:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:700:10)
+    at Module.load (internal/modules/cjs/loader.js:599:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:538:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:530:3)
+    at Object.<anonymous> (/usr/local/lib/node_modules/pm2/lib/ProcessContainerFork.js:32:23)
+  errno: -2,
+  syscall: 'open',
+  code: 'ENOENT',
+  path: './highscore.json' }
+{ Error: ENOENT: no such file or directory, open './highscore.json'
+    at Object.openSync (fs.js:439:3)
+    at Object.readFileSync (fs.js:344:35)
+    at module.exports (/Users/oneairone/Lab/link/sockets/base.js:15:6)
+    at Object.<anonymous> (/Users/oneairone/Lab/link/bin/www:38:27)
+    at Module._compile (internal/modules/cjs/loader.js:689:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:700:10)
+    at Module.load (internal/modules/cjs/loader.js:599:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:538:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:530:3)
+    at Object.<anonymous> (/usr/local/lib/node_modules/pm2/lib/ProcessContainerFork.js:32:23)
+  errno: -2,
+  syscall: 'open',
+  code: 'ENOENT',
+  path: './highscore.json' }
+{ Error: ENOENT: no such file or directory, open './highscore.json'
+    at Object.openSync (fs.js:439:3)
+    at Object.readFileSync (fs.js:344:35)
+    at module.exports (/Users/oneairone/Lab/link/sockets/base.js:15:6)
+    at Object.<anonymous> (/Users/oneairone/Lab/link/bin/www:38:27)
+    at Module._compile (internal/modules/cjs/loader.js:689:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:700:10)
+    at Module.load (internal/modules/cjs/loader.js:599:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:538:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:530:3)
+    at Object.<anonymous> (/usr/local/lib/node_modules/pm2/lib/ProcessContainerFork.js:32:23)
+  errno: -2,
+  syscall: 'open',
+  code: 'ENOENT',
+  path: './highscore.json' }
+{ Error: ENOENT: no such file or directory, open '../highscore.json'
+    at Object.openSync (fs.js:439:3)
+    at Object.readFileSync (fs.js:344:35)
+    at module.exports (/Users/oneairone/Lab/link/sockets/base.js:15:6)
+    at Object.<anonymous> (/Users/oneairone/Lab/link/bin/www:38:27)
+    at Module._compile (internal/modules/cjs/loader.js:689:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:700:10)
+    at Module.load (internal/modules/cjs/loader.js:599:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:538:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:530:3)
+    at Object.<anonymous> (/usr/local/lib/node_modules/pm2/lib/ProcessContainerFork.js:32:23)
+  errno: -2,
+  syscall: 'open',
+  code: 'ENOENT',
+  path: '../highscore.json' }
+{ Error: ENOENT: no such file or directory, open '../highscore.json'
+    at Object.openSync (fs.js:439:3)
+    at Object.readFileSync (fs.js:344:35)
+    at module.exports (/Users/oneairone/Lab/link/sockets/base.js:15:6)
+    at Object.<anonymous> (/Users/oneairone/Lab/link/bin/www:38:27)
+    at Module._compile (internal/modules/cjs/loader.js:689:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:700:10)
+    at Module.load (internal/modules/cjs/loader.js:599:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:538:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:530:3)
+    at Object.<anonymous> (/usr/local/lib/node_modules/pm2/lib/ProcessContainerFork.js:32:23)
+  errno: -2,
+  syscall: 'open',
+  code: 'ENOENT',
+  path: '../highscore.json' }
+{ Error: ENOENT: no such file or directory, open '../highscore.json'
+    at Object.openSync (fs.js:439:3)
+    at Object.readFileSync (fs.js:344:35)
+    at module.exports (/Users/oneairone/Lab/link/sockets/base.js:15:6)
+    at Object.<anonymous> (/Users/oneairone/Lab/link/bin/www:38:27)
+    at Module._compile (internal/modules/cjs/loader.js:689:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:700:10)
+    at Module.load (internal/modules/cjs/loader.js:599:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:538:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:530:3)
+    at Object.<anonymous> (/usr/local/lib/node_modules/pm2/lib/ProcessContainerFork.js:32:23)
+  errno: -2,
+  syscall: 'open',
+  code: 'ENOENT',
+  path: '../highscore.json' }
+{ Error: ENOENT: no such file or directory, open '../highscore.json'
+    at Object.openSync (fs.js:439:3)
+    at Object.readFileSync (fs.js:344:35)
+    at module.exports (/Users/oneairone/Lab/link/sockets/base.js:15:6)
+    at Object.<anonymous> (/Users/oneairone/Lab/link/bin/www:38:27)
+    at Module._compile (internal/modules/cjs/loader.js:689:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:700:10)
+    at Module.load (internal/modules/cjs/loader.js:599:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:538:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:530:3)
+    at Object.<anonymous> (/usr/local/lib/node_modules/pm2/lib/ProcessContainerFork.js:32:23)
+  errno: -2,
+  syscall: 'open',
+  code: 'ENOENT',
+  path: '../highscore.json' }
+{ Error: ENOENT: no such file or directory, open '../highscore.json'
+    at Object.openSync (fs.js:439:3)
+    at Object.readFileSync (fs.js:344:35)
+    at module.exports (/Users/oneairone/Lab/link/sockets/base.js:15:6)
+    at Object.<anonymous> (/Users/oneairone/Lab/link/bin/www:38:27)
+    at Module._compile (internal/modules/cjs/loader.js:689:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:700:10)
+    at Module.load (internal/modules/cjs/loader.js:599:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:538:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:530:3)
+    at Object.<anonymous> (/usr/local/lib/node_modules/pm2/lib/ProcessContainerFork.js:32:23)
+  errno: -2,
+  syscall: 'open',
+  code: 'ENOENT',
+  path: '../highscore.json' }
+{ Error: ENOENT: no such file or directory, open '../highscore.json'
+    at Object.openSync (fs.js:439:3)
+    at Object.readFileSync (fs.js:344:35)
+    at module.exports (/Users/oneairone/Lab/link/sockets/base.js:15:6)
+    at Object.<anonymous> (/Users/oneairone/Lab/link/bin/www:38:27)
+    at Module._compile (internal/modules/cjs/loader.js:689:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:700:10)
+    at Module.load (internal/modules/cjs/loader.js:599:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:538:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:530:3)
+    at Object.<anonymous> (/usr/local/lib/node_modules/pm2/lib/ProcessContainerFork.js:32:23)
+  errno: -2,
+  syscall: 'open',
+  code: 'ENOENT',
+  path: '../highscore.json' }
+{ Error: ENOENT: no such file or directory, open '../highscore.json'
+    at Object.openSync (fs.js:439:3)
+    at Object.readFileSync (fs.js:344:35)
+    at module.exports (/Users/oneairone/Lab/link/sockets/base.js:15:6)
+    at Object.<anonymous> (/Users/oneairone/Lab/link/bin/www:38:27)
+    at Module._compile (internal/modules/cjs/loader.js:689:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:700:10)
+    at Module.load (internal/modules/cjs/loader.js:599:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:538:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:530:3)
+    at Object.<anonymous> (/usr/local/lib/node_modules/pm2/lib/ProcessContainerFork.js:32:23)
+  errno: -2,
+  syscall: 'open',
+  code: 'ENOENT',
+  path: '../highscore.json' }
+{ Error: ENOENT: no such file or directory, open '../highscore.json'
+    at Object.openSync (fs.js:439:3)
+    at Object.readFileSync (fs.js:344:35)
+    at module.exports (/Users/oneairone/Lab/link/sockets/base.js:15:6)
+    at Object.<anonymous> (/Users/oneairone/Lab/link/bin/www:38:27)
+    at Module._compile (internal/modules/cjs/loader.js:689:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:700:10)
+    at Module.load (internal/modules/cjs/loader.js:599:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:538:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:530:3)
+    at Object.<anonymous> (/usr/local/lib/node_modules/pm2/lib/ProcessContainerFork.js:32:23)
+  errno: -2,
+  syscall: 'open',
+  code: 'ENOENT',
+  path: '../highscore.json' }
+{ Error: ENOENT: no such file or directory, open '../highscore.json'
+    at Object.openSync (fs.js:439:3)
+    at Object.readFileSync (fs.js:344:35)
+    at module.exports (/Users/oneairone/Lab/link/sockets/base.js:15:6)
+    at Object.<anonymous> (/Users/oneairone/Lab/link/bin/www:38:27)
+    at Module._compile (internal/modules/cjs/loader.js:689:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:700:10)
+    at Module.load (internal/modules/cjs/loader.js:599:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:538:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:530:3)
+    at Object.<anonymous> (/usr/local/lib/node_modules/pm2/lib/ProcessContainerFork.js:32:23)
+  errno: -2,
+  syscall: 'open',
+  code: 'ENOENT',
+  path: '../highscore.json' }
+{ Error: ENOENT: no such file or directory, open '../highscore.json'
+    at Object.openSync (fs.js:439:3)
+    at Object.readFileSync (fs.js:344:35)
+    at module.exports (/Users/oneairone/Lab/link/sockets/base.js:15:6)
+    at Object.<anonymous> (/Users/oneairone/Lab/link/bin/www:38:27)
+    at Module._compile (internal/modules/cjs/loader.js:689:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:700:10)
+    at Module.load (internal/modules/cjs/loader.js:599:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:538:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:530:3)
+    at Object.<anonymous> (/usr/local/lib/node_modules/pm2/lib/ProcessContainerFork.js:32:23)
+  errno: -2,
+  syscall: 'open',
+  code: 'ENOENT',
+  path: '../highscore.json' }
+{ Error: ENOENT: no such file or directory, open '../highscore.json'
+    at Object.openSync (fs.js:439:3)
+    at Object.readFileSync (fs.js:344:35)
+    at module.exports (/Users/oneairone/Lab/link/sockets/base.js:15:6)
+    at Object.<anonymous> (/Users/oneairone/Lab/link/bin/www:38:27)
+    at Module._compile (internal/modules/cjs/loader.js:689:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:700:10)
+    at Module.load (internal/modules/cjs/loader.js:599:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:538:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:530:3)
+    at Object.<anonymous> (/usr/local/lib/node_modules/pm2/lib/ProcessContainerFork.js:32:23)
+  errno: -2,
+  syscall: 'open',
+  code: 'ENOENT',
+  path: '../highscore.json' }
+{ Error: ENOENT: no such file or directory, open '../highscore.json'
+    at Object.openSync (fs.js:439:3)
+    at Object.readFileSync (fs.js:344:35)
+    at module.exports (/Users/oneairone/Lab/link/sockets/base.js:15:6)
+    at Object.<anonymous> (/Users/oneairone/Lab/link/bin/www:38:27)
+    at Module._compile (internal/modules/cjs/loader.js:689:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:700:10)
+    at Module.load (internal/modules/cjs/loader.js:599:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:538:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:530:3)
+    at Object.<anonymous> (/usr/local/lib/node_modules/pm2/lib/ProcessContainerFork.js:32:23)
+  errno: -2,
+  syscall: 'open',
+  code: 'ENOENT',
+  path: '../highscore.json' }
+{ Error: ENOENT: no such file or directory, open '../highscore.json'
+    at Object.openSync (fs.js:439:3)
+    at Object.readFileSync (fs.js:344:35)
+    at module.exports (/Users/oneairone/Lab/link/sockets/base.js:15:6)
+    at Object.<anonymous> (/Users/oneairone/Lab/link/bin/www:38:27)
+    at Module._compile (internal/modules/cjs/loader.js:689:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:700:10)
+    at Module.load (internal/modules/cjs/loader.js:599:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:538:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:530:3)
+    at Object.<anonymous> (/usr/local/lib/node_modules/pm2/lib/ProcessContainerFork.js:32:23)
+  errno: -2,
+  syscall: 'open',
+  code: 'ENOENT',
+  path: '../highscore.json' }
+{ Error: ENOENT: no such file or directory, open '../highscore.json'
+    at Object.openSync (fs.js:439:3)
+    at Object.readFileSync (fs.js:344:35)
+    at module.exports (/Users/oneairone/Lab/link/sockets/base.js:15:6)
+    at Object.<anonymous> (/Users/oneairone/Lab/link/bin/www:38:27)
+    at Module._compile (internal/modules/cjs/loader.js:689:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:700:10)
+    at Module.load (internal/modules/cjs/loader.js:599:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:538:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:530:3)
+    at Object.<anonymous> (/usr/local/lib/node_modules/pm2/lib/ProcessContainerFork.js:32:23)
+  errno: -2,
+  syscall: 'open',
+  code: 'ENOENT',
+  path: '../highscore.json' }
+{ Error: ENOENT: no such file or directory, open '../highscore.json'
+    at Object.openSync (fs.js:439:3)
+    at Object.readFileSync (fs.js:344:35)
+    at module.exports (/Users/oneairone/Lab/link/sockets/base.js:15:6)
+    at Object.<anonymous> (/Users/oneairone/Lab/link/bin/www:38:27)
+    at Module._compile (internal/modules/cjs/loader.js:689:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:700:10)
+    at Module.load (internal/modules/cjs/loader.js:599:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:538:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:530:3)
+    at Object.<anonymous> (/usr/local/lib/node_modules/pm2/lib/ProcessContainerFork.js:32:23)
+  errno: -2,
+  syscall: 'open',
+  code: 'ENOENT',
+  path: '../highscore.json' }
+{ Error: ENOENT: no such file or directory, open '../highscore.json'
+    at Object.openSync (fs.js:439:3)
+    at Object.readFileSync (fs.js:344:35)
+    at module.exports (/Users/oneairone/Lab/link/sockets/base.js:15:6)
+    at Object.<anonymous> (/Users/oneairone/Lab/link/bin/www:38:27)
+    at Module._compile (internal/modules/cjs/loader.js:689:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:700:10)
+    at Module.load (internal/modules/cjs/loader.js:599:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:538:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:530:3)
+    at Object.<anonymous> (/usr/local/lib/node_modules/pm2/lib/ProcessContainerFork.js:32:23)
+  errno: -2,
+  syscall: 'open',
+  code: 'ENOENT',
+  path: '../highscore.json' }
+highscore undefined
+highscore undefined
+{ Error: ENOENT: no such file or directory, open '../highscore.json'
+    at Object.openSync (fs.js:439:3)
+    at Object.readFileSync (fs.js:344:35)
+    at module.exports (/Users/oneairone/Lab/link/sockets/base.js:15:6)
+    at Object.<anonymous> (/Users/oneairone/Lab/link/bin/www:38:27)
+    at Module._compile (internal/modules/cjs/loader.js:689:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:700:10)
+    at Module.load (internal/modules/cjs/loader.js:599:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:538:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:530:3)
+    at Object.<anonymous> (/usr/local/lib/node_modules/pm2/lib/ProcessContainerFork.js:32:23)
+  errno: -2,
+  syscall: 'open',
+  code: 'ENOENT',
+  path: '../highscore.json' }
+{ Error: ENOENT: no such file or directory, open '../highscore.json'
+    at Object.openSync (fs.js:439:3)
+    at Object.readFileSync (fs.js:344:35)
+    at module.exports (/Users/oneairone/Lab/link/sockets/base.js:15:6)
+    at Object.<anonymous> (/Users/oneairone/Lab/link/bin/www:38:27)
+    at Module._compile (internal/modules/cjs/loader.js:689:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:700:10)
+    at Module.load (internal/modules/cjs/loader.js:599:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:538:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:530:3)
+    at Object.<anonymous> (/usr/local/lib/node_modules/pm2/lib/ProcessContainerFork.js:32:23)
+  errno: -2,
+  syscall: 'open',
+  code: 'ENOENT',
+  path: '../highscore.json' }
+{ Error: ENOENT: no such file or directory, open '../highscore.json'
+    at Object.openSync (fs.js:439:3)
+    at Object.readFileSync (fs.js:344:35)
+    at module.exports (/Users/oneairone/Lab/link/sockets/base.js:15:6)
+    at Object.<anonymous> (/Users/oneairone/Lab/link/bin/www:38:27)
+    at Module._compile (internal/modules/cjs/loader.js:689:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:700:10)
+    at Module.load (internal/modules/cjs/loader.js:599:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:538:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:530:3)
+    at Object.<anonymous> (/usr/local/lib/node_modules/pm2/lib/ProcessContainerFork.js:32:23)
+  errno: -2,
+  syscall: 'open',
+  code: 'ENOENT',
+  path: '../highscore.json' }
+{ Error: ENOENT: no such file or directory, open '../highscore.json'
+    at Object.openSync (fs.js:439:3)
+    at Object.readFileSync (fs.js:344:35)
+    at module.exports (/Users/oneairone/Lab/link/sockets/base.js:15:6)
+    at Object.<anonymous> (/Users/oneairone/Lab/link/bin/www:38:27)
+    at Module._compile (internal/modules/cjs/loader.js:689:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:700:10)
+    at Module.load (internal/modules/cjs/loader.js:599:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:538:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:530:3)
+    at Object.<anonymous> (/usr/local/lib/node_modules/pm2/lib/ProcessContainerFork.js:32:23)
+  errno: -2,
+  syscall: 'open',
+  code: 'ENOENT',
+  path: '../highscore.json' }
+{ Error: ENOENT: no such file or directory, open '../highscore.json'
+    at Object.openSync (fs.js:439:3)
+    at Object.readFileSync (fs.js:344:35)
+    at module.exports (/Users/oneairone/Lab/link/sockets/base.js:15:6)
+    at Object.<anonymous> (/Users/oneairone/Lab/link/bin/www:38:27)
+    at Module._compile (internal/modules/cjs/loader.js:689:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:700:10)
+    at Module.load (internal/modules/cjs/loader.js:599:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:538:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:530:3)
+    at Object.<anonymous> (/usr/local/lib/node_modules/pm2/lib/ProcessContainerFork.js:32:23)
+  errno: -2,
+  syscall: 'open',
+  code: 'ENOENT',
+  path: '../highscore.json' }
+{ Error: ENOENT: no such file or directory, open '../highscore.json'
+    at Object.openSync (fs.js:439:3)
+    at Object.readFileSync (fs.js:344:35)
+    at module.exports (/Users/oneairone/Lab/link/sockets/base.js:15:6)
+    at Object.<anonymous> (/Users/oneairone/Lab/link/bin/www:38:27)
+    at Module._compile (internal/modules/cjs/loader.js:689:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:700:10)
+    at Module.load (internal/modules/cjs/loader.js:599:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:538:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:530:3)
+    at Object.<anonymous> (/usr/local/lib/node_modules/pm2/lib/ProcessContainerFork.js:32:23)
+  errno: -2,
+  syscall: 'open',
+  code: 'ENOENT',
+  path: '../highscore.json' }
+{ Error: ENOENT: no such file or directory, open '../highscore.json'
+    at Object.openSync (fs.js:439:3)
+    at Object.readFileSync (fs.js:344:35)
+    at module.exports (/Users/oneairone/Lab/link/sockets/base.js:15:6)
+    at Object.<anonymous> (/Users/oneairone/Lab/link/bin/www:38:27)
+    at Module._compile (internal/modules/cjs/loader.js:689:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:700:10)
+    at Module.load (internal/modules/cjs/loader.js:599:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:538:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:530:3)
+    at Object.<anonymous> (/usr/local/lib/node_modules/pm2/lib/ProcessContainerFork.js:32:23)
+  errno: -2,
+  syscall: 'open',
+  code: 'ENOENT',
+  path: '../highscore.json' }
+{ Error: ENOENT: no such file or directory, open '../highscore.json'
+    at Object.openSync (fs.js:439:3)
+    at Object.readFileSync (fs.js:344:35)
+    at module.exports (/Users/oneairone/Lab/link/sockets/base.js:15:6)
+    at Object.<anonymous> (/Users/oneairone/Lab/link/bin/www:38:27)
+    at Module._compile (internal/modules/cjs/loader.js:689:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:700:10)
+    at Module.load (internal/modules/cjs/loader.js:599:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:538:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:530:3)
+    at Object.<anonymous> (/usr/local/lib/node_modules/pm2/lib/ProcessContainerFork.js:32:23)
+  errno: -2,
+  syscall: 'open',
+  code: 'ENOENT',
+  path: '../highscore.json' }
+{ Error: ENOENT: no such file or directory, open '../highscore.json'
+    at Object.openSync (fs.js:439:3)
+    at Object.readFileSync (fs.js:344:35)
+    at module.exports (/Users/oneairone/Lab/link/sockets/base.js:15:6)
+    at Object.<anonymous> (/Users/oneairone/Lab/link/bin/www:38:27)
+    at Module._compile (internal/modules/cjs/loader.js:689:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:700:10)
+    at Module.load (internal/modules/cjs/loader.js:599:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:538:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:530:3)
+    at Object.<anonymous> (/usr/local/lib/node_modules/pm2/lib/ProcessContainerFork.js:32:23)
+  errno: -2,
+  syscall: 'open',
+  code: 'ENOENT',
+  path: '../highscore.json' }
+{ Error: ENOENT: no such file or directory, open '../highscore.json'
+    at Object.openSync (fs.js:439:3)
+    at Object.readFileSync (fs.js:344:35)
+    at module.exports (/Users/oneairone/Lab/link/sockets/base.js:15:6)
+    at Object.<anonymous> (/Users/oneairone/Lab/link/bin/www:38:27)
+    at Module._compile (internal/modules/cjs/loader.js:689:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:700:10)
+    at Module.load (internal/modules/cjs/loader.js:599:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:538:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:530:3)
+    at Object.<anonymous> (/usr/local/lib/node_modules/pm2/lib/ProcessContainerFork.js:32:23)
+  errno: -2,
+  syscall: 'open',
+  code: 'ENOENT',
+  path: '../highscore.json' }
+{ Error: ENOENT: no such file or directory, open '../highscore.json'
+    at Object.openSync (fs.js:439:3)
+    at Object.readFileSync (fs.js:344:35)
+    at module.exports (/Users/oneairone/Lab/link/sockets/base.js:15:6)
+    at Object.<anonymous> (/Users/oneairone/Lab/link/bin/www:38:27)
+    at Module._compile (internal/modules/cjs/loader.js:689:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:700:10)
+    at Module.load (internal/modules/cjs/loader.js:599:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:538:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:530:3)
+    at Object.<anonymous> (/usr/local/lib/node_modules/pm2/lib/ProcessContainerFork.js:32:23)
+  errno: -2,
+  syscall: 'open',
+  code: 'ENOENT',
+  path: '../highscore.json' }
+{ Error: ENOENT: no such file or directory, open '../highscore.json'
+    at Object.openSync (fs.js:439:3)
+    at Object.readFileSync (fs.js:344:35)
+    at module.exports (/Users/oneairone/Lab/link/sockets/base.js:15:6)
+    at Object.<anonymous> (/Users/oneairone/Lab/link/bin/www:38:27)
+    at Module._compile (internal/modules/cjs/loader.js:689:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:700:10)
+    at Module.load (internal/modules/cjs/loader.js:599:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:538:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:530:3)
+    at Object.<anonymous> (/usr/local/lib/node_modules/pm2/lib/ProcessContainerFork.js:32:23)
+  errno: -2,
+  syscall: 'open',
+  code: 'ENOENT',
+  path: '../highscore.json' }
+{ Error: ENOENT: no such file or directory, open '../highscore.json'
+    at Object.openSync (fs.js:439:3)
+    at Object.readFileSync (fs.js:344:35)
+    at module.exports (/Users/oneairone/Lab/link/sockets/base.js:15:6)
+    at Object.<anonymous> (/Users/oneairone/Lab/link/bin/www:38:27)
+    at Module._compile (internal/modules/cjs/loader.js:689:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:700:10)
+    at Module.load (internal/modules/cjs/loader.js:599:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:538:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:530:3)
+    at Object.<anonymous> (/usr/local/lib/node_modules/pm2/lib/ProcessContainerFork.js:32:23)
+  errno: -2,
+  syscall: 'open',
+  code: 'ENOENT',
+  path: '../highscore.json' }
+{ Error: ENOENT: no such file or directory, open '../highscore.json'
+    at Object.openSync (fs.js:439:3)
+    at Object.readFileSync (fs.js:344:35)
+    at module.exports (/Users/oneairone/Lab/link/sockets/base.js:15:6)
+    at Object.<anonymous> (/Users/oneairone/Lab/link/bin/www:38:27)
+    at Module._compile (internal/modules/cjs/loader.js:689:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:700:10)
+    at Module.load (internal/modules/cjs/loader.js:599:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:538:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:530:3)
+    at Object.<anonymous> (/usr/local/lib/node_modules/pm2/lib/ProcessContainerFork.js:32:23)
+  errno: -2,
+  syscall: 'open',
+  code: 'ENOENT',
+  path: '../highscore.json' }
+highscore undefined
+highscore undefined
+highscore undefined
+data  undefined
+highscore undefined
+highscore undefined
+highscore undefined
+highscore undefined
+readfile undefined
+SyntaxError: Unexpected token u in JSON at position 0
+    at JSON.parse (<anonymous>)
+    at fs.readFile (/Users/oneairone/Lab/link/sockets/base.js:18:22)
+    at FSReqWrap.readFileAfterClose [as oncomplete] (internal/fs/read_file_context.js:53:3)
+highscore undefined
+readfile undefined
+SyntaxError: Unexpected token u in JSON at position 0
+    at JSON.parse (<anonymous>)
+    at fs.readFile (/Users/oneairone/Lab/link/sockets/base.js:18:22)
+    at FSReqWrap.readFileAfterClose [as oncomplete] (internal/fs/read_file_context.js:53:3)
+highscore undefined
+readfile undefined
+SyntaxError: Unexpected token u in JSON at position 0
+    at JSON.parse (<anonymous>)
+    at fs.readFile (/Users/oneairone/Lab/link/sockets/base.js:18:22)
+    at FSReqWrap.readFileAfterClose [as oncomplete] (internal/fs/read_file_context.js:53:3)
+highscore undefined
+readfile undefined
+SyntaxError: Unexpected token u in JSON at position 0
+    at JSON.parse (<anonymous>)
+    at fs.readFile (/Users/oneairone/Lab/link/sockets/base.js:18:22)
+    at FSReqWrap.readFileAfterClose [as oncomplete] (internal/fs/read_file_context.js:53:3)
+highscore undefined
+readfile undefined
+SyntaxError: Unexpected token u in JSON at position 0
+    at JSON.parse (<anonymous>)
+    at fs.readFile (/Users/oneairone/Lab/link/sockets/base.js:18:22)
+    at FSReqWrap.readFileAfterClose [as oncomplete] (internal/fs/read_file_context.js:53:3)
+highscore undefined
+readfile undefined
+SyntaxError: Unexpected token u in JSON at position 0
+    at JSON.parse (<anonymous>)
+    at fs.readFile (/Users/oneairone/Lab/link/sockets/base.js:18:22)
+    at FSReqWrap.readFileAfterClose [as oncomplete] (internal/fs/read_file_context.js:53:3)
+highscore undefined
+readfile undefined
+SyntaxError: Unexpected token u in JSON at position 0
+    at JSON.parse (<anonymous>)
+    at fs.readFile (/Users/oneairone/Lab/link/sockets/base.js:18:22)
+    at FSReqWrap.readFileAfterClose [as oncomplete] (internal/fs/read_file_context.js:53:3)
+highscore undefined
+readfile undefined
+SyntaxError: Unexpected token u in JSON at position 0
+    at JSON.parse (<anonymous>)
+    at fs.readFile (/Users/oneairone/Lab/link/sockets/base.js:18:22)
+    at FSReqWrap.readFileAfterClose [as oncomplete] (internal/fs/read_file_context.js:53:3)
+highscore undefined
+readfile undefined
+SyntaxError: Unexpected token u in JSON at position 0
+    at JSON.parse (<anonymous>)
+    at fs.readFile (/Users/oneairone/Lab/link/sockets/base.js:18:22)
+    at FSReqWrap.readFileAfterClose [as oncomplete] (internal/fs/read_file_context.js:53:3)
+highscore undefined
+readfile undefined
+SyntaxError: Unexpected token u in JSON at position 0
+    at JSON.parse (<anonymous>)
+    at fs.readFile (/Users/oneairone/Lab/link/sockets/base.js:18:22)
+    at FSReqWrap.readFileAfterClose [as oncomplete] (internal/fs/read_file_context.js:53:3)
+highscore undefined
+readfile undefined
+SyntaxError: Unexpected token u in JSON at position 0
+    at JSON.parse (<anonymous>)
+    at fs.readFile (/Users/oneairone/Lab/link/sockets/base.js:18:22)
+    at FSReqWrap.readFileAfterClose [as oncomplete] (internal/fs/read_file_context.js:53:3)
+highscore undefined
+readfile undefined
+SyntaxError: Unexpected token u in JSON at position 0
+    at JSON.parse (<anonymous>)
+    at fs.readFile (/Users/oneairone/Lab/link/sockets/base.js:18:22)
+    at FSReqWrap.readFileAfterClose [as oncomplete] (internal/fs/read_file_context.js:53:3)
+highscore undefined
+readfile undefined
+SyntaxError: Unexpected token u in JSON at position 0
+    at JSON.parse (<anonymous>)
+    at fs.readFile (/Users/oneairone/Lab/link/sockets/base.js:18:22)
+    at FSReqWrap.readFileAfterClose [as oncomplete] (internal/fs/read_file_context.js:53:3)
+highscore undefined
+readfile undefined
+SyntaxError: Unexpected token u in JSON at position 0
+    at JSON.parse (<anonymous>)
+    at fs.readFile (/Users/oneairone/Lab/link/sockets/base.js:18:22)
+    at FSReqWrap.readFileAfterClose [as oncomplete] (internal/fs/read_file_context.js:53:3)
+highscore undefined
+readfile undefined
+SyntaxError: Unexpected token u in JSON at position 0
+    at JSON.parse (<anonymous>)
+    at fs.readFile (/Users/oneairone/Lab/link/sockets/base.js:18:22)
+    at FSReqWrap.readFileAfterClose [as oncomplete] (internal/fs/read_file_context.js:53:3)
+highscore undefined
+readfile undefined
+SyntaxError: Unexpected token u in JSON at position 0
+    at JSON.parse (<anonymous>)
+    at fs.readFile (/Users/oneairone/Lab/link/sockets/base.js:18:22)
+    at FSReqWrap.readFileAfterClose [as oncomplete] (internal/fs/read_file_context.js:53:3)
+highscore undefined
+readfile {
+    "hightScore": [14000, 7500, 3455],
+    "playerName": ["Tib", "Tib", "OneAir"]
+}
+highscore undefined
+readfile {
+    "hightScore": [14000, 7500, 3455],
+    "playerName": ["Tib", "Tib", "OneAir"]
+}
+highscore undefined
+readfile {
+    "highscore": [14000, 7500, 3455],
+    "playerName": ["Tib", "Tib", "OneAir"]
+}
+highscore undefined
+readfile {
+    "highscore": [14000, 7500, 3455],
+    "playerName": ["Tib", "Tib", "OneAir"]
+}
+highscore undefined
+readfile {"highscore":[14000,7500,3455],"playerName":["Tib","Tib","OneAir"]}
+highscore undefined
+readfile {"highscore":[14000,7500,3455],"playerName":["Tib","Tib","OneAir"]}
+highscore undefined
+app listen
+readfile {"highscore":[14000,7500,3455],"playerName":["Tib","Tib","OneAir"]}
+highscore undefined
+app listen on  port 3000
+readfile {"highscore":[14000,7500,3455],"playerName":["Tib","Tib","OneAir"]}
+highscore undefined
+app listen on  port 3000
+readfile {"highscore":[14000,7500,3455],"playerName":["Tib","Tib","OneAir"]}
+highscore undefined
+app listen on  port 3000
+readfile {"highscore":[14000,7500,3455],"playerName":["Tib","Tib","OneAir"]}
+highscore undefined
+app listen on  port 3000
+readfile {"highscore":[14000,7500,3455],"playerName":["Tib","Tib","OneAir"]}
+server  Server {
+  _events:
+   [Object: null prototype] {
+     request:
+      { [EventEmitter: app]
+        _events: [Object],
+        _eventsCount: 1,
+        _maxListeners: undefined,
+        setMaxListeners: [Function: setMaxListeners],
+        getMaxListeners: [Function: getMaxListeners],
+        emit: [Function: emit],
+        addListener: [Function: addListener],
+        on: [Function: addListener],
+        prependListener: [Function: prependListener],
+        once: [Function: once],
+        prependOnceListener: [Function: prependOnceListener],
+        removeListener: [Function: removeListener],
+        off: [Function: removeListener],
+        removeAllListeners: [Function: removeAllListeners],
+        listeners: [Function: listeners],
+        rawListeners: [Function: rawListeners],
+        listenerCount: [Function: listenerCount],
+        eventNames: [Function: eventNames],
+        init: [Function: init],
+        defaultConfiguration: [Function: defaultConfiguration],
+        lazyrouter: [Function: lazyrouter],
+        handle: [Function: handle],
+        use: [Function: use],
+        route: [Function: route],
+        engine: [Function: engine],
+        param: [Function: param],
+        set: [Function: set],
+        path: [Function: path],
+        enabled: [Function: enabled],
+        disabled: [Function: disabled],
+        enable: [Function: enable],
+        disable: [Function: disable],
+        acl: [Function],
+        bind: [Function],
+        checkout: [Function],
+        connect: [Function],
+        copy: [Function],
+        delete: [Function],
+        get: [Function],
+        head: [Function],
+        link: [Function],
+        lock: [Function],
+        'm-search': [Function],
+        merge: [Function],
+        mkactivity: [Function],
+        mkcalendar: [Function],
+        mkcol: [Function],
+        move: [Function],
+        notify: [Function],
+        options: [Function],
+        patch: [Function],
+        post: [Function],
+        propfind: [Function],
+        proppatch: [Function],
+        purge: [Function],
+        put: [Function],
+        rebind: [Function],
+        report: [Function],
+        search: [Function],
+        source: [Function],
+        subscribe: [Function],
+        trace: [Function],
+        unbind: [Function],
+        unlink: [Function],
+        unlock: [Function],
+        unsubscribe: [Function],
+        all: [Function: all],
+        del: [Function],
+        render: [Function: render],
+        listen: [Function: listen],
+        request: [IncomingMessage],
+        response: [ServerResponse],
+        cache: {},
+        engines: {},
+        settings: [Object],
+        locals: [Object],
+        mountpath: '/',
+        _router: [Function] },
+     connection: [Function: connectionListener] },
+  _eventsCount: 2,
+  _maxListeners: undefined,
+  _connections: 0,
+  _handle: null,
+  _usingWorkers: false,
+  _workers: [],
+  _unref: false,
+  allowHalfOpen: true,
+  pauseOnConnect: false,
+  httpAllowHalfOpen: false,
+  timeout: 120000,
+  keepAliveTimeout: 5000,
+  _pendingResponseData: 0,
+  maxHeadersCount: null,
+  headersTimeout: 40000,
+  [Symbol(IncomingMessage)]:
+   { [Function: IncomingMessage]
+     super_:
+      { [Function: Readable]
+        ReadableState: [Function: ReadableState],
+        super_: [Function],
+        _fromList: [Function: fromList] } },
+  [Symbol(ServerResponse)]:
+   { [Function: ServerResponse] super_: { [Function: OutgoingMessage] super_: [Function] } },
+  [Symbol(asyncId)]: -1 }
+highscore undefined
+app listen on  port 3000
+readfile {"highscore":[14000,7500,3455],"playerName":["Tib","Tib","OneAir"]}
+highscore undefined
+app listen on  port 3000
+readfile {"highscore":[14000,7500,3455],"playerName":["Tib","Tib","OneAir"]}
+highscore undefined
+app listen on  port 3000
+readfile {"highscore":[14000,7500,3455],"playerName":["Tib","Tib","OneAir"]}
+highscore undefined
+app listen on  port 3000
+readfile {"highscore":[14000,7500,3455],"playerName":["Tib","Tib","OneAir"]}
+app listen on  port 3000

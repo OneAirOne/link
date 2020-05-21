@@ -1,43 +1,50 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-	<head>
-		<!-- Global site tag (gtag.js) - Google Analytics -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-119371428-1"></script>
-		<script>
-			window.dataLayer = window.dataLayer || [];
-			function gtag(){dataLayer.push(arguments);}
-			gtag('js', new Date());
 
-			gtag('config', 'UA-119371428-1');
-		</script>
+<head>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-119371428-1"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
 
-		<meta charset="utf-8">
-		<meta name="author" content="Erwan Gilbert" />
-		<meta name="copyright" content="Erwan Gilbert" />
-		<meta name="description" content="Portfolio développé par Erwan Gilbert en Javascript / Canvas / NodeJs / Socket.io. Ce site fait office de démonstration de certaines compétences en développement web."/>
-		<meta name="generator" content="Express / Node.js" />
-		<meta name="news_keywords" content="portfolio, Erwan Gilbert, Github, Coding Academy, Lyon, France, Game, Canvas">
+		function gtag() {
+			dataLayer.push(arguments);
+		}
+		gtag('js', new Date());
 
-		<link rel="stylesheet" href="css/app.css">
-		<link rel="icon" type="image/png" href="img/favicon.png" />
-		<link href="https://fonts.googleapis.com/css?family=Exo+2" rel="stylesheet">
-		<title>Erwan Gilbert</title>
-	</head>
-	<body >
-		<div class="deviceMin">
-			Je vous invite à visiter ce site sur pc pour profiter
-			pleinement de son interactivité.
-			<br/>
-			Une version mobile est en cours de développement et sera bientôt disponible.
-			<br/>
-			<br>
-		</div>
-		<!-- <canvas id="map"></canvas> -->
-		<canvas id="map" style="background: url(img/test.png) repeat center center;" ></canvas>
-		<script src="/socket.io/socket.io.js"></script>
+		gtag('config', 'UA-119371428-1');
+	</script>
 
-		<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
-		<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
-		<script type="text/javascript" src="js/main.js"></script>
-	</body>
+	<meta charset="utf-8">
+	<meta name="author" content="Erwan Gilbert" />
+	<meta name="copyright" content="Erwan Gilbert" />
+	<meta name="description"
+		content="Portfolio développé par Erwan Gilbert en Javascript / Canvas / NodeJs / Socket.io. Ce site fait office de démonstration de certaines compétences en développement web." />
+	<meta name="generator" content="Express / Node.js" />
+	<meta name="news_keywords" content="portfolio, Erwan Gilbert, Github, Coding Academy, Lyon, France, Game, Canvas">
+
+	<link rel="stylesheet" href="css/app.css">
+	<link rel="icon" type="image/png" href="img/favicon.png" />
+	<link href="https://fonts.googleapis.com/css?family=Exo+2" rel="stylesheet">
+	<title>Erwan Gilbert</title>
+</head>
+
+<body>
+	<div class="deviceMin">
+		Je vous invite à visiter ce site sur pc pour profiter
+		pleinement de son interactivité.
+		<br />
+		Une version mobile est en cours de développement et sera bientôt disponible.
+		<br />
+		<br>
+	</div>
+	<!-- <canvas id="map"></canvas> -->
+	<canvas id="map" style="background: url(img/test.png) repeat center center;"></canvas>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.dev.js"></script>
+
+	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+</body>
+
 </html>
