@@ -1,22 +1,6 @@
-version: '3.8'
-
 services:
   link:
     build: .
     restart: always
     ports:
-      - '3000:3000'
-    volumes:
-      - highscore:/app/highscore.json
-    networks:
-      - dokploy-network
-    labels:
-      - 'dokploy.service.name=link'
-      - 'dokploy.service.port=3000'
-
-volumes:
-  highscore:
-
-networks:
-  dokploy-network:
-    external: true
+      - "8081:3000"
