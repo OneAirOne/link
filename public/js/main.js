@@ -1214,13 +1214,14 @@
   var maxEnemyNb = 100;
   var enemyChange = 5000;
 
-  // socket
   if (dev == true) {
     var socket = io("http://localhost:3000");
-    // console.log("connection", socket);
+    console.log("connection", socket);
   } else {
     var socket = io("http://51.254.38.133:3000");
   }
+
+
 
   socket.on("news", function (data) {
     console.log("news ", data);
@@ -1896,7 +1897,7 @@
         hightScore[0] = score;
         bestPlayer[0] = playerName;
         socket.emit("newsResponse", {
-          newHightScore: hightScore,
+          newhighscore: hightScore,
           playerName: bestPlayer,
         });
       } else if (score >= hightScore[1]) {
@@ -1906,7 +1907,7 @@
         hightScore[1] = score;
         bestPlayer[1] = playerName;
         socket.emit("newsResponse", {
-          newHightScore: hightScore,
+          newhighscore: hightScore,
           playerName: bestPlayer,
         });
       } else if (score >= hightScore[2]) {
@@ -1916,7 +1917,7 @@
         hightScore[2] = score;
         bestPlayer[2] = playerName;
         socket.emit("newsResponse", {
-          newHightScore: hightScore,
+          newhighscore: hightScore,
           playerName: bestPlayer,
         });
       }

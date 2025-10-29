@@ -4,19 +4,16 @@ let connectCounter = 0;
 let srcFile = "highscore.json";
 
 // high score load
-// fs.readFileSync(`./${srcFile}`, "utf8", (err, data) => {
-//   console.log("readfile", data);
-//   if (err) console.error("errrrrrro ", err);
-//   highscore = JSON.parse(data);
-// });
 
 module.exports = function (io) {
   let highscore;
-  fs.readFile(`./${srcFile}`, "utf8", (err, data) => {
-    console.log("readfile", data);
-    if (err) console.error("readFileerror ", err);
+  try {
+    const data = fs.readFileSync(`./${srcFile}`, "utf8");
     highscore = JSON.parse(data);
-  });
+  } catch (err) {
+    console.error("Error reading highscore file:", err);
+    return; // Do not proceed if highscore file cannot be read
+  }
 
   io.on("connection", function (socket) {
     console.log("connection", socket.id);
@@ -77,14 +74,10 @@ module.exports = function (io) {
    */
   function save() {
     try {
-      fs.readFile(`./${srcFile}`, "utf8", (err, data) => {
+      var toSave = JSON.stringify(highscore);
+      fs.writeFile(`./${srcFile}`, toSave, (err) => {
         if (err) throw err;
-        var json = JSON.parse(data);
-        var toSave = JSON.stringify(highscore);
-        fs.writeFile(`./${srcFile}`, toSave, (err) => {
-          if (err) throw err;
-          // console.log('The file has been saved!');
-        });
+        // console.log('The file has been saved!');
       });
     } catch (err) {
       console.error(err.message);

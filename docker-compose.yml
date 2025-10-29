@@ -1,0 +1,6 @@
+services:
+  link:
+    build: .
+    restart: always
+    ports:
+      - "8081:3000"
