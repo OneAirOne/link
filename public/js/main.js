@@ -1218,7 +1218,9 @@
     var socket = io("http://localhost:3000");
     console.log("connection", socket);
   } else {
-    var socket = io("https://erwangilbert.com");
+    var socket = io("hhttps://erwangilbert.com", {
+      transports: ["websocket"], 
+    });
   }
 
 
