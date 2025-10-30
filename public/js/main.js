@@ -1218,7 +1218,7 @@
     var socket = io("http://localhost:3000");
     console.log("connection", socket);
   } else {
-    var socket = io("http://51.254.38.133:3000");
+    var socket = io("https://erwangilbert.com");
   }
 
 
