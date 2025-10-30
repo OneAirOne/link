@@ -1213,7 +1213,7 @@
   var shieldOption = 120;
   var maxEnemyNb = 100;
   var enemyChange = 5000;
-
+    
   if (dev == true) {
     var socket = io("http://localhost:3000");
     console.log("connection", socket);

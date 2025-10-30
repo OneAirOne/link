@@ -1,30 +1,44 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-	<head>
-		<!-- Global site tag (gtag.js) - Google Analytics -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-119371428-1"></script>
-		<script>
-			window.dataLayer = window.dataLayer || [];
-			function gtag(){dataLayer.push(arguments);}
-			gtag('js', new Date());
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-119371428-1"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-			gtag('config', 'UA-119371428-1');
-		</script>
-		
-		<meta charset="utf-8">
-		<meta name="author" content="Erwan Gilbert" />
-		<meta name="copyright" content="Erwan Gilbert" />
-		<meta name="description" content="Portfolio développé par Erwan Gilbert en Javascript / Canvas / NodeJs / Socket.io. Ce site fait office de démonstration de certaines compétences en développement web."/>
-		<meta name="generator" content="Express / Node.js" />
-		<meta name="news_keywords" content="portfolio, Erwan Gilbert, Github, Coding Academy, Lyon, France, Game, Canvas">
+      gtag("config", "UA-119371428-1");
+    </script>
 
-		<link rel="icon" type="image/png" href="img/favicon.png" />
-		<title>cv</title>
-	</head>
-	<body>
-		<canvas id="return" style="background: url() no-repeat center center;" ></canvas>
-		<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
-		<!-- <script src="/socket.io/socket.io.js"></script> -->
-		<script type="text/javascript" src="js/cv.js"></script>
-	</body>
+    <meta charset="utf-8" />
+    <meta name="author" content="Erwan Gilbert" />
+    <meta name="copyright" content="Erwan Gilbert" />
+    <meta
+      name="description"
+      content="Portfolio développé par Erwan Gilbert en Javascript / Canvas / NodeJs / Socket.io. Ce site fait office de démonstration de certaines compétences en développement web."
+    />
+    <meta name="generator" content="Express / Node.js" />
+    <meta
+      name="news_keywords"
+      content="portfolio, Erwan Gilbert, Github, Coding Academy, Lyon, France, Game, Canvas"
+    />
+
+    <link rel="icon" type="image/png" href="img/favicon.png" />
+    <title>cv</title>
+  </head>
+  <body>
+    <canvas
+      id="return"
+      style="background: url() no-repeat center center"
+    ></canvas>
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="js/cv.js"></script>
+  </body>
 </html>
