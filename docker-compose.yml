@@ -1,6 +1,6 @@
 services:
   link:
     build: .
-    restart: always
+    restart: unless-stopped
     ports:
       - "8081:3000"
