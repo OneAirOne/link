@@ -1186,7 +1186,7 @@
   var hightScore;
   var playerName;
   var generate = false;
-  var dev = true;
+  var dev = false;
 
   // gameplay>> settings
   var swordOffsetX = 16;
