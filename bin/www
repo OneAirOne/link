@@ -33,7 +33,13 @@ server.on("listening", onListening);
 /**
  * sockets
  */
-var io = require("socket.io").listen(server);
+
+const { Server } = require("socket.io");
+const io = new Server(server, {
+  cors: {
+    origin: "*", // or your frontend URL
+  }
+});
 require("../sockets/base")(io);
 
 /**
